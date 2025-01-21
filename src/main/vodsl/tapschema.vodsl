@@ -1,0 +1,91 @@
+model tapschema (1.0) "tapschema model"
+author "Paul Harrison"
+
+include "../../../build/tmp/IVOA-v1.0.vodsl"
+
+otype Schema "The schema" {
+  	schema_name: ivoa:string iskey "The name of the schema ";
+  	utype: ivoa:string @? "utype";
+  	description: ivoa:string @? "description";
+  	schema_index: ivoa:integer @? "used to recommend table ordering for clients. Clients
+may order by index (ascending) so lower index items would appear
+earlier in a listing.";
+  	tables: table @+ as composition "the tables";
+  	
+  }
+  
+  enum TableType "types of table" {
+  	table "table",
+  	view "view"
+  }
+  
+  enum TAPType  "Allowable types for TAP columns" 
+{
+BOOLEAN  "" ,
+SMALLINT  "" ,
+INTEGER  "" ,
+BIGINT  "" ,
+REAL  "" ,
+DOUBLE  "" ,
+TIMESTAMP  "" ,
+CHAR  "" ,
+VARCHAR  "" ,
+BINARY  "" ,
+VARBINARY  "" ,
+POINT  "" ,
+REGION  "" ,
+CLOB  "" ,
+BLOB  "" 
+}
+  
+  
+  otype table "The table" {
+  	table_name: ivoa:string iskey "name of the table";
+  	table_type: TableType "the type of table";
+  	utype: ivoa:string @? "utype";  	
+    description: ivoa:string @? "description";
+    table_index: ivoa:integer @? "used to recommend table ordering for clients. Clients
+may order by index (ascending) so lower index items would appear
+earlier in a listing.";
+    columns: column @+ as composition "the columns that make up the table";
+    fkeys: ForeignKey @* as composition "the foreign keys for this table";
+  }
+  
+	  otype column "the column" {
+	  	column_name: ivoa:string iskey "name of the column";
+	  	datatype: TAPType "the type of the column (VOTable semantics)";
+    	arraysize: ivoa:string @? "";
+			xtype: ivoa:string @? "";
+//			size: ivoa:integer @? "";
+			description: ivoa:string @? "";
+			utype: ivoa:string @? "";
+			unit: ivoa:string @? "";
+	ucd: ivoa:string @? "";
+	indexed: ivoa:boolean "does the column have an index";
+	principal: ivoa:boolean " indicates that the column is considered a core part
+of the content; clients can use this hint to make the principal column(s)
+visible, for example by selecting them by default in generating an ADQL
+query. In cases where the service selects the columns to return (such as a
+query language without an explicit output selection), the principal column
+indicates those columns that are returned by default";
+	std: ivoa:boolean "is the column defined by a standard";
+	column_index: ivoa:integer @? "used to recommend table ordering for clients. Clients
+may order by index (ascending) so lower index items would appear
+earlier in a listing.";
+	  }
+	  
+ otype ForeignKey "foreign key definition" {
+ 	  key_id:ivoa:string iskey "the id of the key";
+ 	  target_table references table "";
+    description: ivoa:string @? "description";
+    utype: ivoa:string @? "utype";  
+    columns: FKColumn @+ as composition "";
+ 	 }
+ 	 
+ 
+ otype FKColumn "the foreign key columns" {
+ 	
+ 	from_column references column "";
+ 	target_column references column "";
+ }	 
+ 	 

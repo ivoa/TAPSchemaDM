@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<m:mappedModels xmlns:m="http://www.ivoa.net/xml/vodml-binding/v0.9.1">
+    <!-- minimal template-->
+    <model>
+        <name>tapschema</name> <!-- note that this is the model name and "prefix" to vodml-ids -->
+        <file>tapschema.vo-dml.xml</file> <!-- this is the local file name -->
+        <java-package>org.ivoa.tap.schema</java-package> <!-- the java package for the generated code -->
+        <xml-targetnamespace prefix="tap">http://ivoa.net/dm/tapschema/v1</xml-targetnamespace>
+        <rdb naturalJoin="true">
+            <rdbmap vodml-id="Schema">
+                <tableName>schemas</tableName>
+            </rdbmap>
+            <rdbmap vodml-id="table">
+                <tableName>tables</tableName>
+            </rdbmap>
+            <rdbmap vodml-id="column">
+                <tableName>columns</tableName>
+            </rdbmap>
+            <rdbmap vodml-id="ForeignKey">
+                <tableName>keys</tableName>
+            </rdbmap>
+            <rdbmap vodml-id="FKColumn">
+                <tableName>key_columns</tableName>
+            </rdbmap>
+        </rdb>
+    </model>
+</m:mappedModels>
