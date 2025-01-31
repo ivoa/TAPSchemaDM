@@ -2,8 +2,8 @@ plugins {
     id("net.ivoa.vo-dml.vodmltools") version "0.5.14"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
-//    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-//    signing
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    signing
 }
 
 group = "org.javastro.ivoa.dm"
@@ -43,3 +43,12 @@ tasks.named(JavaPlugin.COMPILE_JAVA_TASK_NAME) {
     dependsOn("spotlessApply")
 }
 // end of spotless config
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+        //TODO set pom properties
+    }
+}
