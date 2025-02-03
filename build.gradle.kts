@@ -2,7 +2,7 @@ plugins {
     id("net.ivoa.vo-dml.vodmltools") version "0.5.14"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     signing
 }
 
@@ -48,7 +48,36 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
+
+            pom {
+                name.set("TAP Schema Data Model")
+                description.set("A VO-DML defined model for the TAP Schema")
+                url.set("https://www.ivoa.net/documents/TAP/")
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("pahjbo")
+                        name.set("Paul Harrison")
+                        email.set("paul.harrison@manchester.ac.uk")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/ivoa/TAPSchemaDM.git")
+                    developerConnection.set("scm:git:ssh://github.com/ivoa/TAPSchemaDM.git")
+                    url.set("https://github.com/ivoa/TAPSchemaDM")
+                }
+            }
         }
-        //TODO set pom properties
+    }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype()
     }
 }
