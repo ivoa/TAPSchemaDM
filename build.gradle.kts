@@ -1,5 +1,5 @@
 plugins {
-    id("net.ivoa.vo-dml.vodmltools") version "0.5.14"
+    id("net.ivoa.vo-dml.vodmltools") version "0.5.18"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
