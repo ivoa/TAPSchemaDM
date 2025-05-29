@@ -43,7 +43,10 @@ tasks.named(JavaPlugin.COMPILE_JAVA_TASK_NAME) {
     dependsOn("spotlessApply")
 }
 // end of spotless config
-
+//exclude the persistence.xml - this jar will more than likely be used with another model
+tasks.jar.configure {
+    exclude("META-INF/persistence.xml")
+}
 publishing {
     publications {
         create<MavenPublication>("maven") {
