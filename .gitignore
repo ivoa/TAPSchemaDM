@@ -3,3 +3,8 @@
 /src-gen/
 /build/
 /bin/
+/doc/site/generated/
+/site/
+/mkdocs.yml
+/test.sql
+/test-drop.sql

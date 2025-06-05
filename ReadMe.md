@@ -1,7 +1,7 @@
 TAPSchemaDM
 ===========
 
-This is the TAP schema defined using VO-DML and created with the VO-DML tools.
+This is the TAP schema defined using VO-DML and created with the VO-DML tools. Read [model documentation](https://ivoa.github.io/TAPSchemaDM/).
 
 [![Java CI with Gradle](https://github.com/ivoa/TAPSchemaDM/actions/workflows/gradletest.yml/badge.svg)](https://github.com/ivoa/TAPSchemaDM/actions/workflows/gradletest.yml)
 
