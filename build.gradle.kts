@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.1-SNAPSHOT"
+version = "0.1"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
@@ -47,12 +47,19 @@ tasks.named(JavaPlugin.COMPILE_JAVA_TASK_NAME) {
 }
 // end of spotless config
 //exclude the persistence.xml - this jar will more than likely be used with another model
-tasks.jar.configure {
+tasks.withType<Jar>() {
     exclude("META-INF/persistence.xml")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+
 publishing {
     publications {
-        create<MavenPublication>("maven") {
+        create<MavenPublication>("mavenJava") {
             from(components["java"])
 
             pom {
@@ -81,7 +88,10 @@ publishing {
         }
     }
 }
-
+signing {
+    useGpgCmd()
+    sign(publishing.publications["mavenJava"])
+}
 nexusPublishing {
     repositories {
         sonatype()

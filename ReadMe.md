@@ -5,8 +5,7 @@ This is the TAP schema defined using VO-DML and created with the VO-DML tools. R
 
 [![Java CI with Gradle](https://github.com/ivoa/TAPSchemaDM/actions/workflows/gradletest.yml/badge.svg)](https://github.com/ivoa/TAPSchemaDM/actions/workflows/gradletest.yml)
 
-![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Foss.sonatype.org%2Fcontent%2Frepositories%2Fsnapshots%2Forg%2Fjavastro%2Fivoa%2Fdm%2Ftapschema%2Fmaven-metadata.xml)
-
+[![tapschema](https://img.shields.io/maven-central/v/org.javastro.ivoa.dm/tapschema.svg?label=tapschema)](https://central.sonatype.com/artifact/org.javastro.ivoa.dm/tapschema/)
 
 The database serialization of this model matches the description of the [TAP schema in the TAP Standard](https://www.ivoa.net/documents/TAP/20190927/REC-TAP-1.1.html#tth_sEc4).
 
