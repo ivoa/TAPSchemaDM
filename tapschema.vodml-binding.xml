@@ -6,7 +6,7 @@
         <file>tapschema.vo-dml.xml</file> <!-- this is the local file name -->
         <java-package>org.ivoa.tap.schema</java-package> <!-- the java package for the generated code -->
         <xml-targetnamespace prefix="tap">http://ivoa.net/dm/tapschema/v1</xml-targetnamespace>
-        <rdb naturalJoin="true">
+        <rdb naturalJoin="true" schema="TAP_SCHEMA">
             <rdbmap vodml-id="Schema">
                 <tableName>schemas</tableName>
             </rdbmap>

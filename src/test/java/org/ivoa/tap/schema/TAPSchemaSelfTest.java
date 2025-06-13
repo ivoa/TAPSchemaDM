@@ -49,6 +49,7 @@ public class TAPSchemaSelfTest {
         List<Schema> schema = model_in.getContent(Schema.class);
         assertEquals(1, schema.size());
         Schema schema_in = schema.get(0);
+        assertEquals("TAP_SCHEMA",schema_in.schema_name);
         assertEquals(5,schema_in.getTables().size());
    //TODO add more tests of self consistency
     }
