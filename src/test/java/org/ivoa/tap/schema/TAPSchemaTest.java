@@ -15,6 +15,8 @@ public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Sch
     TapschemaModel tapschemaModel;
     Schema theschema;
 
+
+
     @Override
     public Schema entityForDb() {
         return theschema;
@@ -25,7 +27,12 @@ public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Sch
 
     }
 
-    @Override
+   @Override
+   protected String setDbDumpFile() {
+      return "tapschema_dump.sql";
+   }
+
+   @Override
     public TapschemaModel createModel() {
         tapschemaModel = new TapschemaModel();
         Table table1 = Table.createTable(t -> {
