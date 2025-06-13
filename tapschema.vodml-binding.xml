@@ -23,5 +23,14 @@
                 <tableName>key_columns</tableName>
             </rdbmap>
         </rdb>
+        <type-detail vodml-id="Schema.description">
+            <length>4095</length>
+        </type-detail>
+        <type-detail vodml-id="table.description">
+            <length>4095</length>
+        </type-detail>
+        <type-detail vodml-id="column.description">
+            <length>4095</length>
+        </type-detail>
     </model>
 </m:mappedModels>

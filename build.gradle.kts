@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.1"
+version = "0.1.1"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"

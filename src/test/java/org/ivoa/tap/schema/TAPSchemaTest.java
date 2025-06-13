@@ -15,6 +15,7 @@ public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Sch
     TapschemaModel tapschemaModel;
     Schema theschema;
 
+    final static String desc = "description".repeat(372);
 
 
     @Override
@@ -32,11 +33,13 @@ public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Sch
       return "tapschema_dump.sql";
    }
 
+
    @Override
     public TapschemaModel createModel() {
         tapschemaModel = new TapschemaModel();
         Table table1 = Table.createTable(t -> {
            t.table_name ="table1";
+           t.description = desc;
            t.table_type = TableType.TABLE;
            t.columns = List.of(
                  Column.createColumn(c -> {
@@ -72,6 +75,7 @@ public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Sch
                            c.principal = false;
                            c.std = false;
                            c.utype = "c.b.a";
+                           c.description = desc;
                         }),
                         Column.createColumn(c -> {
                            c.column_name ="colb";
@@ -88,7 +92,7 @@ public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Sch
                   );
               })
         );
-        theschema = new Schema("mySchema", "utype", "description", 1, tables);
+        theschema = new Schema("mySchema", "utype", desc, 1, tables);
         tapschemaModel.addContent(theschema);
         return tapschemaModel;
     }
