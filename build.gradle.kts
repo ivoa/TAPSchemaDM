@@ -94,8 +94,15 @@ signing {
 }
 nexusPublishing {
     repositories {
-        sonatype()
+        //TODO this is a rather unsatisfactory kludge, but still seems better than the suggested JReleaser which is not really gradle friendly
+        // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
+        // note need gradle publishToSonatype closeSonatypeStagingRepository to upload
+        sonatype {
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+        }
     }
+
 }
 
 // site tasks
