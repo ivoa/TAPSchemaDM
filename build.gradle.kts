@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.2"
+version = "0.2.1"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
@@ -98,7 +98,7 @@ nexusPublishing {
     repositories {
         //TODO this is a rather unsatisfactory kludge, but still seems better than the suggested JReleaser which is not really gradle friendly
         // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
-        // note need gradle publishToSonatype closeSonatypeStagingRepository to upload
+        // note need gradle publish  closeSonatypeStagingRepository to upload
         sonatype {
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
             snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))

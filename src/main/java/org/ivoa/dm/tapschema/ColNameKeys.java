@@ -5,9 +5,17 @@ package org.ivoa.dm.tapschema;
  * Created on 16/06/2025 by Paul Harrison (paul.harrison@manchester.ac.uk).
  */
 
-
+/**
+ * Utilities concerned with model column name normalization.
+ */
 public class ColNameKeys {
 
+   /**
+    * Normalize the model keys.
+    * Make sure that the correct keys are generated for a model that as been read from an XML instance.
+    * This need to be done to make the model ready for saving to a database.
+    * @param model the model instance to be normalized.
+    */
    public static void normalize(TapschemaModel model) {
 
       for (Schema sc: model.getContent(Schema.class)){
