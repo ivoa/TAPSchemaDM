@@ -9,7 +9,7 @@
       <title></title>
       <author>Paul Harrison</author>
       <version>1.0</version>
-      <lastModified>2025-01-20T18:08:09Z</lastModified>
+      <lastModified>2025-06-17T09:02:09Z</lastModified>
       <import>
         <name>ivoa</name>
         <version>1.0</version>
@@ -291,7 +291,7 @@
                    <maxOccurs>1</maxOccurs>
                  </multiplicity>
                <constraint xsi:type="vo-dml:NaturalKey">
-               	<position>1</position>
+               	<position>2</position> <!-- note that this is hand edited - does ont transfer from vodsl yet -->
                </constraint>
                </attribute>
                <attribute>

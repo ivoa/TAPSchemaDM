@@ -52,7 +52,7 @@ earlier in a listing.";
   }
   
 	  otype column "the column" {
-	  	column_name: ivoa:string iskey "name of the column";
+	  	column_name: ivoa:string iskey ofRank 2 "name of the column"; // note that this is trying to indicate that the key for the containing object is used as the first part of key
 	  	datatype: TAPType "the type of the column (VOTable semantics)";
     	arraysize: ivoa:string @? "";
 			xtype: ivoa:string @? "";
