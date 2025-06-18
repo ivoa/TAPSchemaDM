@@ -1,5 +1,5 @@
 plugins {
-    id("net.ivoa.vo-dml.vodmltools") version "0.5.21"
+    id("net.ivoa.vo-dml.vodmltools") version "0.5.22"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.1.2"
+version = "0.2"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
@@ -16,8 +16,10 @@ vodml {
 dependencies {
     api("org.javastro.ivoa.vo-dml:ivoa-base:1.0-SNAPSHOT") // IMPL using API so that it appears in transitive compile
 
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher") //Needed to override gradle built-in
+    testRuntimeOnly("org.hibernate.orm:hibernate-testing:6.5.3.Final")
     testImplementation("com.h2database:h2:2.2.220") // try out h2
     implementation("org.slf4j:slf4j-api:1.7.32")
     testRuntimeOnly("ch.qos.logback:logback-classic:1.4.12")
@@ -34,7 +36,7 @@ spotless {
         target(vodml.outputJavaDir.asFileTree.matching(
             PatternSet().include("**/*.java")
         ))
-        googleJavaFormat("1.12.0")
+        googleJavaFormat("1.17.0")
     }
 }
 

@@ -1,16 +1,16 @@
-package org.ivoa.tap.schema;
+package org.ivoa.dm.tapschema;
 
 
 /*
  * Created on 14/01/2025 by Paul Harrison (paul.harrison@manchester.ac.uk).
  */
 
-import org.ivoa.vodml.testing.AutoDBRoundTripTest;
+import org.ivoa.vodml.testing.AutoRoundTripTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Schema> {
+public class TAPSchemaTest extends AutoRoundTripTest<TapschemaModel> {
 
     TapschemaModel tapschemaModel;
     Schema theschema;
@@ -18,20 +18,7 @@ public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Sch
     final static String desc = "description".repeat(372);
 
 
-    @Override
-    public Schema entityForDb() {
-        return theschema;
-    }
 
-    @Override
-    public void testEntity(Schema schema) {
-
-    }
-
-   @Override
-   protected String setDbDumpFile() {
-      return "tapschema_dump.sql";
-   }
 
 
    @Override
@@ -99,6 +86,6 @@ public class TAPSchemaTest extends AutoDBRoundTripTest<TapschemaModel,String,Sch
 
     @Override
     public void testModel(TapschemaModel tapschemaModel) {
-
+       //TODO actually test some things
     }
 }
