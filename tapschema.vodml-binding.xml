@@ -16,7 +16,7 @@
             <rdbmap vodml-id="column">
                 <tableName>columns</tableName>
             </rdbmap>
-            <rdbmap vodml-id="ForeignKey">
+            <rdbmap vodml-id="ForeignKey" joinColumnName="from_table">
                 <tableName>keys</tableName>
             </rdbmap>
             <rdbmap vodml-id="FKColumn">
