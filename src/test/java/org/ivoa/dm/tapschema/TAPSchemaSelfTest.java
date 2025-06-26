@@ -12,20 +12,24 @@ import jakarta.xml.bind.Unmarshaller;
 
 import org.hibernate.Session;
 import org.ivoa.vodml.ModelManagement;
+import org.ivoa.vodml.validation.AbstractBaseValidation;
 import org.ivoa.vodml.validation.XMLValidator;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.transform.stream.StreamSource;
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /** tests whether the TAP schema can read its own TAP schema description */
-public class TAPSchemaSelfTest {
+public class TAPSchemaSelfTest extends AbstractBaseValidation {
     @Test
     public void selfValidationTest() {
         TapschemaModel model = new TapschemaModel();
@@ -46,6 +50,8 @@ public class TAPSchemaSelfTest {
         TapschemaModel model = new TapschemaModel();
         InputStream is = TapschemaModel.TAPSchema();
         assertNotNull(is);
+        String ss = new BufferedReader(new InputStreamReader(TapschemaModel.TAPSchema())).lines().collect(Collectors.joining("\n"));
+        System.out.println(ss);
         JAXBContext jc = model.management().contextFactory();
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         JAXBElement<TapschemaModel> el = unmarshaller.unmarshal(new StreamSource(is), TapschemaModel.class);
@@ -71,22 +77,8 @@ public class TAPSchemaSelfTest {
         assertNotNull(model_in);
         ColNameKeys.normalize(model_in);
         ModelManagement<TapschemaModel> modelManagement = model_in.management();
-         Map<String, String> props = new HashMap<>();
-         props.put("jakarta.persistence.jdbc.url", "jdbc:h2:mem:"+modelManagement.pu_name()+";DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS TAP_SCHEMA");//IMPL differenrt DB for each PU to stop interactions
-        props.put("jakarta.persistence.jdbc.driver", "org.h2.Driver");
-        props.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        props.put("jakarta.persistence.schema-generation.scripts.create-target", "test.sql");
-        props.put("jakarta.persistence.schema-generation.scripts.drop-target", "test-drop.sql");
-        props.put("hibernate.hbm2ddl.schema-generation.script.append", "false");
-        props.put("jakarta.persistence.create-database-schemas", "true");
 
-        props.put("jakarta.persistence.schema-generation.create-source", "metadata");
-        props.put("jakarta.persistence.schema-generation.database.action", "drop-and-create");
-        props.put("jakarta.persistence.schema-generation.scripts.action", "drop-and-create");
-        props.put("jakarta.persistence.jdbc.user", "");        
-        jakarta.persistence.EntityManagerFactory emf = jakarta.persistence.Persistence.createEntityManagerFactory(modelManagement.pu_name(), props);
-
-        jakarta.persistence.EntityManager em = emf.createEntityManager();
+        jakarta.persistence.EntityManager em = setupH2Db(TapschemaModel.pu_name(),TapschemaModel.modelDescription.allClassNames());
         em.getTransaction().begin();
         modelManagement.persistRefs(em);
         em.persist(model_in.getContent(Schema.class).get(0));
