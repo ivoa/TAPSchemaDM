@@ -1,5 +1,5 @@
 plugins {
-    id("net.ivoa.vo-dml.vodmltools") version "0.5.22"
+    id("net.ivoa.vo-dml.vodmltools") version "0.5.23"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.9.0"
+version = "0.9.1"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
@@ -18,6 +18,7 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("net.sf.saxon:Saxon-HE:12.5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher") //Needed to override gradle built-in
     testRuntimeOnly("org.hibernate.orm:hibernate-testing:6.5.3.Final")
     testImplementation("com.h2database:h2:2.2.220") // try out h2
