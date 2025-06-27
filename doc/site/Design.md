@@ -5,13 +5,13 @@ The TAP schema is described in the [TAP Standard](https://www.ivoa.net/documents
 outline table definitions with some accompanying text. In trying to make a VO-DML definition of the schema there are some challenges
 due to the extra rigour in definition that this introduces.
 
-The design of the VO-DML definition has been driven mainly by obtaining a usable and relatively compact XML serialization, tables are children
-of schema, columns and foreign keys are children of tables, and the columns of foreign keys are references to columns defined in tables. 
+The design of the [VO-DML definition](../generated/tapschema.vo-dml/) has been driven mainly by obtaining a usable and relatively compact XML serialization, `table`s are children
+of `Schema`, `column`s and `ForeignKey`s are children of `table`s, and the columns of `ForeignKey`s are references to columns defined in `table`s. 
 Although columns are the only things that are referenced, and consequently the only model elements that actually need identifiers in XML terms, 
 the NaturalKey constraint (new to VO-DML 1.1) is used with most of the other elements so that no surrogate keys are created.
-The FKColumns being a direct composition of the ForeignKey does not have an obvious NaturalKey of its own, and so does get a surrogate key created as well as the foreign keys. 
+The `FKColumns` being a direct composition of the `ForeignKey` does not have an obvious NaturalKey of its own, and so does get a surrogate key created in the `TAP_SCHEMA.key_columns` table. In addition is is "natural" for the VO-DML tooling is to create foreign keys  to the "from" and "target" tables which results in extra `from_column_table` and `target_column_table` columns in the `TAP_SCHEMA.key_columns` table.
 
-In order for the columns to have a truly unique key in the XML serialization the column identifiers are made up from prefixing the column names with the table and schema names delimited with ".".
+In order for the columns to have a truly unique key in the XML serialization the column identifiers are made up from prefixing the column names with the table and schema names delimited with a period. The transformation from the XML serialzation into TAPSchema content has to manipulate these column names into the desired forms.
 
 ## Issues with TAPSchema
 
