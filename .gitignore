@@ -10,3 +10,4 @@
 /test-drop.sql
 /tapschema_dump.sql
 /tapschema_ddl.sql
+/tapschema_content.sql
