@@ -197,7 +197,7 @@
                    <maxOccurs>1</maxOccurs>
                  </multiplicity>
                <constraint xsi:type="vo-dml:NaturalKey">
-               	<position>1</position>
+               	<position>0</position>
                </constraint>
                </attribute>
                <attribute>
@@ -291,7 +291,7 @@
                    <maxOccurs>1</maxOccurs>
                  </multiplicity>
                <constraint xsi:type="vo-dml:NaturalKey">
-               	<position>2</position> <!-- note that this is hand edited - does ont transfer from vodsl yet -->
+               	<position>0</position> <!-- note that this is hand edited - does ont transfer from vodsl yet -->
                </constraint>
                </attribute>
                <attribute>
