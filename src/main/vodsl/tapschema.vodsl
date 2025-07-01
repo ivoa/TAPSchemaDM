@@ -40,7 +40,7 @@ BLOB  ""
   
   
   otype table "The table" {
-  	table_name: ivoa:string iskey "name of the table";
+  	table_name: ivoa:string iskey ofRank 0 "name of the table";
   	table_type: TableType "the type of table";
   	utype: ivoa:string @? "utype";  	
     description: ivoa:string @? "description";
@@ -52,14 +52,14 @@ earlier in a listing.";
   }
   
 	  otype column "the column" {
-	  	column_name: ivoa:string iskey ofRank 2 "name of the column"; // note that this is trying to indicate that the key for the containing object is used as the first part of key
+	  	column_name: ivoa:string iskey ofRank 0 "name of the column"; // note that this is trying to indicate that the key for the containing object is used as the first part of key
 	  	datatype: TAPType "the type of the column (VOTable semantics)";
-    	arraysize: ivoa:string @? "";
-			xtype: ivoa:string @? "";
+    	arraysize: ivoa:string @? "the array size of the column";
+			xtype: ivoa:string @? "the xtype of the column";
 //			size: ivoa:integer @? "";
-			description: ivoa:string @? "";
-			utype: ivoa:string @? "";
-			unit: ivoa:string @? "";
+			description: ivoa:string @? "a description of the column";
+			utype: ivoa:string @? "the utype for the column";
+			unit: ivoa:string @? "the unit for the column (taken from VOUnits)";
 	ucd: ivoa:string @? "";
 	indexed: ivoa:boolean "does the column have an index";
 	principal: ivoa:boolean " indicates that the column is considered a core part
@@ -76,16 +76,16 @@ earlier in a listing.";
 	  
  otype ForeignKey "foreign key definition" {
  	  key_id:ivoa:string iskey "the id of the key";
- 	  target_table references table "";
+ 	  target_table references table "the target table of the foreign key";
     description: ivoa:string @? "description";
     utype: ivoa:string @? "utype";  
-    columns: FKColumn @+ as composition "";
+    columns: FKColumn @+ as composition "The columns that make up the foreign key";
  	 }
  	 
  
  otype FKColumn "the foreign key columns" {
  	
- 	from_column references column "";
- 	target_column references column "";
+ 	from_column references column "the column from which the key is referencing";
+ 	target_column references column "the column that the key references";
  }	 
  	 

@@ -20,6 +20,8 @@ In creating this model and associated tooling there are a number of things in th
 * TAPSchema does not explicitly define what primary key for a particular table is - indexed does not mean primary key. It can generally be inferred from the foreign keys on other tables, but this is only true of course if there is a table with which it is joined.
 * Practice as to what the table name is....
   * sometimes it includes the schema name, sometimes not - the standard does say that the name should be able to be used directly in ADQL, but then it makes the inclusion of schema in the model rather superfluous.
+    * this also causes a problem with case sensitivity "schema"."table"
+  * however in a large implementation where there are many tables in different schema then there is a danger of table name clashes.
 
 
 ## Other Implementations of TAP Schema

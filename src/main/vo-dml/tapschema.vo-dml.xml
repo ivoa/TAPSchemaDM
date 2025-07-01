@@ -9,7 +9,7 @@
       <title></title>
       <author>Paul Harrison</author>
       <version>1.0</version>
-      <lastModified>2025-06-17T09:02:09Z</lastModified>
+      <lastModified>2025-07-01T10:57:36Z</lastModified>
       <import>
         <name>ivoa</name>
         <version>1.0</version>
@@ -309,7 +309,7 @@
                <attribute>
                  <vodml-id>column.arraysize</vodml-id>
                  <name>arraysize</name>
-                 <description></description>	    
+                 <description>the array size of the column</description>	    
                  <datatype>
                     <vodml-ref>ivoa:string</vodml-ref>
                  </datatype>
@@ -321,7 +321,7 @@
                <attribute>
                  <vodml-id>column.xtype</vodml-id>
                  <name>xtype</name>
-                 <description></description>	    
+                 <description>the xtype of the column</description>	    
                  <datatype>
                     <vodml-ref>ivoa:string</vodml-ref>
                  </datatype>
@@ -333,7 +333,7 @@
                <attribute>
                  <vodml-id>column.description</vodml-id>
                  <name>description</name>
-                 <description></description>	    
+                 <description>a description of the column</description>	    
                  <datatype>
                     <vodml-ref>ivoa:string</vodml-ref>
                  </datatype>
@@ -345,7 +345,7 @@
                <attribute>
                  <vodml-id>column.utype</vodml-id>
                  <name>utype</name>
-                 <description></description>	    
+                 <description>the utype for the column</description>	    
                  <datatype>
                     <vodml-ref>ivoa:string</vodml-ref>
                  </datatype>
@@ -357,7 +357,7 @@
                <attribute>
                  <vodml-id>column.unit</vodml-id>
                  <name>unit</name>
-                 <description></description>	    
+                 <description>the unit for the column (taken from VOUnits)</description>	    
                  <datatype>
                     <vodml-ref>ivoa:string</vodml-ref>
                  </datatype>
@@ -456,7 +456,7 @@
                <reference>
                  <vodml-id>ForeignKey.target_table</vodml-id>
                  <name>target_table</name>
-                 <description></description>	    
+                 <description>the target table of the foreign key</description>	    
                  <datatype>
                    <vodml-ref>tapschema:table</vodml-ref>
                  </datatype>
@@ -492,7 +492,7 @@
                <composition>
                  <vodml-id>ForeignKey.columns</vodml-id>
                  <name>columns</name>
-                 <description></description>	    
+                 <description>The columns that make up the foreign key</description>	    
                  <datatype>
                     <vodml-ref>tapschema:FKColumn</vodml-ref>
                  </datatype>
@@ -509,7 +509,7 @@
                <reference>
                  <vodml-id>FKColumn.from_column</vodml-id>
                  <name>from_column</name>
-                 <description></description>	    
+                 <description>the column from which the key is referencing</description>	    
                  <datatype>
                    <vodml-ref>tapschema:column</vodml-ref>
                  </datatype>
@@ -521,7 +521,7 @@
                <reference>
                  <vodml-id>FKColumn.target_column</vodml-id>
                  <name>target_column</name>
-                 <description></description>	    
+                 <description>the column that the key references</description>	    
                  <datatype>
                    <vodml-ref>tapschema:column</vodml-ref>
                  </datatype>

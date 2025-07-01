@@ -19,25 +19,18 @@ public class ColNameKeys {
    public static void normalize(TapschemaModel model) {
 
       for (Schema sc: model.getContent(Schema.class)){
+
          for (Table t: sc.getTables()){
+            t.schema_name = sc.schema_name;
             for (Column c: t.getColumns()){
+               c.table_name=t.table_name;
+               c.schema_name=sc.schema_name;
                String cn = c.getColumn_name();
                if(cn.contains(".")) {
                c.setColumn_name(cn.substring(cn.lastIndexOf('.') + 1));
-               c.table_name = cn.substring(0, cn.lastIndexOf('.') );
-               }
-               else {
-                c.table_name=t.table_name;
                }
             }
-            for(ForeignKey k: t.getFkeys())
-            {
-               for(FKColumn c: k.getColumns())
-               {
-                  updateColumName(c.getFrom_column());
-                  updateColumName(c.getTarget_column());
-               }
-            }
+
          }
       }
    }
