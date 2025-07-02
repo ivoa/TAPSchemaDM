@@ -18,11 +18,13 @@ In order for the columns to have a truly unique key in the XML serialization the
 In creating this model and associated tooling there are a number of things in the design of TAPSchema
 
 * TAPSchema does not explicitly define what primary key for a particular table is - indexed does not mean primary key. It can generally be inferred from the foreign keys on other tables, but this is only true of course if there is a table with which it is joined.
-* Practice as to what the table name is....
-  * sometimes it includes the schema name, sometimes not - the standard does say that the name should be able to be used directly in ADQL, but then it makes the inclusion of schema in the model rather superfluous.
-    * this also causes a problem with case sensitivity "schema"."table"
-  * however in a large implementation where there are many tables in different schema then there is a danger of table name clashes.
-
+  * This library will store instances with the schema appended to the table names by default - however this can be switched off by defining `TAPSCHEMADM_NO_SCHEMA_IN_TABLE_NAME` as an environment variable. 
+* The TAP standard does say that the table_name should be able to be used directly in ADQL, but then it makes the inclusion of schema in the model rather superfluous. It does lead to some other complexities
+  * It introduces a security vulnerabilty that malicious content could be put into a tap schema instance, that a client might unwittingly pass on.
+  * if an implementation has only one schema then it might choose to leave off the schema from the table name - as the only requirement from the TAP standard is that the table names are unique.  This might lead to inconsistencies in the description of "standard" models like obscore.
+    * there is then an issue with case insensitivity and the possible inclusion of quotes in the table names that particular implementations might need to include 
+  
+    
 
 ## Other Implementations of TAP Schema
 
