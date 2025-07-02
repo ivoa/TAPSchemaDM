@@ -6,14 +6,24 @@ package org.ivoa.dm.tapschema;
  */
 
 /**
- * Utilities concerned with model column name normalization.
+ * Utilities concerned with model column and table name normalization.
  */
 public class ColNameKeys {
 
+
+   /**
+    * If true the schema name will be appended to the table name wherever it occurs. It is true by default.
+    * It can be made false by setting TAPSCHEMADM_NO_SCHEMA_IN_TABLE_NAME in the environment.
+    */
+   static boolean include_schema = true;
+
+   static {
+      include_schema = !System.getenv().containsKey("TAPSCHEMADM_NO_SCHEMA_IN_TABLE_NAME");
+   }
    /**
     * Normalize the model keys.
     * Make sure that the correct keys are generated for a model that as been read from an XML instance.
-    * This need to be done to make the model ready for saving to a database.
+    * This needs to be done to make the model ready for saving to a database.
     * @param model the model instance to be normalized.
     */
    public static void normalize(TapschemaModel model) {
@@ -22,6 +32,7 @@ public class ColNameKeys {
 
          for (Table t: sc.getTables()){
             t.schema_name = sc.schema_name;
+            if (include_schema)t.table_name = sc.schema_name+"."+t.table_name;
             for (Column c: t.getColumns()){
                c.table_name=t.table_name;
                c.schema_name=sc.schema_name;
@@ -35,8 +46,4 @@ public class ColNameKeys {
       }
    }
 
-   private static void updateColumName(Column fc) {
-      String cn = fc.getColumn_name();
-      fc.setColumn_name(cn.substring(cn.lastIndexOf('.') + 1));
-   }
 }
