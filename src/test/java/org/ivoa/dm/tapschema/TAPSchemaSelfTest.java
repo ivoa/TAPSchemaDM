@@ -1,6 +1,8 @@
 package org.ivoa.dm.tapschema;
 
 
+import jakarta.persistence.TypedQuery;
+
 /*
  * Created on 31/01/2025 by Paul Harrison (paul.harrison@manchester.ac.uk).
  */
@@ -89,6 +91,22 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
                 ps.setString(1, "tapschema_dump.sql");
                 ps.execute();
             });
+
+       // read back in
+           TypedQuery<Schema> qin = em.createQuery("select s from Schema s where s.schema_name='TAP_SCHEMA'",Schema.class) ;
+           Schema sin = qin.getSingleResult();
+           assertNotNull(sin);
+           assertEquals(5, sin.getTables().size());
+
+           TypedQuery<ForeignKey> qkeys = em.createQuery("select k from ForeignKey k ",ForeignKey.class) ;
+           for (ForeignKey key : qkeys.getResultList())
+           {
+               assertNotNull(key.key_id);
+           }
+
+
+
+
     }
 }
 
