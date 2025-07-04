@@ -1,7 +1,7 @@
 TAPSchemaDM
 ===========
 
-This is the TAP schema defined using VO-DML and created with the VO-DML tools. Read the [tapschema model documentation](https://ivoa.github.io/TAPSchemaDM/) for full instructions on use.
+This is the TAP schema defined using VO-DML and created with the VO-DML tools. Read the [tapschema model documentation](https://ivoa.github.io/TAPSchemaDM/) for full instructions on use. This is the actual data model that the [VO-DML tools]()
 
 The database serialization of this model matches the description of the [TAP schema in the TAP Standard](https://www.ivoa.net/documents/TAP/20190927/REC-TAP-1.1.html#tth_sEc4).
 
