@@ -50,3 +50,7 @@ It would be equally possible to drive from other languages where Saxon is suppor
 
 #### TAPSchema Content
 The TAPSchema content for a particular Model can be created by execution the [tap2instanceDDL.xsl](https://github.com/ivoa/TAPSchemaDM/blob/main/src/main/resources/tap2instanceDDL.xsl) XSLT against the TAPSchema instance for a particular model.
+
+## Transforming to VOSI Tables
+
+The design of TAP Schema is very similar to the VOSI Tables definition, but not exactly the same. There is [tap2VOSI.xsl](https://github.com/ivoa/TAPSchemaDM/blob/main/src/main/resources/tap2VOSI.xsl) that can be used to transform a TAPSchemaDM XML instance to a VOSI Tables XML instance.
