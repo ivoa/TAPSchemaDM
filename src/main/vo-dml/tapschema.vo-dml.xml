@@ -9,7 +9,7 @@
       <title></title>
       <author>Paul Harrison</author>
       <version>1.0</version>
-      <lastModified>2025-07-01T10:57:36Z</lastModified>
+      <lastModified>2025-07-15T10:03:34Z</lastModified>
       <import>
         <name>ivoa</name>
         <version>1.0</version>
@@ -324,6 +324,18 @@
                  <description>the xtype of the column</description>	    
                  <datatype>
                     <vodml-ref>ivoa:string</vodml-ref>
+                 </datatype>
+                 <multiplicity>
+                   <minOccurs>0</minOccurs>
+                   <maxOccurs>1</maxOccurs>
+                 </multiplicity>
+               </attribute>
+               <attribute>
+                 <vodml-id>column.size</vodml-id>
+                 <name>size</name>
+                 <description>deprecated in favour of arraysize</description>	    
+                 <datatype>
+                    <vodml-ref>ivoa:integer</vodml-ref>
                  </datatype>
                  <multiplicity>
                    <minOccurs>0</minOccurs>

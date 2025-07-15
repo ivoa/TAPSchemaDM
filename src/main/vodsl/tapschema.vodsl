@@ -56,7 +56,7 @@ earlier in a listing.";
 	  	datatype: TAPType "the type of the column (VOTable semantics)";
     	arraysize: ivoa:string @? "the array size of the column";
 			xtype: ivoa:string @? "the xtype of the column";
-//			size: ivoa:integer @? "";
+			size: ivoa:integer @? "deprecated in favour of arraysize";//still here for backwards compatibility 
 			description: ivoa:string @? "a description of the column";
 			utype: ivoa:string @? "the utype for the column";
 			unit: ivoa:string @? "the unit for the column (taken from VOUnits)";
