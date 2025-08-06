@@ -1,0 +1,72 @@
+
+digraph GVmap {  
+	label = "\n\ntapschema data model"
+	rankdir=TB
+	
+	node [ 
+	  shape=tab
+	  style=filled
+	]
+	subgraph cluster_packages {
+	  label="Model"
+	  rankdir=TB
+      style=filled
+      fillcolor="/set312/1"
+	  
+	}
+	
+	node [
+	shape=record
+	fontsize=8
+	style=filled] 
+    "tapschema:TableType" [
+    URL="../tapschema/TableType"
+    label = "{&lt;&lt;enumeration&gt;&gt;\nTableType|+table\l+view\l}"
+    fillcolor="/set312/1"
+    ] ;
+  "tapschema:TAPType" [
+    URL="../tapschema/TAPType"
+    label = "{&lt;&lt;enumeration&gt;&gt;\nTAPType|+BOOLEAN\l+SMALLINT\l+INTEGER\l+BIGINT\l+REAL\l+DOUBLE\l+TIMESTAMP\l+CHAR\l+VARCHAR\l+BINARY\l+VARBINARY\l+POINT\l+REGION\l+CLOB\l+BLOB\l}"
+    fillcolor="/set312/1"
+    ] ;
+  "tapschema:Schema" [
+    URL="../tapschema/Schema"
+    label = "{Schema|+schema_name : ivoa:string\l+utype : ivoa:string\l+description : ivoa:string\l+schema_index : ivoa:integer\l}"
+    fillcolor="/set312/1"
+    ] ;
+  "tapschema:table" [
+    URL="../tapschema/table"
+    label = "{table|+table_name : ivoa:string\l+table_type : tapschema:TableType\l+utype : ivoa:string\l+description : ivoa:string\l+table_index : ivoa:integer\l}"
+    fillcolor="/set312/1"
+    ] ;
+  "tapschema:column" [
+    URL="../tapschema/column"
+    label = "{column|+column_name : ivoa:string\l+datatype : tapschema:TAPType\l+arraysize : ivoa:string\l+xtype : ivoa:string\l+size : ivoa:integer\l+description : ivoa:string\l+utype : ivoa:string\l+unit : ivoa:string\l+ucd : ivoa:string\l+indexed : ivoa:boolean\l+principal : ivoa:boolean\l+std : ivoa:boolean\l+column_index : ivoa:integer\l}"
+    fillcolor="/set312/1"
+    ] ;
+  "tapschema:ForeignKey" [
+    URL="../tapschema/ForeignKey"
+    label = "{ForeignKey|+key_id : ivoa:string\l+description : ivoa:string\l+utype : ivoa:string\l}"
+    fillcolor="/set312/1"
+    ] ;
+  "tapschema:FKColumn" [
+    URL="../tapschema/FKColumn"
+    label = "{FKColumn}"
+    fillcolor="/set312/1"
+    ] ;
+  
+ 
+    edge [color="blue", arrowhead="open", arrowtail="diamond",dir="both",fontsize="10"]
+    "tapschema:Schema" -> "tapschema:table" [headlabel="1..*",label="tables",labelfontsize=10] ;
+  "tapschema:table" -> "tapschema:column" [headlabel="1..*",label="columns",labelfontsize=10] ;
+  "tapschema:table" -> "tapschema:ForeignKey" [headlabel="0..*",label="fkeys",labelfontsize=10] ;
+  "tapschema:ForeignKey" -> "tapschema:FKColumn" [headlabel="1..*",label="columns",labelfontsize=10] ;
+  
+ 
+    edge [color="green", arrowhead="open", arrowtail="none"]
+    "tapschema:ForeignKey" -> "tapschema:table" [headlabel="1",label="target_table",labelfontsize=10] ;
+  "tapschema:FKColumn" -> "tapschema:column" [headlabel="1",label="from_column",labelfontsize=10] ;
+  "tapschema:FKColumn" -> "tapschema:column" [headlabel="1",label="target_column",labelfontsize=10] ;
+    
+}
+  

@@ -1,0 +1,253 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$id" : "https://ivoa.net/dm/tapschema.vo-dml.json",
+  "title" : "",
+  "description" : "",
+  "type" : "object",
+  "properties" : {
+    "TapschemaModel" : {
+      "type" : "object",
+      "properties" : {
+        "refs" : {
+          "type" : "object",
+          "properties" : {
+            "$comment" : "placeholder to make commas easier!"
+          },
+          "additionalProperties" : false
+        },
+        "content" : {
+          "type" : "array",
+          "items" : {
+            "anyOf" : [ {
+              "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/Schema"
+            } ]
+          },
+          "additionalProperties" : false
+        }
+      },
+      "additionalProperties" : false
+    }
+  },
+  "$defs" : {
+    "$comment" : "placeholder to make commas easier!",
+    "Schema" : {
+      "type" : "object",
+      "description" : "",
+      "properties" : {
+        "$comment" : "placeholder to make commas easier!",
+        "@type" : {
+          "type" : "string"
+        },
+        "schema_name" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "utype" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "description" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "schema_index" : {
+          "type" : "number",
+          "description" : ""
+        },
+        "tables" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/table"
+          }
+        }
+      },
+      "required" : [ "schema_name", "tables" ],
+      "additionalProperties" : false
+    },
+    "table" : {
+      "type" : "object",
+      "description" : "",
+      "properties" : {
+        "$comment" : "placeholder to make commas easier!",
+        "@type" : {
+          "type" : "string"
+        },
+        "table_name" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "table_type" : {
+          "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/TableType",
+          "description" : ""
+        },
+        "utype" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "description" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "table_index" : {
+          "type" : "number",
+          "description" : ""
+        },
+        "columns" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/column"
+          }
+        },
+        "fkeys" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/ForeignKey"
+          }
+        }
+      },
+      "required" : [ "table_name", "table_type", "columns" ],
+      "additionalProperties" : false
+    },
+    "column" : {
+      "type" : "object",
+      "description" : "",
+      "properties" : {
+        "$comment" : "placeholder to make commas easier!",
+        "@type" : {
+          "type" : "string"
+        },
+        "column_name" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "datatype" : {
+          "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/TAPType",
+          "description" : ""
+        },
+        "arraysize" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "xtype" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "size" : {
+          "type" : "number",
+          "description" : ""
+        },
+        "description" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "utype" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "unit" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "ucd" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "indexed" : {
+          "type" : "boolean",
+          "description" : ""
+        },
+        "principal" : {
+          "type" : "boolean",
+          "description" : ""
+        },
+        "std" : {
+          "type" : "boolean",
+          "description" : ""
+        },
+        "column_index" : {
+          "type" : "number",
+          "description" : ""
+        }
+      },
+      "required" : [ "column_name", "datatype", "indexed", "principal", "std" ],
+      "additionalProperties" : false
+    },
+    "ForeignKey" : {
+      "type" : "object",
+      "description" : "",
+      "properties" : {
+        "$comment" : "placeholder to make commas easier!",
+        "@type" : {
+          "type" : "string"
+        },
+        "key_id" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "description" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "utype" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "columns" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/FKColumn"
+          }
+        },
+        "target_table" : {
+          "oneOf" : [ {
+            "type" : "string"
+          }, {
+            "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/table"
+          } ],
+          "description" : ""
+        }
+      },
+      "required" : [ "key_id", "target_table", "columns" ],
+      "additionalProperties" : false
+    },
+    "FKColumn" : {
+      "type" : "object",
+      "description" : "",
+      "properties" : {
+        "$comment" : "placeholder to make commas easier!",
+        "@type" : {
+          "type" : "string"
+        },
+        "from_column" : {
+          "oneOf" : [ {
+            "type" : "string"
+          }, {
+            "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/column"
+          } ],
+          "description" : ""
+        },
+        "target_column" : {
+          "oneOf" : [ {
+            "type" : "string"
+          }, {
+            "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/column"
+          } ],
+          "description" : ""
+        },
+        "_id" : {
+          "type" : "number"
+        }
+      },
+      "required" : [ "from_column", "target_column" ],
+      "additionalProperties" : false
+    },
+    "TableType" : {
+      "description" : "",
+      "enum" : [ "table", "view" ]
+    },
+    "TAPType" : {
+      "description" : "",
+      "enum" : [ "BOOLEAN", "SMALLINT", "INTEGER", "BIGINT", "REAL", "DOUBLE", "TIMESTAMP", "CHAR", "VARCHAR", "BINARY", "VARBINARY", "POINT", "REGION", "CLOB", "BLOB" ]
+    }
+  }
+}
