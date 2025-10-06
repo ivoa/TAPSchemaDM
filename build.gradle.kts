@@ -1,5 +1,5 @@
 plugins {
-    id("net.ivoa.vo-dml.vodmltools") version "0.5.26"
+    id("net.ivoa.vo-dml.vodmltools") version "0.5.28"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
@@ -24,7 +24,7 @@ dependencies {
     testRuntimeOnly("org.hibernate.orm:hibernate-testing:6.5.3.Final")
     testImplementation("com.h2database:h2:2.2.220") // try out h2
     implementation("org.slf4j:slf4j-api:1.7.32")
-    testRuntimeOnly("ch.qos.logback:logback-classic:1.4.12")
+    testRuntimeOnly("ch.qos.logback:logback-classic:1.5.13")
 
 }
 
