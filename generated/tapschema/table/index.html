@@ -1,0 +1,1527 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../column/">
+      
+      
+        <link rel="next" href="../TAPType/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.25">
+    
+    
+      
+        <title>table - TAP Schema DM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#objecttype-table" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="TAP Schema DM" class="md-header__button md-logo" aria-label="TAP Schema DM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TAP Schema DM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              table
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ivoa/TAPSchemaDM" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../schema/" class="md-tabs__link">
+        
+  
+    
+  
+  Schema
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../tapschema.vo-dml/" class="md-tabs__link">
+          
+  
+  AutoGenerated Documentation
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../javadoc" class="md-tabs__link">
+        
+  
+    
+  
+  JavaDoc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="TAP Schema DM" class="md-nav__button md-logo" aria-label="TAP Schema DM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    TAP Schema DM
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ivoa/TAPSchemaDM" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Model Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../schema/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schema
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AutoGenerated Documentation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AutoGenerated Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    tapschema model
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            tapschema model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tapschema.vo-dml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ObjectTypes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            ObjectTypes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FKColumn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FKColumn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ForeignKey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ForeignKey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Schema/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schema
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../column/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    column
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    table
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    table
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#members" class="md-nav__link">
+    <span class="md-ellipsis">
+      Members
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      References Detail
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#containment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Containment
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Enumerations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Enumerations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TAPType/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TAPType
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TableType/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TableType
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Imported Models
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Imported Models
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ivoa model
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            ivoa model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IVOA-v1.0.vo-dml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1_2" id="__nav_3_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DataTypes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            DataTypes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/IntegerQuantity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IntegerQuantity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/Quantity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quantity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/RealQuantity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RealQuantity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1_3" id="__nav_3_2_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PrimitiveTypes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            PrimitiveTypes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/Unit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/anyURI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    anyURI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/boolean/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    boolean
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/complex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    complex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/datetime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    datetime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/integer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    integer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/nonnegativeInteger/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nonnegativeInteger
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/rational/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    rational
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/real/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    real
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ivoa/string/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    string
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../javadoc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JavaDoc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#members" class="md-nav__link">
+    <span class="md-ellipsis">
+      Members
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      References Detail
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#containment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Containment
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/ivoa/TAPSchemaDM/edit/master/docs/generated/tapschema/table.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="objecttype-table">objectType table</h1>
+<p>The table</p>
+<p><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="xMaxYMax meet" style="width:273px;height:341px" version="1.1" viewBox="0 0 273 341" width="100%" zoomAndPan="magnify" class="uml" alt="uml diagram" title=""><defs><filter height="300%" id="f55eg70qwsmvf" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0" /><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0" /><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3" /><feBlend in="SourceGraphic" in2="blurOut3" mode="normal" /></filter></defs><g><rect fill="#D3D3D3" filter="url(#f55eg70qwsmvf)" height="104.0234" id="table" style="stroke: #800080; stroke-width: 2.0;" width="199" x="41" y="117" /><rect fill="#D3D3D3" height="32" style="stroke: #800080; stroke-width: 2.0;" width="199" x="41" y="117" /><ellipse cx="120.25" cy="133" fill="#ADD1B2" rx="11" ry="11" style="stroke: #800080; stroke-width: 1.0;" /><path d="M123.2188,138.6406 Q122.6406,138.9375 122,139.0781 Q121.3594,139.2344 120.6563,139.2344 Q118.1563,139.2344 116.8281,137.5938 Q115.5156,135.9375 115.5156,132.8125 Q115.5156,129.6875 116.8281,128.0313 Q118.1563,126.375 120.6563,126.375 Q121.3594,126.375 122,126.5313 Q122.6563,126.6875 123.2188,126.9844 L123.2188,129.7031 Q122.5938,129.125 122,128.8594 Q121.4063,128.5781 120.7813,128.5781 Q119.4375,128.5781 118.75,129.6563 Q118.0625,130.7188 118.0625,132.8125 Q118.0625,134.9063 118.75,135.9844 Q119.4375,137.0469 120.7813,137.0469 Q121.4063,137.0469 122,136.7813 Q122.5938,136.5 123.2188,135.9219 L123.2188,138.6406 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="32" x="140.75" y="137.1543">table</text><line style="stroke: #800080; stroke-width: 2.0;" x1="42" x2="239" y1="149" y2="149" /><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="130" x="47" y="163.2104">ivoa:string table_name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="187" x="47" y="176.0151">tapschema:TableType table_type</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="95" x="47" y="188.8198">ivoa:string utype</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="127" x="47" y="201.6245">ivoa:string description</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="135" x="47" y="214.4292">ivoa:integer table_index</text><a href="../column" target="_top" title="../column" xlink:actuate="onRequest" xlink:href="../column" xlink:show="new" xlink:title="../column" xlink:type="simple"><rect fill="#FEFECE" filter="url(#f55eg70qwsmvf)" height="32" id="column" style="stroke: #A80036; stroke-width: 1.5;" width="77" x="6" y="298" /><ellipse cx="21" cy="314" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;" /><path d="M23.9688,319.6406 Q23.3906,319.9375 22.75,320.0781 Q22.1094,320.2344 21.4063,320.2344 Q18.9063,320.2344 17.5781,318.5938 Q16.2656,316.9375 16.2656,313.8125 Q16.2656,310.6875 17.5781,309.0313 Q18.9063,307.375 21.4063,307.375 Q22.1094,307.375 22.75,307.5313 Q23.4063,307.6875 23.9688,307.9844 L23.9688,310.7031 Q23.3438,310.125 22.75,309.8594 Q22.1563,309.5781 21.5313,309.5781 Q20.1875,309.5781 19.5,310.6563 Q18.8125,311.7188 18.8125,313.8125 Q18.8125,315.9063 19.5,316.9844 Q20.1875,318.0469 21.5313,318.0469 Q22.1563,318.0469 22.75,317.7813 Q23.3438,317.5 23.9688,316.9219 L23.9688,319.6406 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="45" x="35" y="318.1543">column</text></a><a href="../ForeignKey" target="_top" title="../ForeignKey" xlink:actuate="onRequest" xlink:href="../ForeignKey" xlink:show="new" xlink:title="../ForeignKey" xlink:type="simple"><rect fill="#FEFECE" filter="url(#f55eg70qwsmvf)" height="32" id="ForeignKey" style="stroke: #A80036; stroke-width: 1.5;" width="100" x="141.5" y="298" /><ellipse cx="156.5" cy="314" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;" /><path d="M159.4688,319.6406 Q158.8906,319.9375 158.25,320.0781 Q157.6094,320.2344 156.9063,320.2344 Q154.4063,320.2344 153.0781,318.5938 Q151.7656,316.9375 151.7656,313.8125 Q151.7656,310.6875 153.0781,309.0313 Q154.4063,307.375 156.9063,307.375 Q157.6094,307.375 158.25,307.5313 Q158.9063,307.6875 159.4688,307.9844 L159.4688,310.7031 Q158.8438,310.125 158.25,309.8594 Q157.6563,309.5781 157.0313,309.5781 Q155.6875,309.5781 155,310.6563 Q154.3125,311.7188 154.3125,313.8125 Q154.3125,315.9063 155,316.9844 Q155.6875,318.0469 157.0313,318.0469 Q157.6563,318.0469 158.25,317.7813 Q158.8438,317.5 159.4688,316.9219 L159.4688,319.6406 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="170.5" y="318.1543">ForeignKey</text></a><a href="../Schema" target="_top" title="../Schema" xlink:actuate="onRequest" xlink:href="../Schema" xlink:show="new" xlink:title="../Schema" xlink:type="simple"><rect fill="#FEFECE" filter="url(#f55eg70qwsmvf)" height="32" id="Schema" style="stroke: #A80036; stroke-width: 1.5;" width="82" x="99.5" y="8" /><ellipse cx="114.5" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;" /><path d="M117.4688,29.6406 Q116.8906,29.9375 116.25,30.0781 Q115.6094,30.2344 114.9063,30.2344 Q112.4063,30.2344 111.0781,28.5938 Q109.7656,26.9375 109.7656,23.8125 Q109.7656,20.6875 111.0781,19.0313 Q112.4063,17.375 114.9063,17.375 Q115.6094,17.375 116.25,17.5313 Q116.9063,17.6875 117.4688,17.9844 L117.4688,20.7031 Q116.8438,20.125 116.25,19.8594 Q115.6563,19.5781 115.0313,19.5781 Q113.6875,19.5781 113,20.6563 Q112.3125,21.7188 112.3125,23.8125 Q112.3125,25.9063 113,26.9844 Q113.6875,28.0469 115.0313,28.0469 Q115.6563,28.0469 116.25,27.7813 Q116.8438,27.5 117.4688,26.9219 L117.4688,29.6406 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="50" x="128.5" y="28.1543">Schema</text></a><path d="M81.73,231.8 C76.95,238.07 72.46,244.52 68.5,251 C59.42,265.88 52.7,284.77 48.72,297.77 " fill="none" id="table&lt;-column" style="stroke: #0000FF; stroke-width: 1.0;" /><polygon fill="#0000FF" points="89.96,221.45,83.0932,223.6518,82.4846,230.8371,89.3513,228.6354,89.96,221.45" style="stroke: #0000FF; stroke-width: 1.0;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="54" x="69.5" y="264.0669">columns</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="23" x="23.3085" y="286.9983">1..*</text><path d="M130.09,234.19 C130.53,245.84 132.62,257.58 137.5,268 C143.25,280.27 154.16,290.36 164.68,297.85 " fill="none" id="table&lt;-ForeignKey" style="stroke: #0000FF; stroke-width: 1.0;" /><polygon fill="#0000FF" points="130.23,221.16,126.1643,227.1157,130.0981,233.1593,134.1638,227.2036,130.23,221.16" style="stroke: #0000FF; stroke-width: 1.0;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="33" x="138.5" y="264.0669">fkeys</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="23" x="128.5075" y="286.81">0..*</text><path d="M188.61,297.75 C186.02,285.06 181.81,266.62 176.5,251 C173.75,242.92 170.5,234.53 167.1,226.36 " fill="none" id="ForeignKey-&gt;table" style="stroke: #008000; stroke-width: 1.0;" /><polygon fill="#008000" points="164.96,221.3,164.7769,231.1472,166.9054,225.906,172.1465,228.0345,164.96,221.3" style="stroke: #008000; stroke-width: 1.0;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="183.5" y="264.0669">target_table</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="159.5814" y="241.0358">1</text><path d="M140.5,53.13 C140.5,71.26 140.5,95.37 140.5,116.82 " fill="none" id="Schema&lt;-table" style="stroke: #0000FF; stroke-width: 1.0;" /><polygon fill="#0000FF" points="140.5,40.03,136.5,46.03,140.5,52.03,144.5,46.03,140.5,40.03" style="stroke: #0000FF; stroke-width: 1.0;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="39" x="141.5" y="83.0669">tables</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="23" x="115.9547" y="105.8747">1..*</text></g></svg></p>
+<h2 id="members">Members</h2>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>mult</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>table_name <span class="twemoji" title="natural key"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 18v4h-4v-3h-3v-3h-3l-2.26-2.26c-.55.17-1.13.26-1.74.26a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6c0 .61-.09 1.19-.26 1.74L22 18M7 5a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2Z"/></svg></span></td>
+<td><a href="../../ivoa/string/" title="primitiveType string - A string, represented as an array of characters treated as a single, primitive value. Ala Java, a string can not be updated, that is any update leads to a different string. However in contrast to Java we assume that two strings that are identical in all their constitutent characters are the same. I.e. string has value type semantics.">ivoa:string</a></td>
+<td></td>
+<td>name of the table</td>
+</tr>
+<tr>
+<td>table_type</td>
+<td><a href="../TableType/" title="enumeration">TableType</a></td>
+<td></td>
+<td>the type of table</td>
+</tr>
+<tr>
+<td>utype</td>
+<td><a href="../../ivoa/string/" title="primitiveType string - A string, represented as an array of characters treated as a single, primitive value. Ala Java, a string can not be updated, that is any update leads to a different string. However in contrast to Java we assume that two strings that are identical in all their constitutent characters are the same. I.e. string has value type semantics.">ivoa:string</a></td>
+<td>optional</td>
+<td>utype</td>
+</tr>
+<tr>
+<td>description</td>
+<td><a href="../../ivoa/string/" title="primitiveType string - A string, represented as an array of characters treated as a single, primitive value. Ala Java, a string can not be updated, that is any update leads to a different string. However in contrast to Java we assume that two strings that are identical in all their constitutent characters are the same. I.e. string has value type semantics.">ivoa:string</a></td>
+<td>optional</td>
+<td>description</td>
+</tr>
+<tr>
+<td>table_index</td>
+<td><a href="../../ivoa/integer/" title="primitiveType integer - An integer number (from Z).">ivoa:integer</a></td>
+<td>optional</td>
+<td>used to recommend table ordering for clients. Clients may order by index (ascending) so lower index items would appear earlier in a listing.</td>
+</tr>
+<tr>
+<td>columns</td>
+<td><a href="../column/" title="objectType">column</a></td>
+<td>1 or more</td>
+<td>the columns that make up the table</td>
+</tr>
+<tr>
+<td>fkeys</td>
+<td><a href="../ForeignKey/" title="objectType">ForeignKey</a></td>
+<td>0 or more</td>
+<td>the foreign keys for this table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="references-detail">References Detail</h2>
+<p>This is referred to by <a href="../ForeignKey/" title="objectType">ForeignKey</a>
+Has contained reference(s) <a href="../column/" title="objectType">column</a> in the containment hierarchy.</p>
+<h2 id="containment">Containment</h2>
+<p>This is contained by <a href="../Schema/" title="objectType">Schema</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "content.action.edit", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+   <system systemId="tapschema.vo-dml.xsd" uri="http://ivoa.net/dm/tapschema/v1"/>
+</catalog>

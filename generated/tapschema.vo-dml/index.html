@@ -1,0 +1,1649 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../schema/">
+      
+      
+        <link rel="next" href="../tapschema/FKColumn/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.25">
+    
+    
+      
+        <title>Overview - TAP Schema DM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tapschema" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TAP Schema DM" class="md-header__button md-logo" aria-label="TAP Schema DM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TAP Schema DM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ivoa/TAPSchemaDM" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../schema/" class="md-tabs__link">
+        
+  
+    
+  
+  Schema
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  AutoGenerated Documentation
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../javadoc" class="md-tabs__link">
+        
+  
+    
+  
+  JavaDoc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TAP Schema DM" class="md-nav__button md-logo" aria-label="TAP Schema DM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    TAP Schema DM
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ivoa/TAPSchemaDM" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Model Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schema
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    AutoGenerated Documentation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AutoGenerated Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    tapschema model
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            tapschema model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview diagram
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enums
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objecttypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      ObjectTypes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Imports
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ObjectTypes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            ObjectTypes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tapschema/FKColumn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FKColumn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tapschema/ForeignKey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ForeignKey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tapschema/Schema/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schema
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tapschema/column/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    column
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tapschema/table/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    table
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Enumerations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Enumerations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tapschema/TAPType/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TAPType
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tapschema/TableType/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TableType
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Imported Models
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Imported Models
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ivoa model
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            ivoa model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IVOA-v1.0.vo-dml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1_2" id="__nav_3_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DataTypes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            DataTypes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/IntegerQuantity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IntegerQuantity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/Quantity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quantity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/RealQuantity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RealQuantity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1_3" id="__nav_3_2_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PrimitiveTypes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            PrimitiveTypes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/Unit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/anyURI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    anyURI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/boolean/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    boolean
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/complex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    complex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/datetime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    datetime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/integer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    integer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/nonnegativeInteger/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nonnegativeInteger
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/rational/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    rational
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/real/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    real
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ivoa/string/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    string
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../javadoc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JavaDoc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview diagram
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enums
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objecttypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      ObjectTypes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Imports
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/ivoa/TAPSchemaDM/edit/master/docs/generated/tapschema.vo-dml.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="tapschema">tapschema</h1>
+<p>version 1.0 <em>2025-07-15</em></p>
+<h2 id="introduction">Introduction</h2>
+<p>tapschema model</p>
+<h3 id="authors">Authors</h3>
+<p>Paul Harrison</p>
+<h3 id="overview-diagram">Overview diagram</h3>
+<p>The whole model is represented in a model diagram below</p>
+<div xmlns:bnd="http://www.ivoa.net/xml/vodml-binding/v0.9.1" xmlns:vf="http://www.ivoa.net/xml/VODML/functions" xmlns:vo-dml="http://www.ivoa.net/xml/VODML/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="439pt" height="725pt" viewBox="0.00 0.00 439.00 725.00" preserveAspectRatio="xMidYMid meet" zoomAndPan="magnify" version="1.1" contentScriptType="text/ecmascript" contentStyleType="text/css"><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 721)"><title>GVmap</title><polygon fill="white" stroke="transparent" points="-4,4 -4,-721 435,-721 435,4 -4,4"/><text text-anchor="middle" x="215.5" y="-7.8" font-family="Times,serif" font-size="14.00">tapschema data model</text><g id="node1" class="node"><title>tapschema:TableType</title><g id="a_node1"><a xlink:href="../tapschema/TableType" xlink:title="{&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;\nTableType|+table\l+view\l}" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
+<polygon fill="#8dd3c7" stroke="black" points="0,-606 0,-658 94,-658 94,-606 0,-606"/>
+<text text-anchor="middle" x="47" y="-647.6" font-family="Times,serif" font-size="8.00">&lt;&lt;enumeration&gt;&gt;</text>
+<text text-anchor="middle" x="47" y="-638.6" font-family="Times,serif" font-size="8.00">TableType</text>
+<polyline fill="none" stroke="black" points="0,-632 94,-632 "/>
+<text text-anchor="start" x="8" y="-621.6" font-family="Times,serif" font-size="8.00">+table</text>
+<text text-anchor="start" x="8" y="-612.6" font-family="Times,serif" font-size="8.00">+view</text>
+</a></g></g><g id="node2" class="node"><title>tapschema:TAPType</title><g id="a_node2"><a xlink:href="../tapschema/TAPType" xlink:title="{&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;\nTAPType|+BOOLEAN\l+SMALLINT\l+INTEGER\l+BIGINT\l+REAL\l+DOUBLE\l+TIMESTAMP\l+CHAR\l+VARCHAR\l+BINARY\l+VARBINARY\l+POINT\l+REGION\l+CLOB\l+BLOB\l}" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
+<polygon fill="#8dd3c7" stroke="black" points="112,-547.5 112,-716.5 206,-716.5 206,-547.5 112,-547.5"/>
+<text text-anchor="middle" x="159" y="-706.1" font-family="Times,serif" font-size="8.00">&lt;&lt;enumeration&gt;&gt;</text>
+<text text-anchor="middle" x="159" y="-697.1" font-family="Times,serif" font-size="8.00">TAPType</text>
+<polyline fill="none" stroke="black" points="112,-690.5 206,-690.5 "/>
+<text text-anchor="start" x="120" y="-680.1" font-family="Times,serif" font-size="8.00">+BOOLEAN</text>
+<text text-anchor="start" x="120" y="-671.1" font-family="Times,serif" font-size="8.00">+SMALLINT</text>
+<text text-anchor="start" x="120" y="-662.1" font-family="Times,serif" font-size="8.00">+INTEGER</text>
+<text text-anchor="start" x="120" y="-653.1" font-family="Times,serif" font-size="8.00">+BIGINT</text>
+<text text-anchor="start" x="120" y="-644.1" font-family="Times,serif" font-size="8.00">+REAL</text>
+<text text-anchor="start" x="120" y="-635.1" font-family="Times,serif" font-size="8.00">+DOUBLE</text>
+<text text-anchor="start" x="120" y="-626.1" font-family="Times,serif" font-size="8.00">+TIMESTAMP</text>
+<text text-anchor="start" x="120" y="-617.1" font-family="Times,serif" font-size="8.00">+CHAR</text>
+<text text-anchor="start" x="120" y="-608.1" font-family="Times,serif" font-size="8.00">+VARCHAR</text>
+<text text-anchor="start" x="120" y="-599.1" font-family="Times,serif" font-size="8.00">+BINARY</text>
+<text text-anchor="start" x="120" y="-590.1" font-family="Times,serif" font-size="8.00">+VARBINARY</text>
+<text text-anchor="start" x="120" y="-581.1" font-family="Times,serif" font-size="8.00">+POINT</text>
+<text text-anchor="start" x="120" y="-572.1" font-family="Times,serif" font-size="8.00">+REGION</text>
+<text text-anchor="start" x="120" y="-563.1" font-family="Times,serif" font-size="8.00">+CLOB</text>
+<text text-anchor="start" x="120" y="-554.1" font-family="Times,serif" font-size="8.00">+BLOB</text>
+</a></g></g><g id="node3" class="node"><title>tapschema:Schema</title><g id="a_node3"><a xlink:href="../tapschema/Schema" xlink:title="{Schema|+schema_name : ivoa:string\l+utype : ivoa:string\l+description : ivoa:string\l+schema_index : ivoa:integer\l}" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
+<polygon fill="#8dd3c7" stroke="black" points="224,-601.5 224,-662.5 358,-662.5 358,-601.5 224,-601.5"/>
+<text text-anchor="middle" x="291" y="-652.1" font-family="Times,serif" font-size="8.00">Schema</text>
+<polyline fill="none" stroke="black" points="224,-645.5 358,-645.5 "/>
+<text text-anchor="start" x="232" y="-635.1" font-family="Times,serif" font-size="8.00">+schema_name : ivoa:string</text>
+<text text-anchor="start" x="232" y="-626.1" font-family="Times,serif" font-size="8.00">+utype : ivoa:string</text>
+<text text-anchor="start" x="232" y="-617.1" font-family="Times,serif" font-size="8.00">+description : ivoa:string</text>
+<text text-anchor="start" x="232" y="-608.1" font-family="Times,serif" font-size="8.00">+schema_index : ivoa:integer</text>
+</a></g></g><g id="node4" class="node"><title>tapschema:table</title><g id="a_node4"><a xlink:href="../tapschema/table" xlink:title="{table|+table_name : ivoa:string\l+table_type : tapschema:TableType\l+utype : ivoa:string\l+description : ivoa:string\l+table_index : ivoa:integer\l}" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
+<polygon fill="#8dd3c7" stroke="black" points="212,-429.5 212,-499.5 370,-499.5 370,-429.5 212,-429.5"/>
+<text text-anchor="middle" x="291" y="-489.1" font-family="Times,serif" font-size="8.00">table</text>
+<polyline fill="none" stroke="black" points="212,-482.5 370,-482.5 "/>
+<text text-anchor="start" x="220" y="-472.1" font-family="Times,serif" font-size="8.00">+table_name : ivoa:string</text>
+<text text-anchor="start" x="220" y="-463.1" font-family="Times,serif" font-size="8.00">+table_type : tapschema:TableType</text>
+<text text-anchor="start" x="220" y="-454.1" font-family="Times,serif" font-size="8.00">+utype : ivoa:string</text>
+<text text-anchor="start" x="220" y="-445.1" font-family="Times,serif" font-size="8.00">+description : ivoa:string</text>
+<text text-anchor="start" x="220" y="-436.1" font-family="Times,serif" font-size="8.00">+table_index : ivoa:integer</text>
+</a></g></g><g id="edge1" class="edge"><title>tapschema:Schema-&gt;tapschema:table</title><path fill="none" stroke="blue" d="M291,-589.33C291,-565.09 291,-534.56 291,-509.87"/><polygon fill="blue" stroke="blue" points="291,-589.41 295,-595.41 291,-601.41 287,-595.41 291,-589.41"/><polygon fill="blue" stroke="blue" points="291,-499.69 295.5,-509.69 291,-504.69 291,-509.69 291,-509.69 291,-509.69 291,-504.69 286.5,-509.69 291,-499.69 291,-499.69"/><text text-anchor="middle" x="306.5" y="-521" font-family="Times,serif" font-size="10.00">tables</text><text text-anchor="middle" x="282" y="-502.69" font-family="Times,serif" font-size="10.00">1..*</text></g><g id="node5" class="node"><title>tapschema:column</title><g id="a_node5"><a xlink:href="../tapschema/column" xlink:title="{column|+column_name : ivoa:string\l+datatype : tapschema:TAPType\l+arraysize : ivoa:string\l+xtype : ivoa:string\l+size : ivoa:integer\l+description : ivoa:string\l+utype : ivoa:string\l+unit : ivoa:string\l+ucd : ivoa:string\l+indexed : ivoa:boolean\l+principal : ivoa:boolean\l+std : ivoa:boolean\l+column_index : ivoa:integer\l}" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
+<polygon fill="#8dd3c7" stroke="black" points="214.5,-55.5 214.5,-197.5 361.5,-197.5 361.5,-55.5 214.5,-55.5"/>
+<text text-anchor="middle" x="288" y="-187.1" font-family="Times,serif" font-size="8.00">column</text>
+<polyline fill="none" stroke="black" points="214.5,-180.5 361.5,-180.5 "/>
+<text text-anchor="start" x="222.5" y="-170.1" font-family="Times,serif" font-size="8.00">+column_name : ivoa:string</text>
+<text text-anchor="start" x="222.5" y="-161.1" font-family="Times,serif" font-size="8.00">+datatype : tapschema:TAPType</text>
+<text text-anchor="start" x="222.5" y="-152.1" font-family="Times,serif" font-size="8.00">+arraysize : ivoa:string</text>
+<text text-anchor="start" x="222.5" y="-143.1" font-family="Times,serif" font-size="8.00">+xtype : ivoa:string</text>
+<text text-anchor="start" x="222.5" y="-134.1" font-family="Times,serif" font-size="8.00">+size : ivoa:integer</text>
+<text text-anchor="start" x="222.5" y="-125.1" font-family="Times,serif" font-size="8.00">+description : ivoa:string</text>
+<text text-anchor="start" x="222.5" y="-116.1" font-family="Times,serif" font-size="8.00">+utype : ivoa:string</text>
+<text text-anchor="start" x="222.5" y="-107.1" font-family="Times,serif" font-size="8.00">+unit : ivoa:string</text>
+<text text-anchor="start" x="222.5" y="-98.1" font-family="Times,serif" font-size="8.00">+ucd : ivoa:string</text>
+<text text-anchor="start" x="222.5" y="-89.1" font-family="Times,serif" font-size="8.00">+indexed : ivoa:boolean</text>
+<text text-anchor="start" x="222.5" y="-80.1" font-family="Times,serif" font-size="8.00">+principal : ivoa:boolean</text>
+<text text-anchor="start" x="222.5" y="-71.1" font-family="Times,serif" font-size="8.00">+std : ivoa:boolean</text>
+<text text-anchor="start" x="222.5" y="-62.1" font-family="Times,serif" font-size="8.00">+column_index : ivoa:integer</text>
+</a></g></g><g id="edge2" class="edge"><title>tapschema:table-&gt;tapschema:column</title><path fill="none" stroke="blue" d="M279.63,-417.23C277.29,-405.79 275.19,-393.51 274,-382 268,-323.83 271.92,-257.9 277.13,-207.72"/><polygon fill="blue" stroke="blue" points="279.69,-417.52 284.87,-422.54 282.22,-429.25 277.05,-424.22 279.69,-417.52"/><polygon fill="blue" stroke="blue" points="278.22,-197.59 281.62,-208.01 277.68,-202.56 277.15,-207.53 277.15,-207.53 277.15,-207.53 277.68,-202.56 272.67,-207.05 278.22,-197.59 278.22,-197.59"/><text text-anchor="middle" x="293.5" y="-303" font-family="Times,serif" font-size="10.00">columns</text><text text-anchor="middle" x="287.22" y="-200.59" font-family="Times,serif" font-size="10.00">1..*</text></g><g id="node6" class="node"><title>tapschema:ForeignKey</title><g id="a_node6"><a xlink:href="../tapschema/ForeignKey" xlink:title="{ForeignKey|+key_id : ivoa:string\l+description : ivoa:string\l+utype : ivoa:string\l}" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
+<polygon fill="#8dd3c7" stroke="black" points="283.5,-329.5 283.5,-381.5 400.5,-381.5 400.5,-329.5 283.5,-329.5"/>
+<text text-anchor="middle" x="342" y="-371.1" font-family="Times,serif" font-size="8.00">ForeignKey</text>
+<polyline fill="none" stroke="black" points="283.5,-364.5 400.5,-364.5 "/>
+<text text-anchor="start" x="291.5" y="-354.1" font-family="Times,serif" font-size="8.00">+key_id : ivoa:string</text>
+<text text-anchor="start" x="291.5" y="-345.1" font-family="Times,serif" font-size="8.00">+description : ivoa:string</text>
+<text text-anchor="start" x="291.5" y="-336.1" font-family="Times,serif" font-size="8.00">+utype : ivoa:string</text>
+</a></g></g><g id="edge3" class="edge"><title>tapschema:table-&gt;tapschema:ForeignKey</title><path fill="none" stroke="blue" d="M287.22,-417.18C288.02,-411.22 289.52,-405.34 292,-400 293.7,-396.35 295.87,-392.88 298.34,-389.62"/><polygon fill="blue" stroke="blue" points="287.21,-417.4 290.81,-423.65 286.44,-429.38 282.83,-423.13 287.21,-417.4"/><polygon fill="blue" stroke="blue" points="305.05,-381.94 301.87,-392.43 301.76,-385.7 298.48,-389.47 298.48,-389.47 298.48,-389.47 301.76,-385.7 295.09,-386.51 305.05,-381.94 305.05,-381.94"/><text text-anchor="middle" x="306" y="-403" font-family="Times,serif" font-size="10.00">fkeys</text><text text-anchor="middle" x="296.05" y="-384.94" font-family="Times,serif" font-size="10.00">0..*</text></g><g id="edge5" class="edge"><title>tapschema:ForeignKey-&gt;tapschema:table</title><path fill="none" stroke="green" d="M332.55,-381.74C328.87,-391.04 324.47,-401.6 320,-411 318.52,-414.1 316.95,-417.28 315.32,-420.46"/><polygon fill="green" stroke="green" points="310.64,-429.36 311.31,-418.41 312.96,-424.93 315.29,-420.51 315.29,-420.51 315.29,-420.51 312.96,-424.93 319.27,-422.6 310.64,-429.36 310.64,-429.36"/><text text-anchor="middle" x="355" y="-403" font-family="Times,serif" font-size="10.00">target_table</text><text text-anchor="middle" x="307.14" y="-421.36" font-family="Times,serif" font-size="10.00">1</text></g><g id="node7" class="node"><title>tapschema:FKColumn</title><g id="a_node7"><a xlink:href="../tapschema/FKColumn" xlink:title="{FKColumn}" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
+<polygon fill="#8dd3c7" stroke="black" points="312.5,-245.5 312.5,-281.5 371.5,-281.5 371.5,-245.5 312.5,-245.5"/>
+<text text-anchor="middle" x="342" y="-261.6" font-family="Times,serif" font-size="8.00">FKColumn</text>
+</a></g></g><g id="edge4" class="edge"><title>tapschema:ForeignKey-&gt;tapschema:FKColumn</title><path fill="none" stroke="blue" d="M342,-317.09C342,-308.65 342,-299.85 342,-291.92"/><polygon fill="blue" stroke="blue" points="342,-317.43 346,-323.43 342,-329.43 338,-323.43 342,-317.43"/><polygon fill="blue" stroke="blue" points="342,-281.75 346.5,-291.75 342,-286.75 342,-291.75 342,-291.75 342,-291.75 342,-286.75 337.5,-291.75 342,-281.75 342,-281.75"/><text text-anchor="middle" x="363.5" y="-303" font-family="Times,serif" font-size="10.00">columns</text><text text-anchor="middle" x="333" y="-284.75" font-family="Times,serif" font-size="10.00">1..*</text></g><g id="edge6" class="edge"><title>tapschema:FKColumn-&gt;tapschema:column</title><path fill="none" stroke="green" d="M312.25,-249.54C303.13,-243.99 294.16,-236.55 289,-227 285.74,-220.98 283.47,-214.43 281.96,-207.67"/><polygon fill="green" stroke="green" points="280.26,-197.65 286.37,-206.76 281.1,-202.58 281.93,-207.51 281.93,-207.51 281.93,-207.51 281.1,-202.58 277.5,-208.26 280.26,-197.65 280.26,-197.65"/><text text-anchor="middle" x="322.5" y="-219" font-family="Times,serif" font-size="10.00">from_column</text><text text-anchor="middle" x="276.76" y="-200.65" font-family="Times,serif" font-size="10.00">1</text></g><g id="edge7" class="edge"><title>tapschema:FKColumn-&gt;tapschema:column</title><path fill="none" stroke="green" d="M352.41,-245.18C356.38,-236.4 359.26,-225.58 356,-216 354.94,-212.88 353.72,-209.79 352.37,-206.73"/><polygon fill="green" stroke="green" points="347.94,-197.66 356.37,-204.67 350.13,-202.15 352.33,-206.64 352.33,-206.64 352.33,-206.64 350.13,-202.15 348.29,-208.62 347.94,-197.66 347.94,-197.66"/><text text-anchor="middle" x="394" y="-219" font-family="Times,serif" font-size="10.00">target_column</text><text text-anchor="middle" x="344.44" y="-200.66" font-family="Times,serif" font-size="10.00">1</text></g></g></svg></div>
+
+<h2 id="enums">Enums</h2>
+<ul>
+<li><a href="../tapschema/TAPType/">TAPType</a></li>
+<li><a href="../tapschema/TableType/">TableType</a></li>
+</ul>
+<h2 id="objecttypes">ObjectTypes</h2>
+<ul>
+<li><a href="../tapschema/FKColumn/">FKColumn</a></li>
+<li><a href="../tapschema/ForeignKey/">ForeignKey</a></li>
+<li><a href="../tapschema/Schema/">Schema</a></li>
+<li><a href="../tapschema/column/">column</a></li>
+<li><a href="../tapschema/table/">table</a></li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="../tapschema/column/">column</a> contained</li>
+<li><a href="../tapschema/table/">table</a> contained</li>
+</ul>
+<h2 id="imports">Imports</h2>
+<ul>
+<li>ivoa</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.action.edit", "content.tooltips"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>
