@@ -7,7 +7,11 @@ The database serialization of this model matches the description of the [TAP sch
 
 [![Java CI with Gradle](https://github.com/ivoa/TAPSchemaDM/actions/workflows/gradletest.yml/badge.svg)](https://github.com/ivoa/TAPSchemaDM/actions/workflows/gradletest.yml)
 
-[![tapschema](https://img.shields.io/maven-central/v/org.javastro.ivoa.dm/tapschema.svg?label=tapschema)](https://central.sonatype.com/artifact/org.javastro.ivoa.dm/tapschema/)
+
+Note - published to the UKSrc Nexus
+
+![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo.dev.uksrc.org%2Frepository%2Fmaven-public%2Forg%2Fjavastro%2Fivoa%2Fdm%2Ftapschema%2Fmaven-metadata.xml&strategy=highestVersion&label=tapschema&link=https%3A%2F%2Frepo.dev.uksrc.org%2F%23browse%2Fbrowse%3Amaven-releases%3Aorg%252Fjavastro%252Fivoa%252Fdm%252Ftapschema)
+
 
 
 

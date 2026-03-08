@@ -2,12 +2,12 @@ plugins {
     id("net.ivoa.vo-dml.vodmltools") version "0.5.28"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
-    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
+//    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     signing
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.9.5"
+version = "0.9.6"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
@@ -91,23 +91,36 @@ publishing {
             }
         }
     }
+    repositories {
+        maven {
+            name = "uksrcrepo"
+            credentials {
+                username = (findProperty("uksrcNexusUsername") ?: System.getenv("UKSRC_REPO_USERNAME")) as String?
+                password = (findProperty("uksrcNexusPassword") ?: System.getenv("UKSRC_REPO_PASSWORD")) as String?
+            }
+            val releasesRepoUrl = uri("https://repo.dev.uksrc.org/repository/maven-releases/")
+            val snapshotsRepoUrl = uri("https://repo.dev.uksrc.org/repository/maven-snapshots/")
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+        }
+    }
+
 }
 signing {
     useGpgCmd()
     sign(publishing.publications["mavenJava"])
 }
-nexusPublishing {
-    repositories {
-        //TODO this is a rather unsatisfactory kludge, but still seems better than the suggested JReleaser which is not really gradle friendly
-        // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
-        // note need gradle publish  closeSonatypeStagingRepository to upload
-        sonatype {
-            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
-        }
-    }
-
-}
+//nexusPublishing {
+//    repositories {
+//        //TODO this is a rather unsatisfactory kludge, but still seems better than the suggested JReleaser which is not really gradle friendly
+//        // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
+//        // note need gradle publish  closeSonatypeStagingRepository to upload
+//        sonatype {
+//            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+//            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+//        }
+//    }
+//
+//}
 
 // site tasks
 tasks.register<Copy>("copyJavaDocForSite") {
