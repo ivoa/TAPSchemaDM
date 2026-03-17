@@ -38,7 +38,7 @@
    </xsl:template>
     <xsl:template match="table/columns/column">
         <column>
-            <xsl:apply-templates select="(column_name,description,unit,ucd,utype,datatype,indexed,principal)"/>
+            <xsl:apply-templates select="(column_name,description,unit,ucd,utype,datatype,indexed,principal,nullable)"/>
         </column>
     </xsl:template>
     <xsl:template match="indexed">
@@ -47,6 +47,11 @@
     <xsl:template match="principal">
         <flag>primary</flag>
     </xsl:template>
+    <xsl:template match="nullable[text()='true']">
+        <flag>nullable</flag>
+    </xsl:template>
+    <!-- suppress output for nullable=false -->
+    <xsl:template match="nullable"/>
     <xsl:template match="datatype">
         <xsl:element name="dataType" >
             <xsl:attribute name="type" namespace="http://www.w3.org/2001/XMLSchema-instance">vs:VOTableType</xsl:attribute>
