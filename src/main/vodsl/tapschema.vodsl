@@ -19,23 +19,24 @@ earlier in a listing.";
   	view "view"
   }
   
-  enum TAPType  "Allowable types for TAP columns" 
+  enum TAPType  "Allowable types for TAP columns - The various definitions for these can be found in the VOTable,VOSI and ADQL specifications" //IMPL having a centralized definition here is an advantage
 {
-BOOLEAN  "" ,
-SMALLINT  "" ,
-INTEGER  "" ,
-BIGINT  "" ,
-REAL  "" ,
-DOUBLE  "" ,
-TIMESTAMP  "" ,
-CHAR  "" ,
-VARCHAR  "" ,
-BINARY  "" ,
-VARBINARY  "" ,
-POINT  "" ,
-REGION  "" ,
-CLOB  "" ,
-BLOB  "" 
+BOOLEAN  "true/false values" ,
+SMALLINT  "typically a 16 bit integer" ,
+INTEGER  "typically a 32 bit integer" ,
+BIGINT  "typically a 64 bit integer" ,
+REAL  "single precision floating point number" ,
+DOUBLE  "double precision floating point number" ,
+TIMESTAMP  "a timestamp in ISO 8601 format" ,
+CHAR  "fixed length character" ,
+VARCHAR  "variable length character" ,
+BINARY  "fixed length binary" ,
+VARBINARY  "variable length binary" ,
+POINT  "Geometry values are two-dimensional; they are usually longitude
+        and latitude values in spherical coordinates" ,
+REGION  "FIXME this is a placeholder for the ADQL REGION type - we need to define how this is represented in TAP and VOTable and PGSphere" ,
+CLOB  "large character/text object. The actual size limit is implementation defined" ,
+BLOB  " large binary object"
 }
   
   

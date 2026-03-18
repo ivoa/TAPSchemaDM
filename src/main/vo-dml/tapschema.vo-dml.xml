@@ -9,7 +9,7 @@
       <title></title>
       <author>Paul Harrison</author>
       <version>1.0</version>
-      <lastModified>2026-03-18T10:12:02Z</lastModified>
+      <lastModified>2026-03-18T11:47:19Z</lastModified>
       <import>
         <name>ivoa</name>
         <version>1.0</version>
@@ -34,81 +34,82 @@
             <enumeration>
                <vodml-id>TAPType</vodml-id>
                <name>TAPType</name>
-               <description>Allowable types for TAP columns</description>	    
+               <description>Allowable types for TAP columns - The various definitions for these can be found in the VOTable,VOSI and ADQL specifications</description>	    
                   <literal>
                     <vodml-id>TAPType.BOOLEAN</vodml-id>
                     <name>BOOLEAN</name>
-                    <description></description>	    
+                    <description>true/false values</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.SMALLINT</vodml-id>
                     <name>SMALLINT</name>
-                    <description></description>	    
+                    <description>typically a 16 bit integer</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.INTEGER</vodml-id>
                     <name>INTEGER</name>
-                    <description></description>	    
+                    <description>typically a 32 bit integer</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.BIGINT</vodml-id>
                     <name>BIGINT</name>
-                    <description></description>	    
+                    <description>typically a 64 bit integer</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.REAL</vodml-id>
                     <name>REAL</name>
-                    <description></description>	    
+                    <description>single precision floating point number</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.DOUBLE</vodml-id>
                     <name>DOUBLE</name>
-                    <description></description>	    
+                    <description>double precision floating point number</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.TIMESTAMP</vodml-id>
                     <name>TIMESTAMP</name>
-                    <description></description>	    
+                    <description>a timestamp in ISO 8601 format</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.CHAR</vodml-id>
                     <name>CHAR</name>
-                    <description></description>	    
+                    <description>fixed length character</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.VARCHAR</vodml-id>
                     <name>VARCHAR</name>
-                    <description></description>	    
+                    <description>variable length character</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.BINARY</vodml-id>
                     <name>BINARY</name>
-                    <description></description>	    
+                    <description>fixed length binary</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.VARBINARY</vodml-id>
                     <name>VARBINARY</name>
-                    <description></description>	    
+                    <description>variable length binary</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.POINT</vodml-id>
                     <name>POINT</name>
-                    <description></description>	    
+                    <description>Geometry values are two-dimensional; they are usually longitude
+                            and latitude values in spherical coordinates</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.REGION</vodml-id>
                     <name>REGION</name>
-                    <description></description>	    
+                    <description>FIXME this is a placeholder for the ADQL REGION type - we need to define how this is represented in TAP and VOTable and PGSphere</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.CLOB</vodml-id>
                     <name>CLOB</name>
-                    <description></description>	    
+                    <description>large character/text object. The actual size limit is implementation defined</description>	    
                   </literal>	
                   <literal>
                     <vodml-id>TAPType.BLOB</vodml-id>
                     <name>BLOB</name>
-                    <description></description>	    
+                    <description> large binary object</description>	    
                   </literal>	
             </enumeration>
             <objectType>
