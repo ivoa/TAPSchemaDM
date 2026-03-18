@@ -9,7 +9,7 @@
       <title></title>
       <author>Paul Harrison</author>
       <version>1.0</version>
-      <lastModified>2025-07-15T10:03:34Z</lastModified>
+      <lastModified>2026-03-18T10:12:02Z</lastModified>
       <import>
         <name>ivoa</name>
         <version>1.0</version>
@@ -432,6 +432,20 @@
                  </multiplicity>
                </attribute>
                <attribute>
+                 <vodml-id>column.column_index</vodml-id>
+                 <name>column_index</name>
+                 <description>used to recommend table ordering for clients. Clients
+                 may order by index (ascending) so lower index items would appear
+                 earlier in a listing.</description>	    
+                 <datatype>
+                    <vodml-ref>ivoa:integer</vodml-ref>
+                 </datatype>
+                 <multiplicity>
+                   <minOccurs>0</minOccurs>
+                   <maxOccurs>1</maxOccurs>
+                 </multiplicity>
+               </attribute>
+               <attribute>
                  <vodml-id>column.nullable</vodml-id>
                  <name>nullable</name>
                  <description>indicates whether the column may have null values</description>	    
@@ -444,13 +458,11 @@
                  </multiplicity>
                </attribute>
                <attribute>
-                 <vodml-id>column.column_index</vodml-id>
-                 <name>column_index</name>
-                 <description>used to recommend table ordering for clients. Clients
-                 may order by index (ascending) so lower index items would appear
-                 earlier in a listing.</description>	    
+                 <vodml-id>column.isNaturalKey</vodml-id>
+                 <name>isNaturalKey</name>
+                 <description>indicates whether the column is a natural key (i.e. a key that has meaning outside the database)</description>	    
                  <datatype>
-                    <vodml-ref>ivoa:integer</vodml-ref>
+                    <vodml-ref>ivoa:boolean</vodml-ref>
                  </datatype>
                  <multiplicity>
                    <minOccurs>0</minOccurs>
