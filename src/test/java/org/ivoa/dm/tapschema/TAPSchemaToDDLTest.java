@@ -27,7 +27,7 @@ public class TAPSchemaToDDLTest {
     @Test
     public void writeDDL () throws SaxonApiException {
 
-        XsltExecutable stylesheet = compiler.compile(new StreamSource(TapschemaModel.class.getResourceAsStream("/tap2posgresql.xsl")));
+        XsltExecutable stylesheet = compiler.compile(new StreamSource(TapschemaModel.class.getResourceAsStream("/tap2schemaDDL.xsl")));
         Serializer out = processor.newSerializer(new File("tapschema_ddl.sql"));
         out.setOutputProperty(Serializer.Property.METHOD, "text");
         Xslt30Transformer transformer = stylesheet.load30();

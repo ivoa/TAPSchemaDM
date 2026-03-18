@@ -38,12 +38,12 @@ It is possible to work directly with the XML TAPSchema instances (produced by th
 
 #### Model Tables
 
-The DDL for the model tables can be created by executing the [tap2posgresql.xsl](https://github.com/ivoa/TAPSchemaDM/blob/main/src/main/resources/tap2posgresql.xsl) against the TAPSchema instance. This repository has a [test](https://github.com/ivoa/TAPSchemaDM/blob/main/src/test/java/org/ivoa/dm/tapschema/TAPSchemaToDDLTest.java) showing this being driven by Java code - in this case the DDL is being created for the TAPSchema itself. 
+The DDL for the model tables can be created by executing the [tap2schemaDDL.xsl](https://github.com/ivoa/TAPSchemaDM/blob/main/src/main/resources/tap2schemaDDL.xsl) against the TAPSchema instance. This repository has a [test](https://github.com/ivoa/TAPSchemaDM/blob/main/src/test/java/org/ivoa/dm/tapschema/TAPSchemaToDDLTest.java) showing this being driven by Java code - in this case the DDL is being created for the TAPSchema itself. 
 
 It is possible to drive the transformation from the commandline (after installing the [Saxon XSLT processor](https://www.saxonica.com/html/documentation12/about/installationjava/installingjava.html))
 
 ```shell
-java  -jar /opt/packages/SaxonHE12-7J/saxon-he-12.7.jar -xsl:src/main/resources/tap2posgresql.xsl -s:build/generated/sources/vodml/schema/tapschema.vo-dml.tap.xml 
+java  -jar /opt/packages/SaxonHE12-7J/saxon-he-12.7.jar -xsl:src/main/resources/tap2schemaDDL.xsl -s:build/generated/sources/vodml/schema/tapschema.vo-dml.tap.xml > tapSchemaDDL.sql
 ```
 
 It would be equally possible to drive from other languages where Saxon is supported e.g. Python via [saxonche](https://pypi.org/project/saxonche/). 
