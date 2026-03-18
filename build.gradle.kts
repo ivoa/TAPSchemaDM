@@ -1,5 +1,5 @@
 plugins {
-    id("net.ivoa.vo-dml.vodmltools") version "0.5.28"
+    id("net.ivoa.vo-dml.vodmltools") version "0.6.0"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
 //    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.9.6"
+version = "0.9.7"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
