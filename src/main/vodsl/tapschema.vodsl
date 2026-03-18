@@ -69,6 +69,7 @@ query. In cases where the service selects the columns to return (such as a
 query language without an explicit output selection), the principal column
 indicates those columns that are returned by default";
 	std: ivoa:boolean "is the column defined by a standard";
+	nullable: ivoa:boolean @? "indicates whether the column may have null values";
 	column_index: ivoa:integer @? "used to recommend table ordering for clients. Clients
 may order by index (ascending) so lower index items would appear
 earlier in a listing.";
