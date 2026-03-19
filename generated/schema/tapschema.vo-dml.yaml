@@ -1,0 +1,213 @@
+components:
+  schemas:
+    TableType:
+      description: "types of table"
+      enum:
+      - "table"
+      - "view"
+    TAPType:
+      description: "Allowable types for TAP columns - The various definitions for\
+        \ these can be found in the VOTable,VOSI and ADQL specifications"
+      enum:
+      - "BOOLEAN"
+      - "SMALLINT"
+      - "INTEGER"
+      - "BIGINT"
+      - "REAL"
+      - "DOUBLE"
+      - "TIMESTAMP"
+      - "CHAR"
+      - "VARCHAR"
+      - "BINARY"
+      - "VARBINARY"
+      - "POINT"
+      - "REGION"
+      - "CLOB"
+      - "BLOB"
+    Schema:
+      type: "object"
+      description: "The schema"
+      properties:
+        '@type':
+          type: "string"
+          description: "UType as type discriminator"
+        schema_name:
+          type: "string"
+          description: "The name of the schema"
+        utype:
+          type: "string"
+          description: "utype"
+        description:
+          type: "string"
+          description: "description"
+        schema_index:
+          type: "integer"
+          description: "used to recommend table ordering for clients. Clients may\
+            \ order by index (ascending) so lower index items would appear earlier\
+            \ in a listing."
+        tables:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/table"
+      required:
+      - "schema_name"
+      - "tables"
+      additionalProperties: false
+    table:
+      type: "object"
+      description: "The table"
+      properties:
+        '@type':
+          type: "string"
+          description: "UType as type discriminator"
+        table_name:
+          type: "string"
+          description: "name of the table"
+        table_type:
+          $ref: "#/components/schemas/TableType"
+          description: "the type of table"
+        utype:
+          type: "string"
+          description: "utype"
+        description:
+          type: "string"
+          description: "description"
+        table_index:
+          type: "integer"
+          description: "used to recommend table ordering for clients. Clients may\
+            \ order by index (ascending) so lower index items would appear earlier\
+            \ in a listing."
+        columns:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/column"
+        fkeys:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ForeignKey"
+      required:
+      - "table_name"
+      - "table_type"
+      - "columns"
+      additionalProperties: false
+    column:
+      type: "object"
+      description: "the column"
+      properties:
+        '@type':
+          type: "string"
+          description: "UType as type discriminator"
+        column_name:
+          type: "string"
+          description: "name of the column"
+        datatype:
+          $ref: "#/components/schemas/TAPType"
+          description: "the type of the column (VOTable semantics)"
+        arraysize:
+          type: "string"
+          description: "the array size of the column"
+        xtype:
+          type: "string"
+          description: "the xtype of the column"
+        size:
+          type: "integer"
+          description: "deprecated in favour of arraysize"
+        description:
+          type: "string"
+          description: "a description of the column"
+        utype:
+          type: "string"
+          description: "the utype for the column"
+        unit:
+          type: "string"
+          description: "the unit for the column (taken from VOUnits)"
+        ucd:
+          type: "string"
+          description: ""
+        indexed:
+          type: "boolean"
+          description: "does the column have an index"
+        principal:
+          type: "boolean"
+          description: "indicates that the column is considered a core part of the\
+            \ content; clients can use this hint to make the principal column(s) visible,\
+            \ for example by selecting them by default in generating an ADQL query.\
+            \ In cases where the service selects the columns to return (such as a\
+            \ query language without an explicit output selection), the principal\
+            \ column indicates those columns that are returned by default"
+        std:
+          type: "boolean"
+          description: "is the column defined by a standard"
+        column_index:
+          type: "integer"
+          description: "used to recommend table ordering for clients. Clients may\
+            \ order by index (ascending) so lower index items would appear earlier\
+            \ in a listing."
+        nullable:
+          type: "boolean"
+          description: "indicates whether the column may have null values"
+        isNaturalKey:
+          type: "boolean"
+          description: "indicates whether the column is a natural key (i.e. a key\
+            \ that has meaning outside the database)"
+      required:
+      - "column_name"
+      - "datatype"
+      - "indexed"
+      - "principal"
+      - "std"
+      additionalProperties: false
+    ForeignKey:
+      type: "object"
+      description: "foreign key definition"
+      properties:
+        '@type':
+          type: "string"
+          description: "UType as type discriminator"
+        key_id:
+          type: "string"
+          description: "the id of the key"
+        target_table:
+          oneOf:
+          - type: "string"
+          - $ref: "#/components/schemas/table"
+          description: "the target table of the foreign key"
+        description:
+          type: "string"
+          description: "description"
+        utype:
+          type: "string"
+          description: "utype"
+        columns:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FKColumn"
+      required:
+      - "key_id"
+      - "target_table"
+      - "columns"
+      additionalProperties: false
+    FKColumn:
+      type: "object"
+      description: "the foreign key columns"
+      properties:
+        '@type':
+          type: "string"
+          description: "UType as type discriminator"
+        from_column:
+          oneOf:
+          - type: "string"
+          - $ref: "#/components/schemas/column"
+          description: "the column from which the key is referencing"
+        target_column:
+          oneOf:
+          - type: "string"
+          - $ref: "#/components/schemas/column"
+          description: "the column that the key references"
+        _id:
+          type: "integer"
+          description: "surrogate key"
+      required:
+      - "from_column"
+      - "target_column"
+      additionalProperties: false
