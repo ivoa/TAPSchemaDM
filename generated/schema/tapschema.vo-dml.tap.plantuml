@@ -1,0 +1,128 @@
+
+
+@startuml
+
+' hide the spot
+' hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+        
+entity "schemas" as schemas {
+
+    schema_name : VARCHAR
+
+---
+
+    utype : VARCHAR
+description : VARCHAR
+schema_index : INTEGER
+
+}
+
+entity "tables" as tables {
+
+    schema_name : VARCHAR
+table_name : VARCHAR
+
+---
+
+    table_type : VARCHAR
+utype : VARCHAR
+description : VARCHAR
+table_index : INTEGER
+
+---
+      schema_name : VARCHAR<<FK>>
+
+}
+
+entity "columns" as columns {
+
+    schema_name : VARCHAR
+table_name : VARCHAR
+column_name : VARCHAR
+
+---
+
+    datatype : VARCHAR
+arraysize : VARCHAR
+xtype : VARCHAR
+size : INTEGER
+description : VARCHAR
+utype : VARCHAR
+unit : VARCHAR
+ucd : VARCHAR
+indexed : INTEGER
+principal : INTEGER
+std : INTEGER
+column_index : INTEGER
+nullable : INTEGER
+isNaturalKey : INTEGER
+
+---
+      schema_name : VARCHAR<<FK>>
+table_name : VARCHAR<<FK>>
+
+}
+
+entity "keys" as keys {
+
+    key_id : VARCHAR
+
+---
+
+    schema_name : VARCHAR
+from_table : VARCHAR
+target_table_schema_name : VARCHAR
+target_table : VARCHAR
+description : VARCHAR
+utype : VARCHAR
+
+---
+      target_table_schema_name : VARCHAR<<FK>>
+target_table : VARCHAR<<FK>>
+schema_name : VARCHAR<<FK>>
+from_table : VARCHAR<<FK>>
+
+}
+
+entity "key_columns" as key_columns {
+
+    FKCOLUMN_ID : BIGINT
+
+---
+
+    key_id : VARCHAR
+from_column_schema_name : VARCHAR
+from_column_table_name : VARCHAR
+from_column : VARCHAR
+target_column_schema_name : VARCHAR
+target_column_table_name : VARCHAR
+target_column : VARCHAR
+
+---
+      from_column_schema_name : VARCHAR<<FK>>
+from_column_table_name : VARCHAR<<FK>>
+from_column : VARCHAR<<FK>>
+target_column_schema_name : VARCHAR<<FK>>
+target_column_table_name : VARCHAR<<FK>>
+target_column : VARCHAR<<FK>>
+key_id : VARCHAR<<FK>>
+
+}
+
+
+        tables }o--||schemas
+columns }o--||tables
+keys }o--||tables
+keys }o--||tables
+key_columns }o--||columns
+key_columns }o--||columns
+key_columns }o--||keys
+
+
+
+@enduml
+
+    
