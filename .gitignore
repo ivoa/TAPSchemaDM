@@ -12,3 +12,5 @@
 /tapschema_ddl.sql
 /tapschema_content.sql
 /tables_VOSI.xml
+/TAPschemaDiscovered.xml
+/postgres_tapschema.xml

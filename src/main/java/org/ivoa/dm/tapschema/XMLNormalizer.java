@@ -9,9 +9,9 @@ import java.util.List;
 
 /**
  * Utilities concerned with model column and table name normalization.
+ * Note that this is here to allow package access to the DM.
  */
-public class ColNameKeys {
-
+public class XMLNormalizer {
 
    /**
     * list of reserved terms.
@@ -66,11 +66,11 @@ public class ColNameKeys {
    }
    /**
     * Normalize the model keys.
-    * Make sure that the correct keys are generated for a model that as been read from an XML instance.
+    * Make sure that the correct keys are generated for a model that as been translate from an XML instance.
     * This needs to be done to make the model ready for saving to a database.
     * @param model the model instance to be normalized.
     */
-   public static void normalize(TapschemaModel model) {
+   public void prepareForDB(TapschemaModel model) {
 
       for (Schema sc: model.getContent(Schema.class)){
 
@@ -82,10 +82,9 @@ public class ColNameKeys {
                c.schema_name=sc.schema_name;
                String cn = c.getColumn_name();
                if(cn.contains(".")) {
-               c.setColumn_name(quoteColum(cn.substring(cn.lastIndexOf('.') + 1)));
+               c.setColumn_name(quoteColumn(cn.substring(cn.lastIndexOf('.') + 1)));
                }
             }
-
          }
       }
    }
@@ -95,7 +94,7 @@ public class ColNameKeys {
     * @param columName the column name.
     * @return the column name quoted if necessary.
     */
-   private static String quoteColum(String columName) {
+   private static String quoteColumn(String columName) {
       if (reservedADQL.contains(columName.toUpperCase())) {
          return "\""+columName+"\"";
       }

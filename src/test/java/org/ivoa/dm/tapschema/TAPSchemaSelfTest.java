@@ -23,14 +23,12 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.PreparedStatement;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** tests whether the TAP schema can read its own TAP schema description */
+/** tests whether the TAP schema can translate its own TAP schema description */
 public class TAPSchemaSelfTest extends AbstractBaseValidation {
     @Test
     public void selfValidationTest() {
@@ -77,7 +75,7 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
         JAXBElement<TapschemaModel> el = unmarshaller.unmarshal(new StreamSource(is), TapschemaModel.class);
         TapschemaModel model_in = el.getValue();
         assertNotNull(model_in);
-        ColNameKeys.normalize(model_in);
+        new XMLNormalizer().prepareForDB(model_in);
         ModelManagement<TapschemaModel> modelManagement = model_in.management();
 
         jakarta.persistence.EntityManager em = setupH2Db(TapschemaModel.pu_name(),TapschemaModel.modelDescription.allClassNames());
@@ -92,7 +90,7 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
                 ps.execute();
             });
 
-       // read back in
+       // translate back in
            TypedQuery<Schema> qin = em.createQuery("select s from Schema s where s.schema_name='TAP_SCHEMA'",Schema.class) ;
            Schema sin = qin.getSingleResult();
            assertNotNull(sin);

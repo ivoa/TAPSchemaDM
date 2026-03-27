@@ -24,7 +24,7 @@ JAXBContext jc = model.management().contextFactory();
 Unmarshaller unmarshaller = jc.createUnmarshaller(); 
 JAXBElement<TapschemaModel> el = unmarshaller.unmarshal(new StreamSource(is), TapschemaModel.class);
 TapschemaModel model_in = el.getValue();
-org.ivoa.dm.tapschema.ColNameKeys.normalize(model_in); // note that this step is necessary before saving to the database to set up the table_name foreign keys
+new org.ivoa.dm.tapschema.XMLNormalizer().prepareForDB(model_in); // note that this step is necessary before saving to the database to set up the table_name foreign keys
 EntityManager em = emf.createEntityManager(); 
 em.getTransaction().begin();
 model_in.management().persistRefs(em);
