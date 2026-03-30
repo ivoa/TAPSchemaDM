@@ -56,17 +56,17 @@ public class XMLNormalizer {
 
    );
    /**
-    * If true the schema name will be appended to the table name wherever it occurs. It is true by default.
-    * It can be made false by setting TAPSCHEMADM_NO_SCHEMA_IN_TABLE_NAME in the environment.
+    * If true the schema name will be appended to the table name wherever it occurs. It is false by default.
+    * It can be made true by setting TAPSCHEMADM_SCHEMA_IN_TABLE_NAME in the environment.
     */
-   static boolean include_schema = true;
+   static boolean include_schema = false;
 
    static {
-      include_schema = !System.getenv().containsKey("TAPSCHEMADM_NO_SCHEMA_IN_TABLE_NAME");
+      include_schema = System.getenv().containsKey("TAPSCHEMADM_SCHEMA_IN_TABLE_NAME");
    }
    /**
     * Normalize the model keys.
-    * Make sure that the correct keys are generated for a model that as been translate from an XML instance.
+    * Make sure that the correct keys are generated for a model that as been translated from an XML instance.
     * This needs to be done to make the model ready for saving to a database.
     * @param model the model instance to be normalized.
     */
@@ -76,7 +76,9 @@ public class XMLNormalizer {
 
          for (Table t: sc.getTables()){
             t.schema_name = sc.schema_name;
-            if (include_schema)t.table_name = sc.schema_name+"."+t.table_name;
+            if (!include_schema) {
+               t.table_name = t.table_name.substring(t.table_name.lastIndexOf('.') + 1);
+            }
             for (Column c: t.getColumns()){
                c.table_name=t.table_name;
                c.schema_name=sc.schema_name;
@@ -84,6 +86,23 @@ public class XMLNormalizer {
                if(cn.contains(".")) {
                c.setColumn_name(quoteColumn(cn.substring(cn.lastIndexOf('.') + 1)));
                }
+            }
+         }
+      }
+   }
+
+   /**
+    * prepare a model that has been read from a database for XML serialization. Note that
+    * the serialization is not performed.
+    * @param model the model to be serialized
+    */
+   public void prepareForSerialization(TapschemaModel model) {
+      for (Schema sc: model.getContent(Schema.class)){
+         for (Table t: sc.getTables()){
+            String tn = String.join(".",sc.schema_name,t.getTable_name());
+            t.table_name=tn;
+            for (Column c: t.getColumns()){
+               c.column_name=String.join(".",tn,c.column_name);
             }
          }
       }

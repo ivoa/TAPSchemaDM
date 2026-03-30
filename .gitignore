@@ -14,3 +14,5 @@
 /tables_VOSI.xml
 /TAPschemaDiscovered.xml
 /postgres_tapschema.xml
+/tapschema_reserialization.json
+/tapschema_reserialization.xml

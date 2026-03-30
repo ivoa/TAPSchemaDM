@@ -43,28 +43,54 @@ public final class SchemaReader implements AutoCloseable {
           "MYSQL",
           "PERFORMANCE_SCHEMA");
 
+  /**
+   * Constructs a new SchemaReader with a JDBC URL. The connection will be owned and closed by this reader.
+   * @param jdbcUrl the JDBC URL to connect to the database. This should include any necessary credentials and parameters.
+   * @throws SQLException
+   */
   public SchemaReader(String jdbcUrl) throws SQLException {
     this.connection = DriverManager.getConnection(jdbcUrl);
     this.ownsConnection = true;
   }
 
 
+  /**
+   * Constructs a SchemaReader with a DataSource. The connection will be owned and closed by this reader.
+   * @param dataSource the configured dataSource.
+   * @throws SQLException if a problem with creating the database connection.
+   */
   public SchemaReader(DataSource dataSource) throws SQLException {
       this.connection = dataSource.getConnection();
       this.ownsConnection = true;
   }
 
-
+  /**
+   * Contructs a new SchemaReader with a JDBC URL and credentials. The connection will be owned and closed by this reader.
+   * @param jdbcUrl   the JDBC URL to connect to the database. This should include any necessary parameters, but not credentials.
+   * @param user      the username for the database connection.
+   * @param password  the password for the database connection
+   * @throws SQLException if a problem with creating the database connection.
+   */
   public SchemaReader(String jdbcUrl, String user, String password) throws SQLException {
     this.connection = DriverManager.getConnection(jdbcUrl, user, password);
     this.ownsConnection = true;
   }
 
+  /**
+   * Constructs a new SchemaReader with JDBC URL and properties.
+   * @param jdbcUrl the JDBC URL to connect to the database. This should include any necessary parameters, but not credentials.
+   * @param properties the properties for the database connection, including credentials if necessary.
+   * @throws SQLException if a problem with creating the database connection.
+   */
   public SchemaReader(String jdbcUrl, Properties properties) throws SQLException {
     this.connection = DriverManager.getConnection(jdbcUrl, properties);
     this.ownsConnection = true;
   }
 
+  /**
+   * constructs a new SchemaReader with an existing JDBC connection. The connection will not be closed by this reader, and is the responsibility of the caller.
+   * @param connection
+   */
   public SchemaReader(Connection connection) {
     this.connection = Objects.requireNonNull(connection, "connection must not be null");
     this.ownsConnection = false;

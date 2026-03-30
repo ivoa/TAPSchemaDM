@@ -1,6 +1,7 @@
 package org.ivoa.dm.tapschema;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.persistence.TypedQuery;
 
 /*
@@ -18,6 +19,8 @@ import org.ivoa.vodml.validation.AbstractBaseValidation;
 import org.ivoa.vodml.validation.XMLValidator;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -30,6 +33,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** tests whether the TAP schema can translate its own TAP schema description */
 public class TAPSchemaSelfTest extends AbstractBaseValidation {
+
+    @Override
+    protected String setSerializationDumpPrefix()
+    {
+        return "tapschema_reserialization";
+    }
+
     @Test
     public void selfValidationTest() {
         TapschemaModel model = new TapschemaModel();
@@ -46,7 +56,7 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
 
     }
     @Test
-    public void selfReadTest() throws JAXBException {
+    public void selfReadTest() throws JAXBException, ParserConfigurationException, TransformerException, JsonProcessingException {
         TapschemaModel model = new TapschemaModel();
         InputStream is = TapschemaModel.TAPSchema();
         assertNotNull(is);
@@ -62,7 +72,11 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
         Schema schema_in = schema.get(0);
         assertEquals("TAP_SCHEMA",schema_in.schema_name);
         assertEquals(5,schema_in.getTables().size());
-   //TODO add more tests of self consistency
+        final XMLNormalizer xmlNormalizer = new XMLNormalizer();
+        xmlNormalizer.prepareForDB(model_in); // this should work ok = tested below
+        xmlNormalizer.prepareForSerialization(model_in);
+        roundtripXML(model_in);
+        roundTripJSON(model_in);
     }
     
     @Test
