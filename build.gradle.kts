@@ -135,8 +135,10 @@ publishing {
 
 }
 signing {
-    useGpgCmd()
-    sign(publishing.publications["mavenJava"])
+    if (!project.hasProperty("skipSigning")) {
+        useGpgCmd()
+        sign(publishing.publications["mavenJava"])
+    }
 }
 //nexusPublishing {
 //    repositories {
