@@ -167,7 +167,7 @@ public final class SchemaReader implements AutoCloseable {
 
   /**
    * Translate the database metadata into a TAP_SCHEMA model. By default, system schemas are excluded and only tables and views are included. See {@link Options} for more control.
-   * @return the translated metadata model.
+   * @return the translated metadata model.Note with schema, table and column names are qualified suitable for immediate XML serialization, rather than for database storage. See {@link XMLNormalizer} for normalizing the model for database storage.
    * @throws SQLException if there is a problem reading the database metadata.
    */
   public TapschemaModel translate() throws SQLException {
@@ -177,7 +177,7 @@ public final class SchemaReader implements AutoCloseable {
   /**
    * Translate the database metadata into a TAP_SCHEMA model. By default, system schemas are excluded and only tables and views are included. See {@link Options} for more control.
    * @param options translation options.
-   * @return the translated metadata model.
+   * @return the translated metadata model.Note with schema, table and column names are qualified suitable for immediate XML serialization, rather than for database storage. See {@link XMLNormalizer} for normalizing the model for database storage.
    * @throws SQLException if there is a problem reading the database metadata.
    */
   public TapschemaModel translate(Options options) throws SQLException {

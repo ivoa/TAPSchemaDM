@@ -50,20 +50,20 @@ class SchemaReaderTest {
             .findFirst()
             .orElseThrow();
 
-    Map<String, Table> tablesByShortName =
+    Map<String, Table> tablesByUppercaseName =
         schema.getTables().stream()
             .collect(
                 Collectors.toMap(
                     t -> {
-                      String name = t.getTable_name();
-                      int splitAt = name.lastIndexOf('.');
-                      return splitAt >= 0 ? name.substring(splitAt + 1).toUpperCase() : name.toUpperCase();
+
+                      return t.getTable_name().toUpperCase();
+
                     },
                     t -> t));
 
-    assertEquals(2, tablesByShortName.size());
-    Table catalog = tablesByShortName.get("CATALOG");
-    Table obs = tablesByShortName.get("OBS");
+    assertEquals(2, tablesByUppercaseName.size());
+    Table catalog = tablesByUppercaseName.get("ASTRO.CATALOG");
+    Table obs = tablesByUppercaseName.get("ASTRO.OBS");
     assertNotNull(catalog);
     assertNotNull(obs);
 
@@ -71,10 +71,10 @@ class SchemaReaderTest {
         obs.getColumns().stream()
             .collect(Collectors.toMap(c -> c.getColumn_name().toUpperCase(), c -> c));
 
-    assertEquals(TAPType.BIGINT, obsColumns.get("ID").getDatatype());
-    assertEquals(TAPType.INTEGER, obsColumns.get("CATALOG_ID").getDatatype());
-    assertTrue(obsColumns.get("BAND").getIndexed());
-    assertFalse(obsColumns.get("CATALOG_ID").getNullable());
+    assertEquals(TAPType.BIGINT, obsColumns.get("ASTRO.OBS.ID").getDatatype());
+    assertEquals(TAPType.INTEGER, obsColumns.get("ASTRO.OBS.CATALOG_ID").getDatatype());
+    assertTrue(obsColumns.get("ASTRO.OBS.BAND").getIndexed());
+    assertFalse(obsColumns.get("ASTRO.OBS.CATALOG_ID").getNullable());
 
     assertEquals(1, obs.getFkeys().size());
     ForeignKey key = obs.getFkeys().get(0);
@@ -84,8 +84,8 @@ class SchemaReaderTest {
             || "CATALOG".equalsIgnoreCase(key.getTarget_table().getTable_name()));
     assertEquals(1, key.getColumns().size());
     assertEquals(
-        "CATALOG_ID", key.getColumns().get(0).getFrom_column().getColumn_name().toUpperCase());
-    assertEquals("ID", key.getColumns().get(0).getTarget_column().getColumn_name().toUpperCase());
+        "ASTRO.OBS.CATALOG_ID", key.getColumns().get(0).getFrom_column().getColumn_name().toUpperCase());
+    assertEquals("ASTRO.CATALOG.ID", key.getColumns().get(0).getTarget_column().getColumn_name().toUpperCase());
   }
 }
 
