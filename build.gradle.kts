@@ -21,6 +21,7 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.10") // add as implementation so that it is bundled in the "uber" jar TODO add other common ones
     implementation("org.slf4j:slf4j-api:1.7.32")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
+    implementation("ch.qos.logback:logback-classic:1.5.13")
 
 
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
@@ -30,7 +31,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher") //Needed to override gradle built-in
     testRuntimeOnly("org.hibernate.orm:hibernate-testing:6.5.3.Final")
     testImplementation("com.h2database:h2:2.2.220") // try out h2
-    testRuntimeOnly("ch.qos.logback:logback-classic:1.5.13")
+    testImplementation("ch.qos.logback:logback-classic:1.5.13")
 
 }
 
