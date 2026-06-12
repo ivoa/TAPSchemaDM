@@ -1,12 +1,21 @@
 package org.ivoa.dm.tapschema.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import org.ivoa.dm.tapschema.*;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
+import picocli.CommandLine.Spec;
+import picocli.CommandLine.ITypeConverter;
+import picocli.CommandLine.Model.CommandSpec;
 
-import javax.sql.DataSource;
 import java.io.IOException;
+import javax.sql.DataSource;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -20,10 +29,12 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 /**
  * Builds a TAP_SCHEMA model from JDBC metadata. Note that this fills the TAPSchema in a way that is suitable for
@@ -531,7 +542,152 @@ public final class SchemaReader implements AutoCloseable {
     return tableKey(schema, table) + "." + column;
   }
 
- 
+  public static void main(String[] args) {
+    CommandLine commandLine = new CommandLine(new CliCommand());
+    if (args == null || args.length == 0) {
+      commandLine.usage(System.err);
+      System.exit(0);
+    }
+    System.exit(commandLine.execute(args));
+  }
+
+  private static void writeJson(TapschemaModel model, OutputStream out) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    mapper.writeValue(out, model);
+    out.write('\n');
+    out.flush();
+  }
+
+  private static OutputFormat parseFormat(String value) {
+    if (value == null || value.isBlank()) {
+      return OutputFormat.XML;
+    }
+    String normalized = value.toLowerCase(Locale.ROOT);
+    return switch (normalized) {
+      case "xml" -> OutputFormat.XML;
+      case "json" -> OutputFormat.JSON;
+      default -> throw new IllegalArgumentException("Unsupported format: " + value + " (expected xml|json)");
+    };
+  }
+
+  enum OutputFormat {
+    XML,
+    JSON
+  }
+
+  @Command(
+      name = "SchemaReader",
+      mixinStandardHelpOptions = true,
+      version = "0.9.9",
+      description = {
+        "Builds a TAP_SCHEMA model from JDBC metadata.",
+        "The JDBC URL may be supplied either with --jdbc-url or as a positional argument."
+      })
+  static final class CliCommand implements Callable<Integer> {
+    @Spec CommandSpec spec;
+
+    @Option(names = {"--jdbc-url", "--jdbcUrl"}, description = "JDBC URL for the database connection.")
+    String jdbcUrlOption;
+
+    @Parameters(
+        index = "0",
+        arity = "0..1",
+        description = "JDBC URL for backwards-compatible positional usage.")
+    String jdbcUrlPositional;
+
+    @Option(names = "--user", description = "Database user name.")
+    String user;
+
+    @Option(names = "--password", description = "Database password.",arity = "0..1", interactive = true)
+    String password;
+
+    @Option(names = "--format", description = "Output format: xml or json.", converter = OutputFormatConverter.class)
+    OutputFormat format;
+
+    @Parameters(
+        index = "1",
+        arity = "0..1",
+        description = "Optional positional output format for backwards-compatible usage.",
+        converter = OutputFormatConverter.class)
+    OutputFormat positionalFormat;
+
+    @Option(names = "--catalog", description = "Catalog to harvest.")
+    String catalog;
+
+    @Option(names = "--schema", description = "Schema name(s), comma-separated or repeated.")
+    List<String> includeSchemas = new ArrayList<>();
+
+    @Option(names = "--table-type", description = "Table type(s), comma-separated or repeated.")
+    List<String> tableTypes = new ArrayList<>();
+
+    @Option(names = "--include-system-schemas", description = "Include system schemas.")
+    boolean includeSystemSchemas;
+
+    @Override
+    public Integer call() throws Exception {
+      String jdbcUrl = firstNonBlank(jdbcUrlOption, jdbcUrlPositional);
+      if (jdbcUrl == null || jdbcUrl.isBlank()) {
+        throw new CommandLine.ParameterException(
+            spec.commandLine(), "Missing required JDBC URL. Use --jdbc-url or the positional form.");
+      }
+
+      OutputFormat effectiveFormat = format != null ? format : positionalFormat != null ? positionalFormat : OutputFormat.XML;
+
+      Options options =
+          new Options()
+              .setCatalog(catalog)
+              .setIncludeSystemSchemas(includeSystemSchemas);
+      List<String> normalizedSchemas = normalizeCsvValues(includeSchemas);
+      if (!normalizedSchemas.isEmpty()) {
+        options.setIncludeSchemas(normalizedSchemas);
+      }
+      List<String> normalizedTableTypes = normalizeCsvValues(tableTypes);
+      if (!normalizedTableTypes.isEmpty()) {
+        options.setTableTypes(normalizedTableTypes.toArray(String[]::new));
+      }
+
+      try (SchemaReader reader =
+          user == null
+              ? new SchemaReader(jdbcUrl)
+              : new SchemaReader(jdbcUrl, user, password == null ? "" : password)) {
+        TapschemaModel model = reader.translate(options);
+        if (effectiveFormat == OutputFormat.JSON) {
+          writeJson(model, System.out);
+        } else {
+          reader.writeSchemas(model, System.out);
+          System.out.flush();
+        }
+      }
+      return 0;
+    }
+  }
+
+  static final class OutputFormatConverter implements ITypeConverter<OutputFormat> {
+    @Override
+    public OutputFormat convert(String value) {
+      return parseFormat(value);
+    }
+  }
+
+  static List<String> normalizeCsvValues(Collection<String> values) {
+    List<String> items = new ArrayList<>();
+    if (values == null || values.isEmpty()) {
+      return items;
+    }
+    for (String value : values) {
+      if (value == null || value.isBlank()) {
+        continue;
+      }
+      for (String raw : value.split(",")) {
+        String item = raw.trim();
+        if (!item.isEmpty()) {
+          items.add(item);
+        }
+      }
+    }
+    return items;
+  }
 
   private static String emptyToNull(String value) {
     if (value == null || value.isBlank()) {
@@ -554,4 +710,3 @@ public final class SchemaReader implements AutoCloseable {
     m.marshal(model, out);
   }
 }
-

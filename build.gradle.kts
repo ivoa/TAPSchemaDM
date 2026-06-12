@@ -1,13 +1,14 @@
 plugins {
-    id("net.ivoa.vo-dml.vodmltools") version "0.6.1"
+    id("net.ivoa.vo-dml.vodmltools") version "0.6.2"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
 //    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     signing
+    id("com.gradleup.shadow") version "9.4.2"
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.9.8"
+version = "0.9.9"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
@@ -16,6 +17,12 @@ vodml {
 dependencies {
     api("net.ivoa.vo-dml:ivoa-base:1.0-SNAPSHOT") // IMPL using API so that it appears in transitive compile
 
+    implementation("info.picocli:picocli:4.7.6")
+    implementation("org.postgresql:postgresql:42.7.10") // add as implementation so that it is bundled in the "uber" jar TODO add other common ones
+    implementation("org.slf4j:slf4j-api:1.7.32")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
+
+
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("net.sf.saxon:Saxon-HE:12.5")
@@ -23,8 +30,6 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher") //Needed to override gradle built-in
     testRuntimeOnly("org.hibernate.orm:hibernate-testing:6.5.3.Final")
     testImplementation("com.h2database:h2:2.2.220") // try out h2
-    testImplementation("org.postgresql:postgresql:42.7.10")
-    implementation("org.slf4j:slf4j-api:1.7.32")
     testRuntimeOnly("ch.qos.logback:logback-classic:1.5.13")
 
 }
@@ -83,6 +88,9 @@ tasks.named(JavaPlugin.COMPILE_JAVA_TASK_NAME) {
 tasks.withType<Jar>() {
     exclude("META-INF/persistence.xml")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes["Main-Class"] = "org.ivoa.dm.tapschema.utils.SchemaReader"
+    }
 }
 java {
     withJavadocJar()
@@ -187,4 +195,3 @@ tasks.register<Exec>("doSite"){
     commandLine("mkdocs", "gh-deploy", "--force")
     dependsOn("makeSiteNav")
 }
-
