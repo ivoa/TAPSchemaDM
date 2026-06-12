@@ -199,6 +199,7 @@ public final class SchemaReader implements AutoCloseable {
 
     Map<String, Table> tableByKey = new LinkedHashMap<>();
     Map<String, Column> columnByKey = new LinkedHashMap<>();
+    Map<String, Schema> schemaMap = new LinkedHashMap<>();
 
     List<String> schemas = discoverSchemas(metadata, effective);
     int schemaIndex = 0;
@@ -206,13 +207,14 @@ public final class SchemaReader implements AutoCloseable {
       Schema schema = new Schema();
       schema.setSchema_name(schemaName);
       schema.setSchema_index(schemaIndex++);
-      model.addContent(schema);
+      schemaMap.put(schemaName, schema);
 
       harvestTablesAndColumns(metadata, effective, schemaName, schema, tableByKey, columnByKey);
     }
 
     harvestForeignKeys(metadata, effective, schemas, tableByKey, columnByKey);
-    model.processReferences();
+    schemaMap.forEach((k, v) -> model.addContent(v));
+   // model.processReferences();
     return model;
   }
 
@@ -551,7 +553,7 @@ public final class SchemaReader implements AutoCloseable {
     System.exit(commandLine.execute(args));
   }
 
-  private static void writeJson(TapschemaModel model, OutputStream out) throws IOException {
+  private static void writeSchemaAsJson(TapschemaModel model, OutputStream out) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     mapper.enable(SerializationFeature.INDENT_OUTPUT);
     mapper.writeValue(out, model);
@@ -653,9 +655,9 @@ public final class SchemaReader implements AutoCloseable {
               : new SchemaReader(jdbcUrl, user, password == null ? "" : password)) {
         TapschemaModel model = reader.translate(options);
         if (effectiveFormat == OutputFormat.JSON) {
-          writeJson(model, System.out);
+          writeSchemaAsJson(model, System.out);
         } else {
-          reader.writeSchemas(model, System.out);
+          reader.writeSchemasAsXML(model, System.out);
           System.out.flush();
         }
       }
@@ -703,7 +705,7 @@ public final class SchemaReader implements AutoCloseable {
     return value;
   }
 
-  public void writeSchemas(TapschemaModel model, OutputStream out) throws IOException, JAXBException {
+  public void writeSchemasAsXML(TapschemaModel model, OutputStream out) throws IOException, JAXBException {
     JAXBContext jc = TapschemaModel.contextFactory();
     Marshaller m = jc.createMarshaller();
     m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);

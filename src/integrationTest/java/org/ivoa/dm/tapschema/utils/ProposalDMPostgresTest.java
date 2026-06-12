@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 import javax.xml.transform.stream.StreamSource;
 
 public class ProposalDMPostgresTest {
@@ -31,7 +29,7 @@ public class ProposalDMPostgresTest {
          assertNotNull(connection.getSchema());
          SchemaReader sr = new SchemaReader(connection);
          TapschemaModel model = sr.translate();
-         sr.writeSchemas(model, new FileOutputStream("postgres_tapschema.xml"));
+         sr.writeSchemasAsXML(model, new FileOutputStream("postgres_tapschema.xml"));
          XMLValidator validator = new XMLValidator(model.management());
          XMLValidator.ValidationResult result = validator.validate(new StreamSource(new FileInputStream("postgres_tapschema.xml")));
          if(!result.isOk)         {
