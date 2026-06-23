@@ -57,7 +57,7 @@ public final class SchemaReader implements AutoCloseable {
   /**
    * Constructs a new SchemaReader with a JDBC URL. The connection will be owned and closed by this reader.
    * @param jdbcUrl the JDBC URL to connect to the database. This should include any necessary credentials and parameters.
-   * @throws SQLException
+   * @throws SQLException if there is a problem with the database connection.
    */
   public SchemaReader(String jdbcUrl) throws SQLException {
     this.connection = DriverManager.getConnection(jdbcUrl);
@@ -100,7 +100,7 @@ public final class SchemaReader implements AutoCloseable {
 
   /**
    * constructs a new SchemaReader with an existing JDBC connection. The connection will not be closed by this reader, and is the responsibility of the caller.
-   * @param connection
+   * @param connection the connection to the database.
    */
   public SchemaReader(Connection connection) {
     this.connection = Objects.requireNonNull(connection, "connection must not be null");
@@ -125,28 +125,43 @@ public final class SchemaReader implements AutoCloseable {
     private Set<String> includeSchemas = Set.of();
     private String[] tableTypes = new String[] {"TABLE", "VIEW", "MATERIALIZED VIEW"};
 
+    /**
+     * Checks whether system schemas should be included in the harvest.
+     *
+     * @return true if system schemas are to be included, false otherwise.
+     */
     public boolean isIncludeSystemSchemas() {
       return includeSystemSchemas;
     }
 
-    public Options setIncludeSystemSchemas(boolean includeSystemSchemas) {
-      this.includeSystemSchemas = includeSystemSchemas;
-      return this;
-    }
-
-    public String getCatalog() {
-      return catalog;
-    }
-
+    /**
+     * Sets the catalog to harvest from the database.
+     *
+     * @param catalog the catalog name, or null for the default catalog.
+     * @return this Options instance for method chaining.
+     */
     public Options setCatalog(String catalog) {
       this.catalog = catalog;
       return this;
     }
 
+    /**
+     * Gets the set of schema names to include in the harvest.
+     *
+     * @return an immutable set of schema names to include, or an empty set if all schemas should be considered.
+     */
     public Set<String> getIncludeSchemas() {
       return includeSchemas;
     }
 
+    /**
+     * Sets the schema names to include in the harvest.
+     * Null or blank schema names are filtered out. If null or empty collection is provided,
+     * all non-system schemas will be considered based on other filter settings.
+     *
+     * @param includeSchemas the collection of schema names to include, or null/empty to include all eligible schemas.
+     * @return this Options instance for method chaining.
+     */
     public Options setIncludeSchemas(Collection<String> includeSchemas) {
       if (includeSchemas == null || includeSchemas.isEmpty()) {
         this.includeSchemas = Set.of();
@@ -162,10 +177,23 @@ public final class SchemaReader implements AutoCloseable {
       return this;
     }
 
+    /**
+     * Gets the table types to include in the harvest.
+     *
+     * @return an array of table type names (e.g., "TABLE", "VIEW"), or null for all types.
+     */
     public String[] getTableTypes() {
       return tableTypes;
     }
 
+    /**
+     * Sets the table types to include in the harvest.
+     * If null or empty, no table types will be filtered (all types included).
+     *
+     * @param tableTypes variable length array of table type names (e.g., "TABLE", "VIEW", "MATERIALIZED VIEW"),
+     *                   or null/empty to include all table types.
+     * @return this Options instance for method chaining.
+     */
     public Options setTableTypes(String... tableTypes) {
       if (tableTypes == null || tableTypes.length == 0) {
         this.tableTypes = null;
@@ -173,6 +201,26 @@ public final class SchemaReader implements AutoCloseable {
         this.tableTypes = tableTypes;
       }
       return this;
+    }
+
+    /**
+     * Sets whether system schemas should be included in the harvest.
+     *
+     * @param includeSystemSchemas true to include system schemas, false to exclude them.
+     * @return this Options instance for method chaining.
+     */
+    public Options setIncludeSystemSchemas(boolean includeSystemSchemas) {
+      this.includeSystemSchemas = includeSystemSchemas;
+      return this;
+    }
+
+    /**
+     * Gets the catalog to harvest from the database.
+     *
+     * @return the catalog name, or null for the default catalog.
+     */
+    public String getCatalog() {
+      return catalog;
     }
   }
 
@@ -544,6 +592,10 @@ public final class SchemaReader implements AutoCloseable {
     return tableKey(schema, table) + "." + column;
   }
 
+  /**
+   * The main method.
+   * @param args the command-line arguments.
+   */
   public static void main(String[] args) {
     CommandLine commandLine = new CommandLine(new CliCommand());
     if (args == null || args.length == 0) {
@@ -705,6 +757,13 @@ public final class SchemaReader implements AutoCloseable {
     return value;
   }
 
+  /**
+   * Write the TAP Schema as XML.
+   * @param model the TAP schema instance.
+   * @param out the output stream to write the instance to.
+   * @throws IOException if there is a problem writing to the output stream.
+   * @throws JAXBException if there is a problem marshalling the model to XML.
+   */
   public void writeSchemasAsXML(TapschemaModel model, OutputStream out) throws IOException, JAXBException {
     JAXBContext jc = TapschemaModel.contextFactory();
     Marshaller m = jc.createMarshaller();
