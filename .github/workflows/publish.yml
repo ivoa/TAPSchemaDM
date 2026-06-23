@@ -13,7 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'ivoa/TAPSchemaDM' # Don't run on forks
     permissions:
-      contents: read
+      contents: write
+      pull-requests: write
+
 
     steps:
     - uses: actions/checkout@v4
