@@ -1,0 +1,29 @@
+- tapschema model:
+  - Overview: "generated/tapschema.vo-dml.md"
+  - ObjectTypes:
+    - FKColumn: "generated/tapschema/FKColumn.md"
+    - ForeignKey: "generated/tapschema/ForeignKey.md"
+    - Schema: "generated/tapschema/Schema.md"
+    - column: "generated/tapschema/column.md"
+    - table: "generated/tapschema/table.md"
+  - Enumerations:
+    - TAPType: "generated/tapschema/TAPType.md"
+    - TableType: "generated/tapschema/TableType.md"
+- Imported Models:
+  - ivoa model:
+    - Overview: "generated/IVOA-v1.0.vo-dml.md"
+    - DataTypes:
+      - IntegerQuantity: "generated/ivoa/IntegerQuantity.md"
+      - Quantity: "generated/ivoa/Quantity.md"
+      - RealQuantity: "generated/ivoa/RealQuantity.md"
+    - PrimitiveTypes:
+      - Unit: "generated/ivoa/Unit.md"
+      - anyURI: "generated/ivoa/anyURI.md"
+      - boolean: "generated/ivoa/boolean.md"
+      - complex: "generated/ivoa/complex.md"
+      - datetime: "generated/ivoa/datetime.md"
+      - integer: "generated/ivoa/integer.md"
+      - nonnegativeInteger: "generated/ivoa/nonnegativeInteger.md"
+      - rational: "generated/ivoa/rational.md"
+      - real: "generated/ivoa/real.md"
+      - string: "generated/ivoa/string.md"
