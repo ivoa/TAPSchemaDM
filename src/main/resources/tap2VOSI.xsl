@@ -9,7 +9,7 @@
     <!--TODO this needs to be made more robust to column ordering and missing values -->
    <xsl:output method="xml" indent="yes"/>
 
-
+    <xsl:param name="typeDescriptionMode" as="xsd:string" select="'TAP'"/> <!-- can be TAP or VOTABLE -->
     <xsl:template match="tap:tapschemaModel">
         <vosi:tableset>
             <xsl:apply-templates select="schema"/>
@@ -54,17 +54,47 @@
     <xsl:template match="nullable"/>
     <xsl:template match="datatype">
         <xsl:element name="dataType" >
-            <xsl:attribute name="type" namespace="http://www.w3.org/2001/XMLSchema-instance">vs:VOTableType</xsl:attribute>
             <xsl:choose>
-                <xsl:when test="text() = 'VARCHAR'">char</xsl:when>
-                <xsl:when test="text() = 'INTEGER'">int</xsl:when>
-                <xsl:when test="text() = 'BIGINT'">long</xsl:when><!--FIXME this list is not comprehensive -->
-
+                <xsl:when test="$typeDescriptionMode = 'TAP'">
+                    <xsl:attribute name="type" namespace="http://www.w3.org/2001/XMLSchema-instance">vs:TAPType</xsl:attribute>
+                    <xsl:value-of select="."/>
+                    <xsl:if test="@arraysize">
+                        <xsl:attribute name="arraysize"><xsl:value-of select="@arraysize"/></xsl:attribute>
+                    </xsl:if>
+                </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="lower-case(text())"/>
+                    <xsl:attribute name="type" namespace="http://www.w3.org/2001/XMLSchema-instance">vs:VOTableType</xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="text() = 'VARCHAR'">char</xsl:when>
+                        <xsl:when test="text() = 'INTEGER'">int</xsl:when>
+                        <xsl:when test="text() = 'SMALLINT'">long</xsl:when>
+                        <xsl:when test="text() = 'BIGINT'">long</xsl:when>
+                        <xsl:when test="text() = 'REAL'">float</xsl:when>
+                        <xsl:when test="text() = 'DOUBLE'">double</xsl:when>
+                        <xsl:when test="text() = 'BOOLEAN'">boolean</xsl:when>
+                        <xsl:when test="text() = 'TIMESTAMP'">char</xsl:when>
+                        <xsl:when test="text() = 'CHAR'">char</xsl:when>
+                        <xsl:when test="text() = 'VARCHAR'">char</xsl:when>
+                        <xsl:when test="text() = 'CLOB'">char</xsl:when> <!-- todo check this -->
+                        <!-- FIXME - need to think about how to handle POINT, REGION, BLOB -->
+                        <xsl:otherwise>
+                            <xsl:value-of select="lower-case(text())"/>
+                        </xsl:otherwise>
+
+                    </xsl:choose>
+                    <xsl:if test="@arraysize">
+                        <xsl:attribute name="arraysize"><xsl:value-of select="@arraysize"/></xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="text() = 'TIMESTAMP'">
+                        <xsl:attribute name="extendedType">timestamp</xsl:attribute> <!-- TODO is this correct? -->
+                    </xsl:if>
                 </xsl:otherwise>
+
             </xsl:choose>
+
         </xsl:element>
+
+
     </xsl:template>
     <xsl:template match="column_name">
         <name><xsl:value-of select="vft:columnNameNormalisation(text())"/></name>
