@@ -32,17 +32,17 @@ public class TAPSchemaTest extends AutoRoundTripTest<TapschemaModel> {
                  Column.createColumn(c -> {
                     c.column_name ="col1";
                     c.datatype=TAPType.VARCHAR;
-                    c.indexed = true;
-                    c.principal = false;
-                    c.std = false;
+                    c.indexed = 1;
+                    c.principal = 0;
+                    c.std = 0;
                     c.utype = "a.b.c";
                  }),
                  Column.createColumn(c -> {
                     c.column_name ="col2";
                     c.datatype=TAPType.INTEGER;
-                    c.indexed = false;
-                    c.principal = false;
-                    c.std = false;
+                    c.indexed = 0;
+                    c.principal = 0;
+                    c.std = 0;
                     c.utype = "a.b.c";
                  })
            );
@@ -58,18 +58,18 @@ public class TAPSchemaTest extends AutoRoundTripTest<TapschemaModel> {
                         Column.createColumn(c -> {
                            c.column_name ="cola";
                            c.datatype=TAPType.VARCHAR;
-                           c.indexed = true;
-                           c.principal = false;
-                           c.std = false;
+                           c.indexed = 1;
+                           c.principal = 0;
+                           c.std = 0;
                            c.utype = "c.b.a";
                            c.description = desc;
                         }),
                         Column.createColumn(c -> {
                            c.column_name ="colb";
                            c.datatype=TAPType.INTEGER;
-                           c.indexed = false;
-                           c.principal = false;
-                           c.std = false;
+                           c.indexed = 0;
+                           c.principal = 0;
+                           c.std = 0;
                            c.utype = "c.b.b  ";
                         })
                    );

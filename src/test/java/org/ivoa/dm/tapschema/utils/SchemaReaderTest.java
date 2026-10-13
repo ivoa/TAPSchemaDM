@@ -73,8 +73,8 @@ class SchemaReaderTest {
 
     assertEquals(TAPType.BIGINT, obsColumns.get("ASTRO.OBS.ID").getDatatype());
     assertEquals(TAPType.INTEGER, obsColumns.get("ASTRO.OBS.CATALOG_ID").getDatatype());
-    assertTrue(obsColumns.get("ASTRO.OBS.BAND").getIndexed());
-    assertFalse(obsColumns.get("ASTRO.OBS.CATALOG_ID").getNullable());
+    assertTrue(obsColumns.get("ASTRO.OBS.BAND").getIndexed() == 1);
+    assertFalse(obsColumns.get("ASTRO.OBS.CATALOG_ID").getNullable() == 1);
 
     assertEquals(1, obs.getFkeys().size());
     ForeignKey key = obs.getFkeys().get(0);

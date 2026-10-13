@@ -373,10 +373,10 @@ public final class SchemaReader implements AutoCloseable {
 
         boolean isIndexed = indexedColumns.contains(columnName);
         boolean isPrimaryKey = primaryKeyColumns.contains(columnName);
-        column.setIndexed(isIndexed || isPrimaryKey);
-        column.setPrincipal(isPrimaryKey);
+        column.setIndexed(isIndexed || isPrimaryKey?1:0);
+        column.setPrincipal(isPrimaryKey?1:0);
         column.setIsNaturalKey(isPrimaryKey);
-        column.setStd(Boolean.FALSE);
+        column.setStd(0);
 
         table.addToColumns(column);
 
@@ -573,13 +573,13 @@ public final class SchemaReader implements AutoCloseable {
     };
   }
 
-  private static Boolean readNullable(ResultSet columnRows) throws SQLException {
+  private static Integer readNullable(ResultSet columnRows) throws SQLException {
     int nullable = columnRows.getInt("NULLABLE");
     if (nullable == DatabaseMetaData.columnNoNulls) {
-      return Boolean.FALSE;
+      return Integer.valueOf(0);
     }
     if (nullable == DatabaseMetaData.columnNullable) {
-      return Boolean.TRUE;
+      return Integer.valueOf(1);
     }
     return null;
   }

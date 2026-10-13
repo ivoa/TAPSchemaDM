@@ -30,7 +30,7 @@ create schema <xsl:value-of select="schema_name"/>;
      <xsl:value-of select="concat('primary key (', string-join(distinct-values(for $c in columns/fKColumn/target_column return vft:columnNameNormalisation($c)),','),')')"/>
    </xsl:template>
    <xsl:template match="columns" mode="primarykey">
-       <xsl:value-of select="concat('primary key (', string-join(distinct-values(for $c in column[indexed='true'] return vft:columnNameNormalisation($c/column_name)),','),')')"/>
+       <xsl:value-of select="concat('primary key (', string-join(distinct-values(for $c in column[indexed=1] return vft:columnNameNormalisation($c/column_name)),','),')')"/>
    </xsl:template>
    <xsl:template match="column">
      <xsl:value-of select="concat(vft:columnNameNormalisation(column_name),' ', datatype,', ')"/>

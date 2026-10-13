@@ -62,18 +62,18 @@ earlier in a listing.";
 			utype: ivoa:string @? "the utype for the column";
 			unit: ivoa:string @? "the unit for the column (taken from VOUnits)";
 	ucd: ivoa:string @? "";
-	indexed: ivoa:boolean "does the column have an index";
-	principal: ivoa:boolean " indicates that the column is considered a core part
+	indexed: ivoa:integer "does the column have an index";
+	principal: ivoa:integer " indicates that the column is considered a core part
 of the content; clients can use this hint to make the principal column(s)
 visible, for example by selecting them by default in generating an ADQL
 query. In cases where the service selects the columns to return (such as a
 query language without an explicit output selection), the principal column
 indicates those columns that are returned by default";
-	std: ivoa:boolean "is the column defined by a standard";
+	std: ivoa:integer "is the column defined by a standard";
 	column_index: ivoa:integer @? "used to recommend table ordering for clients. Clients
 may order by index (ascending) so lower index items would appear
 earlier in a listing.";
-      	nullable: ivoa:boolean @? "indicates whether the column may have null values";
+      	nullable: ivoa:integer @? "indicates whether the column may have null values";
       	isNaturalKey: ivoa:boolean @? "indicates whether the column is a natural key (i.e. a key that has meaning outside the database)";
 	  }
 	  
