@@ -1,14 +1,16 @@
+import pl.allegro.tech.build.axion.release.domain.hooks.HookContext
+
 plugins {
-    id("net.ivoa.vo-dml.vodmltools") version "0.6.2"
+    id("net.ivoa.vo-dml.vodmltools") version "0.7.2"
     id("com.diffplug.spotless") version "6.25.0"
     `maven-publish`
 //    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     signing
     id("com.gradleup.shadow") version "9.4.2"
+    id("pl.allegro.tech.build.axion-release") version "1.21.3"
 }
 
 group = "org.javastro.ivoa.dm"
-version = "0.9.9"
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
@@ -149,6 +151,21 @@ signing {
         sign(publishing.publications["mavenJava"])
     }
 }
+
+scmVersion {
+    tag {
+        prefix.set("v")
+    }
+    hooks {
+        pre("fileUpdate", mapOf(
+            "encoding" to "utf-8",
+            "file" to rootDir.resolve("README.md").toString(),
+            "pattern" to KotlinClosure2<String, HookContext,String>({ v, c -> "/${project.name}:${v}/" } ),
+            "replacement" to KotlinClosure2<String, HookContext,String>( {v, c -> "${project.name}:${v}" })
+        ))
+    }
+}
+
 //nexusPublishing {
 //    repositories {
 //        //TODO this is a rather unsatisfactory kludge, but still seems better than the suggested JReleaser which is not really gradle friendly

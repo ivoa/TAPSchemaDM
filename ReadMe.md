@@ -12,6 +12,10 @@ Note - published to the [UKSRC  Nexus](https://repo.dev.uksrc.org/#browse/browse
 
 ![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo.dev.uksrc.org%2Frepository%2Fmaven-public%2Forg%2Fjavastro%2Fivoa%2Fdm%2Ftapschema%2Fmaven-metadata.xml&strategy=highestVersion&label=tapschema&link=https%3A%2F%2Frepo.dev.uksrc.org%2F%23browse%2Fbrowse%3Amaven-releases%3Aorg%252Fjavastro%252Fivoa%252Fdm%252Ftapschema)
 
+## Versions
 
+```kotlin
+implementation("org.javastro.ivoa.dm:tapschema:0.9.9")
+```
 
 
