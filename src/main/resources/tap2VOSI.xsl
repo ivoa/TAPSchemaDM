@@ -9,7 +9,7 @@
     <!--TODO this needs to be made more robust to column ordering and missing values -->
    <xsl:output method="xml" indent="yes"/>
 
-    <xsl:param name="typeDescriptionMode" as="xsd:string" select="'TAP'"/> <!-- can be TAP or VOTABLE -->
+    <xsl:param name="typeDescriptionMode" as="xsd:string" select="'VOTABLE'"/> <!-- can be TAP or VOTABLE -->
     <xsl:template match="tap:tapschemaModel">
         <vosi:tableset>
             <xsl:apply-templates select="schema"/>
@@ -54,6 +54,7 @@
     <xsl:template match="nullable"/>
     <xsl:template match="datatype">
         <xsl:element name="dataType" >
+            <!-- note here how extendedType is used vs xtype in votable -->
             <xsl:choose>
                 <xsl:when test="$typeDescriptionMode = 'TAP'">
                     <xsl:attribute name="type" namespace="http://www.w3.org/2001/XMLSchema-instance">vs:TAPType</xsl:attribute>
@@ -64,6 +65,9 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:attribute name="type" namespace="http://www.w3.org/2001/XMLSchema-instance">vs:VOTableType</xsl:attribute>
+                    <xsl:if test="@arraysize">
+                        <xsl:attribute name="arraysize"><xsl:value-of select="@arraysize"/></xsl:attribute>
+                    </xsl:if>
                     <xsl:choose>
                         <xsl:when test="text() = 'VARCHAR'">char</xsl:when>
                         <xsl:when test="text() = 'INTEGER'">int</xsl:when>
@@ -72,22 +76,47 @@
                         <xsl:when test="text() = 'REAL'">float</xsl:when>
                         <xsl:when test="text() = 'DOUBLE'">double</xsl:when>
                         <xsl:when test="text() = 'BOOLEAN'">boolean</xsl:when>
-                        <xsl:when test="text() = 'TIMESTAMP'">char</xsl:when>
+                        <xsl:when test="text() = 'TIMESTAMP'">
+                            <xsl:attribute name="arraysize">*</xsl:attribute>
+                            <xsl:attribute name="extendedType">timestamp</xsl:attribute>
+                            <xsl:text>char</xsl:text>
+                        </xsl:when>
                         <xsl:when test="text() = 'CHAR'">char</xsl:when>
                         <xsl:when test="text() = 'VARCHAR'">char</xsl:when>
                         <xsl:when test="text() = 'CLOB'">char</xsl:when> <!-- todo check this -->
-                        <!-- FIXME - need to think about how to handle POINT, REGION, BLOB -->
+                        <xsl:when test="text() = 'POINT'">
+                            <xsl:attribute name="arraysize">2</xsl:attribute>
+                            <xsl:attribute name="extendedType">point</xsl:attribute>
+                            <xsl:text>double</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="text() = 'CIRCLE'">
+                            <xsl:attribute name="arraysize">3</xsl:attribute>
+                            <xsl:attribute name="extendedType">circle</xsl:attribute>
+                            <xsl:text>double</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="text() = 'ELLIPSE'">
+                            <xsl:attribute name="arraysize">5</xsl:attribute>
+                            <xsl:attribute name="extendedType">ellipse</xsl:attribute>
+                            <xsl:text>double</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="text() = ('POLYGON','REGION')"> <!-- TODO this might not be the most appropriate mapping for REGION - need to see if region will appear in the wild -->
+                            <xsl:attribute name="arraysize">*</xsl:attribute>
+                            <xsl:attribute name="extendedType">polygon</xsl:attribute>
+                            <xsl:text>double</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="text() = 'LINE'">
+                            <xsl:attribute name="arraysize">2</xsl:attribute>
+                            <xsl:attribute name="extendedType">line</xsl:attribute>
+                            <xsl:text>double</xsl:text>
+                        </xsl:when>
+
                         <xsl:otherwise>
-                            <xsl:value-of select="lower-case(text())"/>
+                            <xsl:value-of select="lower-case(text())"/>  <!-- IMPL this catches "unknown" things will probably produce invalid XML against a schema, but acts to flag new things not captured   -->
+                            <xsl:message>Unknown data type: <xsl:value-of select="text()"/></xsl:message>
                         </xsl:otherwise>
 
                     </xsl:choose>
-                    <xsl:if test="@arraysize">
-                        <xsl:attribute name="arraysize"><xsl:value-of select="@arraysize"/></xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="text() = 'TIMESTAMP'">
-                        <xsl:attribute name="extendedType">timestamp</xsl:attribute> <!-- TODO is this correct? -->
-                    </xsl:if>
+
                 </xsl:otherwise>
 
             </xsl:choose>

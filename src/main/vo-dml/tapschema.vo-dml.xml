@@ -9,7 +9,7 @@
       <title></title>
       <author>Paul Harrison</author>
       <version>1.0</version>
-      <lastModified>2026-10-13T15:48:48Z</lastModified>
+      <lastModified>2026-10-14T14:12:48Z</lastModified>
       <import>
         <name>ivoa</name>
         <version>1.0</version>
@@ -91,6 +91,16 @@
                     <description>variable length binary</description>	    
                   </literal>	
                   <literal>
+                    <vodml-id>TAPType.CLOB</vodml-id>
+                    <name>CLOB</name>
+                    <description>large character/text object. The actual size limit is implementation defined</description>	    
+                  </literal>	
+                  <literal>
+                    <vodml-id>TAPType.BLOB</vodml-id>
+                    <name>BLOB</name>
+                    <description> large binary object</description>	    
+                  </literal>	
+                  <literal>
                     <vodml-id>TAPType.POINT</vodml-id>
                     <name>POINT</name>
                     <description>Geometry values are two-dimensional; they are usually longitude
@@ -102,14 +112,29 @@
                     <description>FIXME this is a placeholder for the ADQL REGION type - we need to define how this is represented in TAP and VOTable and PGSphere</description>	    
                   </literal>	
                   <literal>
-                    <vodml-id>TAPType.CLOB</vodml-id>
-                    <name>CLOB</name>
-                    <description>large character/text object. The actual size limit is implementation defined</description>	    
+                    <vodml-id>TAPType.CIRCLE</vodml-id>
+                    <name>CIRCLE</name>
+                    <description>a circular region</description>	    
                   </literal>	
                   <literal>
-                    <vodml-id>TAPType.BLOB</vodml-id>
-                    <name>BLOB</name>
-                    <description> large binary object</description>	    
+                    <vodml-id>TAPType.ELLIPSE</vodml-id>
+                    <name>ELLIPSE</name>
+                    <description>elliptical region</description>	    
+                  </literal>	
+                  <literal>
+                    <vodml-id>TAPType.BOX</vodml-id>
+                    <name>BOX</name>
+                    <description>a box region</description>	    
+                  </literal>	
+                  <literal>
+                    <vodml-id>TAPType.POLYGON</vodml-id>
+                    <name>POLYGON</name>
+                    <description>a polygon region</description>	    
+                  </literal>	
+                  <literal>
+                    <vodml-id>TAPType.LINE</vodml-id>
+                    <name>LINE</name>
+                    <description>a line</description>	    
                   </literal>	
             </enumeration>
             <objectType>

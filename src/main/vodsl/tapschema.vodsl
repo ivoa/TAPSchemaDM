@@ -32,11 +32,17 @@ CHAR  "fixed length character" ,
 VARCHAR  "variable length character" ,
 BINARY  "fixed length binary" ,
 VARBINARY  "variable length binary" ,
+CLOB  "large character/text object. The actual size limit is implementation defined" ,
+BLOB  " large binary object",
 POINT  "Geometry values are two-dimensional; they are usually longitude
         and latitude values in spherical coordinates" ,
 REGION  "FIXME this is a placeholder for the ADQL REGION type - we need to define how this is represented in TAP and VOTable and PGSphere" ,
-CLOB  "large character/text object. The actual size limit is implementation defined" ,
-BLOB  " large binary object"
+// these are not actually in TAP directly but some are in VOSI - but PGSphere supports them and they are used in ADQL so we need to define them here for completeness
+CIRCLE "a circular region",
+ELLIPSE "elliptical region",
+BOX "a box region",
+POLYGON "a polygon region",
+LINE "a line"
 }
   
   
