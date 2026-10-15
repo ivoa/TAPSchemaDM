@@ -27,7 +27,7 @@
     <xsl:template match="table">
         <xsl:element name="table">
             <xsl:attribute name="type" select="table_type"/>
-        <xsl:apply-templates select="(table_name,desciption,utype,columns,fkeys)"/>
+        <xsl:apply-templates select="(table_name,description,utype,columns,fkeys)"/>
         </xsl:element>
     </xsl:template>
     <xsl:template match="table_name|schema_name">
@@ -41,17 +41,21 @@
             <xsl:apply-templates select="(column_name,description,unit,ucd,utype,datatype,indexed,principal,nullable)"/>
         </column>
     </xsl:template>
-    <xsl:template match="indexed">
+    <xsl:template match="(indexed|std)">
+        <xsl:if test="text()='1'">
         <flag><xsl:value-of select="name()"/></flag>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="principal">
+        <xsl:if test="text()='1'">
         <flag>primary</flag>
+        </xsl:if>
     </xsl:template>
-    <xsl:template match="nullable[text()='true']">
+    <xsl:template match="nullable">
+        <xsl:if test="text()='true'">
         <flag>nullable</flag>
+        </xsl:if>
     </xsl:template>
-    <!-- suppress output for nullable=false -->
-    <xsl:template match="nullable"/>
     <xsl:template match="datatype">
         <xsl:element name="dataType" >
             <!-- note here how extendedType is used vs xtype in votable -->
