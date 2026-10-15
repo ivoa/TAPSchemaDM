@@ -15,7 +15,7 @@ Note - published to the [UKSRC  Nexus](https://repo.dev.uksrc.org/#browse/browse
 ## Versions
 
 ```kotlin
-implementation("org.javastro.ivoa.dm:tapschema:0.9.9")
+implementation("org.javastro.ivoa.dm:tapschema:0.9.10")
 ```
 
 
