@@ -20,17 +20,19 @@ components:
       - "VARCHAR"
       - "BINARY"
       - "VARBINARY"
-      - "POINT"
-      - "REGION"
       - "CLOB"
       - "BLOB"
+      - "POINT"
+      - "REGION"
+      - "CIRCLE"
+      - "ELLIPSE"
+      - "BOX"
+      - "POLYGON"
+      - "LINE"
     Schema:
       type: "object"
       description: "The schema"
       properties:
-        '@type':
-          type: "string"
-          description: "UType as type discriminator"
         schema_name:
           type: "string"
           description: "The name of the schema"
@@ -57,9 +59,6 @@ components:
       type: "object"
       description: "The table"
       properties:
-        '@type':
-          type: "string"
-          description: "UType as type discriminator"
         table_name:
           type: "string"
           description: "name of the table"
@@ -94,9 +93,6 @@ components:
       type: "object"
       description: "the column"
       properties:
-        '@type':
-          type: "string"
-          description: "UType as type discriminator"
         column_name:
           type: "string"
           description: "name of the column"
@@ -125,10 +121,10 @@ components:
           type: "string"
           description: ""
         indexed:
-          type: "boolean"
+          type: "integer"
           description: "does the column have an index"
         principal:
-          type: "boolean"
+          type: "integer"
           description: "indicates that the column is considered a core part of the\
             \ content; clients can use this hint to make the principal column(s) visible,\
             \ for example by selecting them by default in generating an ADQL query.\
@@ -136,7 +132,7 @@ components:
             \ query language without an explicit output selection), the principal\
             \ column indicates those columns that are returned by default"
         std:
-          type: "boolean"
+          type: "integer"
           description: "is the column defined by a standard"
         column_index:
           type: "integer"
@@ -144,7 +140,7 @@ components:
             \ order by index (ascending) so lower index items would appear earlier\
             \ in a listing."
         nullable:
-          type: "boolean"
+          type: "integer"
           description: "indicates whether the column may have null values"
         isNaturalKey:
           type: "boolean"
@@ -161,9 +157,6 @@ components:
       type: "object"
       description: "foreign key definition"
       properties:
-        '@type':
-          type: "string"
-          description: "UType as type discriminator"
         key_id:
           type: "string"
           description: "the id of the key"
@@ -191,9 +184,6 @@ components:
       type: "object"
       description: "the foreign key columns"
       properties:
-        '@type':
-          type: "string"
-          description: "UType as type discriminator"
         from_column:
           oneOf:
           - type: "string"

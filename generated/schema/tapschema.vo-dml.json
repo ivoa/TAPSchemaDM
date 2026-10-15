@@ -15,14 +15,11 @@
           },
           "additionalProperties" : false
         },
-        "content" : {
+        "schema" : {
           "type" : "array",
           "items" : {
-            "anyOf" : [ {
-              "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/Schema"
-            } ]
-          },
-          "additionalProperties" : false
+            "$ref" : "https://ivoa.net/dm/tapschema.vo-dml.json#/$defs/Schema"
+          }
         }
       },
       "additionalProperties" : false
@@ -36,17 +33,13 @@
     },
     "TAPType" : {
       "description" : "Allowable types for TAP columns - The various definitions for these can be found in the VOTable,VOSI and ADQL specifications",
-      "enum" : [ "BOOLEAN", "SMALLINT", "INTEGER", "BIGINT", "REAL", "DOUBLE", "TIMESTAMP", "CHAR", "VARCHAR", "BINARY", "VARBINARY", "POINT", "REGION", "CLOB", "BLOB" ]
+      "enum" : [ "BOOLEAN", "SMALLINT", "INTEGER", "BIGINT", "REAL", "DOUBLE", "TIMESTAMP", "CHAR", "VARCHAR", "BINARY", "VARBINARY", "CLOB", "BLOB", "POINT", "REGION", "CIRCLE", "ELLIPSE", "BOX", "POLYGON", "LINE" ]
     },
     "Schema" : {
       "type" : "object",
       "description" : "The schema",
       "properties" : {
         "$comment" : "placeholder to make commas easier",
-        "@type" : {
-          "type" : "string",
-          "description" : "UType as type discriminator"
-        },
         "schema_name" : {
           "type" : "string",
           "description" : "The name of the schema"
@@ -78,10 +71,6 @@
       "description" : "The table",
       "properties" : {
         "$comment" : "placeholder to make commas easier",
-        "@type" : {
-          "type" : "string",
-          "description" : "UType as type discriminator"
-        },
         "table_name" : {
           "type" : "string",
           "description" : "name of the table"
@@ -123,10 +112,6 @@
       "description" : "the column",
       "properties" : {
         "$comment" : "placeholder to make commas easier",
-        "@type" : {
-          "type" : "string",
-          "description" : "UType as type discriminator"
-        },
         "column_name" : {
           "type" : "string",
           "description" : "name of the column"
@@ -164,15 +149,15 @@
           "description" : ""
         },
         "indexed" : {
-          "type" : "boolean",
+          "type" : "integer",
           "description" : "does the column have an index"
         },
         "principal" : {
-          "type" : "boolean",
+          "type" : "integer",
           "description" : "indicates that the column is considered a core part of the content; clients can use this hint to make the principal column(s) visible, for example by selecting them by default in generating an ADQL query. In cases where the service selects the columns to return (such as a query language without an explicit output selection), the principal column indicates those columns that are returned by default"
         },
         "std" : {
-          "type" : "boolean",
+          "type" : "integer",
           "description" : "is the column defined by a standard"
         },
         "column_index" : {
@@ -180,7 +165,7 @@
           "description" : "used to recommend table ordering for clients. Clients may order by index (ascending) so lower index items would appear earlier in a listing."
         },
         "nullable" : {
-          "type" : "boolean",
+          "type" : "integer",
           "description" : "indicates whether the column may have null values"
         },
         "isNaturalKey" : {
@@ -196,10 +181,6 @@
       "description" : "foreign key definition",
       "properties" : {
         "$comment" : "placeholder to make commas easier",
-        "@type" : {
-          "type" : "string",
-          "description" : "UType as type discriminator"
-        },
         "key_id" : {
           "type" : "string",
           "description" : "the id of the key"
@@ -235,10 +216,6 @@
       "description" : "the foreign key columns",
       "properties" : {
         "$comment" : "placeholder to make commas easier",
-        "@type" : {
-          "type" : "string",
-          "description" : "UType as type discriminator"
-        },
         "from_column" : {
           "oneOf" : [ {
             "type" : "string"

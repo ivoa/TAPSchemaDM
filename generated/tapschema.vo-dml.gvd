@@ -26,7 +26,7 @@ digraph GVmap {
     ] ;
   "tapschema:TAPType" [
     URL="../tapschema/TAPType"
-    label = "{&lt;&lt;enumeration&gt;&gt;\nTAPType|+BOOLEAN\l+SMALLINT\l+INTEGER\l+BIGINT\l+REAL\l+DOUBLE\l+TIMESTAMP\l+CHAR\l+VARCHAR\l+BINARY\l+VARBINARY\l+POINT\l+REGION\l+CLOB\l+BLOB\l}"
+    label = "{&lt;&lt;enumeration&gt;&gt;\nTAPType|+BOOLEAN\l+SMALLINT\l+INTEGER\l+BIGINT\l+REAL\l+DOUBLE\l+TIMESTAMP\l+CHAR\l+VARCHAR\l+BINARY\l+VARBINARY\l+CLOB\l+BLOB\l+POINT\l+REGION\l+CIRCLE\l+ELLIPSE\l+BOX\l+POLYGON\l+LINE\l}"
     fillcolor="/set312/1"
     ] ;
   "tapschema:Schema" [
@@ -41,7 +41,7 @@ digraph GVmap {
     ] ;
   "tapschema:column" [
     URL="../tapschema/column"
-    label = "{column|+column_name : ivoa:string\l+datatype : tapschema:TAPType\l+arraysize : ivoa:string\l+xtype : ivoa:string\l+size : ivoa:integer\l+description : ivoa:string\l+utype : ivoa:string\l+unit : ivoa:string\l+ucd : ivoa:string\l+indexed : ivoa:boolean\l+principal : ivoa:boolean\l+std : ivoa:boolean\l+column_index : ivoa:integer\l+nullable : ivoa:boolean\l+isNaturalKey : ivoa:boolean\l}"
+    label = "{column|+column_name : ivoa:string\l+datatype : tapschema:TAPType\l+arraysize : ivoa:string\l+xtype : ivoa:string\l+size : ivoa:integer\l+description : ivoa:string\l+utype : ivoa:string\l+unit : ivoa:string\l+ucd : ivoa:string\l+indexed : ivoa:integer\l+principal : ivoa:integer\l+std : ivoa:integer\l+column_index : ivoa:integer\l+nullable : ivoa:integer\l+isNaturalKey : ivoa:boolean\l}"
     fillcolor="/set312/1"
     ] ;
   "tapschema:ForeignKey" [

@@ -955,17 +955,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Quantity
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -975,34 +964,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#members" class="md-nav__link">
-    <span class="md-ellipsis">
-      Members
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -1357,23 +1318,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#members" class="md-nav__link">
-    <span class="md-ellipsis">
-      Members
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1397,8 +1341,9 @@
 
 <h1 id="abstract-datatype-quantity"><em>abstract</em> dataType Quantity</h1>
 <p>Meant to represent the value of a numerical physical quantity. Can be mapped in VOTables to FIELDrefs and PARAM(ref)s, in which case the @unit attribute of those VOTable elements is assumed to be mapped to the attribute on the Quantity. Ths is only allowed for these predefined ivoa types.</p>
-<p><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="xMaxYMax meet" style="width:292px;height:175px" version="1.1" viewBox="0 0 292 175" width="100%" zoomAndPan="magnify" class="uml" alt="uml diagram" title=""><defs><filter height="300%" id="f13fbggovdm1ad" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0" /><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0" /><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3" /><feBlend in="SourceGraphic" in2="blurOut3" mode="normal" /></filter></defs><g><rect fill="#D3D3D3" filter="url(#f13fbggovdm1ad)" height="58.7422" id="Quantity" style="stroke: #800080; stroke-width: 2.0;" width="101" x="97" y="106" /><rect fill="#D3D3D3" height="37.9375" style="stroke: #800080; stroke-width: 2.0;" width="101" x="97" y="106" /><ellipse cx="112" cy="124.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke: #800080; stroke-width: 1.0;" /><path d="M112.1094,120.3125 L110.9531,125.3906 L113.2813,125.3906 L112.1094,120.3125 Z M110.625,118.0781 L113.6094,118.0781 L116.9688,130.4688 L114.5156,130.4688 L113.75,127.4063 L110.4688,127.4063 L109.7188,130.4688 L107.2813,130.4688 L110.625,118.0781 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="73" x="124" y="122.1387">&#171;dataType&#187;</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="52" x="134.5" y="136.1074">Quantity</text><line style="stroke: #800080; stroke-width: 2.0;" x1="98" x2="197" y1="143.9375" y2="143.9375" /><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="103" y="158.1479">ivoa:Unit unit</text><a href="../IntegerQuantity" target="_top" title="../IntegerQuantity" xlink:actuate="onRequest" xlink:href="../IntegerQuantity" xlink:show="new" xlink:title="../IntegerQuantity" xlink:type="simple"><rect fill="#FEFECE" filter="url(#f13fbggovdm1ad)" height="37.9375" id="IntegerQuantity" style="stroke: #A80036; stroke-width: 1.5;" width="129" x="6" y="8" /><ellipse cx="21" cy="26.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;" /><path d="M23.9688,32.6094 Q23.3906,32.9063 22.75,33.0469 Q22.1094,33.2031 21.4063,33.2031 Q18.9063,33.2031 17.5781,31.5625 Q16.2656,29.9063 16.2656,26.7813 Q16.2656,23.6563 17.5781,22 Q18.9063,20.3438 21.4063,20.3438 Q22.1094,20.3438 22.75,20.5 Q23.4063,20.6563 23.9688,20.9531 L23.9688,23.6719 Q23.3438,23.0938 22.75,22.8281 Q22.1563,22.5469 21.5313,22.5469 Q20.1875,22.5469 19.5,23.625 Q18.8125,24.6875 18.8125,26.7813 Q18.8125,28.875 19.5,29.9531 Q20.1875,31.0156 21.5313,31.0156 Q22.1563,31.0156 22.75,30.75 Q23.3438,30.4688 23.9688,29.8906 L23.9688,32.6094 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="73" x="47" y="24.1387">&#171;dataType&#187;</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="97" x="35" y="38.1074">IntegerQuantity</text></a><a href="../RealQuantity" target="_top" title="../RealQuantity" xlink:actuate="onRequest" xlink:href="../RealQuantity" xlink:show="new" xlink:title="../RealQuantity" xlink:type="simple"><rect fill="#FEFECE" filter="url(#f13fbggovdm1ad)" height="37.9375" id="RealQuantity" style="stroke: #A80036; stroke-width: 1.5;" width="111" x="170" y="8" /><ellipse cx="185" cy="26.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;" /><path d="M187.9688,32.6094 Q187.3906,32.9063 186.75,33.0469 Q186.1094,33.2031 185.4063,33.2031 Q182.9063,33.2031 181.5781,31.5625 Q180.2656,29.9063 180.2656,26.7813 Q180.2656,23.6563 181.5781,22 Q182.9063,20.3438 185.4063,20.3438 Q186.1094,20.3438 186.75,20.5 Q187.4063,20.6563 187.9688,20.9531 L187.9688,23.6719 Q187.3438,23.0938 186.75,22.8281 Q186.1563,22.5469 185.5313,22.5469 Q184.1875,22.5469 183.5,23.625 Q182.8125,24.6875 182.8125,26.7813 Q182.8125,28.875 183.5,29.9531 Q184.1875,31.0156 185.5313,31.0156 Q186.1563,31.0156 186.75,30.75 Q187.3438,30.4688 187.9688,29.8906 L187.9688,32.6094 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="73" x="202" y="24.1387">&#171;dataType&#187;</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="79" x="199" y="38.1074">RealQuantity</text></a><path d="M83.56,46.07 C92.17,57.97 103.84,74.11 114.86,89.35 " fill="none" id="IntegerQuantity-&gt;Quantity" style="stroke: #FF0000; stroke-width: 1.0;" /><polygon fill="none" points="120.77,85.59,126.82,105.89,109.43,93.79,120.77,85.59" style="stroke: #FF0000; stroke-width: 1.0;" /><path d="M212.27,46.07 C203.55,57.97 191.73,74.11 180.57,89.35 " fill="none" id="RealQuantity-&gt;Quantity" style="stroke: #FF0000; stroke-width: 1.0;" /><polygon fill="none" points="185.92,93.9,168.45,105.89,174.62,85.62,185.92,93.9" style="stroke: #FF0000; stroke-width: 1.0;" /></g></svg></p>
-<h2 id="members">Members</h2>
+<p><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" preserveAspectRatio="xMaxYMax meet" style="width:292px;height:175px" version="1.1" viewBox="0 0 292 175" width="100%" zoomAndPan="magnify" class="uml" alt="uml diagram" title=""><defs><filter height="300%" id="f1lr6qgf1tasmj" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0" /><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0" /><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3" /><feBlend in="SourceGraphic" in2="blurOut3" mode="normal" /></filter></defs><g><rect fill="#D3D3D3" filter="url(#f1lr6qgf1tasmj)" height="58.7422" id="Quantity" style="stroke: #800080; stroke-width: 2.0;" width="101" x="97" y="106" /><rect fill="#D3D3D3" height="37.9375" style="stroke: #800080; stroke-width: 2.0;" width="101" x="97" y="106" /><ellipse cx="112" cy="124.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke: #800080; stroke-width: 1.0;" /><path d="M112.1094,120.3125 L110.9531,125.3906 L113.2813,125.3906 L112.1094,120.3125 Z M110.625,118.0781 L113.6094,118.0781 L116.9688,130.4688 L114.5156,130.4688 L113.75,127.4063 L110.4688,127.4063 L109.7188,130.4688 L107.2813,130.4688 L110.625,118.0781 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="73" x="124" y="122.1387">&#171;dataType&#187;</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="52" x="134.5" y="136.1074">Quantity</text><line style="stroke: #800080; stroke-width: 2.0;" x1="98" x2="197" y1="143.9375" y2="143.9375" /><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="103" y="158.1479">ivoa:Unit unit</text><a href="../IntegerQuantity" target="_top" title="../IntegerQuantity" xlink:actuate="onRequest" xlink:href="../IntegerQuantity" xlink:show="new" xlink:title="../IntegerQuantity" xlink:type="simple"><rect fill="#FEFECE" filter="url(#f1lr6qgf1tasmj)" height="37.9375" id="IntegerQuantity" style="stroke: #A80036; stroke-width: 1.5;" width="129" x="6" y="8" /><ellipse cx="21" cy="26.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;" /><path d="M23.9688,32.6094 Q23.3906,32.9063 22.75,33.0469 Q22.1094,33.2031 21.4063,33.2031 Q18.9063,33.2031 17.5781,31.5625 Q16.2656,29.9063 16.2656,26.7813 Q16.2656,23.6563 17.5781,22 Q18.9063,20.3438 21.4063,20.3438 Q22.1094,20.3438 22.75,20.5 Q23.4063,20.6563 23.9688,20.9531 L23.9688,23.6719 Q23.3438,23.0938 22.75,22.8281 Q22.1563,22.5469 21.5313,22.5469 Q20.1875,22.5469 19.5,23.625 Q18.8125,24.6875 18.8125,26.7813 Q18.8125,28.875 19.5,29.9531 Q20.1875,31.0156 21.5313,31.0156 Q22.1563,31.0156 22.75,30.75 Q23.3438,30.4688 23.9688,29.8906 L23.9688,32.6094 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="73" x="47" y="24.1387">&#171;dataType&#187;</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="97" x="35" y="38.1074">IntegerQuantity</text></a><a href="../RealQuantity" target="_top" title="../RealQuantity" xlink:actuate="onRequest" xlink:href="../RealQuantity" xlink:show="new" xlink:title="../RealQuantity" xlink:type="simple"><rect fill="#FEFECE" filter="url(#f1lr6qgf1tasmj)" height="37.9375" id="RealQuantity" style="stroke: #A80036; stroke-width: 1.5;" width="111" x="170" y="8" /><ellipse cx="185" cy="26.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;" /><path d="M187.9688,32.6094 Q187.3906,32.9063 186.75,33.0469 Q186.1094,33.2031 185.4063,33.2031 Q182.9063,33.2031 181.5781,31.5625 Q180.2656,29.9063 180.2656,26.7813 Q180.2656,23.6563 181.5781,22 Q182.9063,20.3438 185.4063,20.3438 Q186.1094,20.3438 186.75,20.5 Q187.4063,20.6563 187.9688,20.9531 L187.9688,23.6719 Q187.3438,23.0938 186.75,22.8281 Q186.1563,22.5469 185.5313,22.5469 Q184.1875,22.5469 183.5,23.625 Q182.8125,24.6875 182.8125,26.7813 Q182.8125,28.875 183.5,29.9531 Q184.1875,31.0156 185.5313,31.0156 Q186.1563,31.0156 186.75,30.75 Q187.3438,30.4688 187.9688,29.8906 L187.9688,32.6094 Z " /><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="73" x="202" y="24.1387">&#171;dataType&#187;</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="79" x="199" y="38.1074">RealQuantity</text></a><path d="M83.56,46.07 C92.17,57.97 103.84,74.11 114.86,89.35 " fill="none" id="IntegerQuantity-&gt;Quantity" style="stroke: #FF0000; stroke-width: 1.0;" /><polygon fill="none" points="120.77,85.59,126.82,105.89,109.43,93.79,120.77,85.59" style="stroke: #FF0000; stroke-width: 1.0;" /><path d="M212.27,46.07 C203.55,57.97 191.73,74.11 180.57,89.35 " fill="none" id="RealQuantity-&gt;Quantity" style="stroke: #FF0000; stroke-width: 1.0;" /><polygon fill="none" points="185.92,93.9,168.45,105.89,174.62,85.62,185.92,93.9" style="stroke: #FF0000; stroke-width: 1.0;" /></g></svg></p>
+<pre><code>    ## Members
+</code></pre>
 <table>
 <thead>
 <tr>

@@ -72,10 +72,15 @@
 +VARCHAR
 +BINARY
 +VARBINARY
-+POINT
-+REGION
 +CLOB
 +BLOB
++POINT
++REGION
++CIRCLE
++ELLIPSE
++BOX
++POLYGON
++LINE
 </y:AttributeLabel>
                   <y:MethodLabel xml:space="preserve"/>
                </y:UML>
@@ -151,11 +156,11 @@
 +utype : ivoa:string
 +unit : ivoa:string
 +ucd : ivoa:string
-+indexed : ivoa:boolean
-+principal : ivoa:boolean
-+std : ivoa:boolean
++indexed : ivoa:integer
++principal : ivoa:integer
++std : ivoa:integer
 +column_index : ivoa:integer
-+nullable : ivoa:boolean
++nullable : ivoa:integer
 +isNaturalKey : ivoa:boolean
 </y:AttributeLabel>
                   <y:MethodLabel xml:space="preserve"/>
@@ -207,7 +212,7 @@
       <!--imported nodes-->
       <!--edges-->
       <edge xmlns:y="http://www.yworks.com/xml/graphml"
-            id="d2e135"
+            id="d2e156"
             source="tapschema:Schema"
             target="tapschema:table">
          <data key="k3">
@@ -223,7 +228,7 @@
          </data>
       </edge>
       <edge xmlns:y="http://www.yworks.com/xml/graphml"
-            id="d2e195"
+            id="d2e216"
             source="tapschema:table"
             target="tapschema:column">
          <data key="k3">
@@ -239,7 +244,7 @@
          </data>
       </edge>
       <edge xmlns:y="http://www.yworks.com/xml/graphml"
-            id="d2e204"
+            id="d2e225"
             source="tapschema:table"
             target="tapschema:ForeignKey">
          <data key="k3">
@@ -255,7 +260,7 @@
          </data>
       </edge>
       <edge xmlns:y="http://www.yworks.com/xml/graphml"
-            id="d2e398"
+            id="d2e419"
             source="tapschema:ForeignKey"
             target="tapschema:FKColumn">
          <data key="k3">
@@ -271,7 +276,7 @@
          </data>
       </edge>
       <edge xmlns:y="http://www.yworks.com/xml/graphml"
-            id="d2e371"
+            id="d2e392"
             source="tapschema:ForeignKey"
             target="tapschema:table">
          <data key="k3">
@@ -287,7 +292,7 @@
          </data>
       </edge>
       <edge xmlns:y="http://www.yworks.com/xml/graphml"
-            id="d2e411"
+            id="d2e432"
             source="tapschema:FKColumn"
             target="tapschema:column">
          <data key="k3">
@@ -303,7 +308,7 @@
          </data>
       </edge>
       <edge xmlns:y="http://www.yworks.com/xml/graphml"
-            id="d2e420"
+            id="d2e441"
             source="tapschema:FKColumn"
             target="tapschema:column">
          <data key="k3">
