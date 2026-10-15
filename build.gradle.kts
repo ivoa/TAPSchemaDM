@@ -156,6 +156,9 @@ scmVersion {
     tag {
         prefix.set("v")
     }
+    checks {
+        snapshotDependencies.set(false) //TODO remove this once proper release of IVOA-base
+    }
     hooks {
         pre("fileUpdate", mapOf(
             "encoding" to "utf-8",
