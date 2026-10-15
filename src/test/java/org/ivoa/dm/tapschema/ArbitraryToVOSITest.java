@@ -6,41 +6,55 @@ package org.ivoa.dm.tapschema;
  */
 
 import net.sf.saxon.s9api.*;
+import org.ivoa.dm.tapschema.utils.VOSIWriter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ArbitraryToVOSITest {
 
-    static Processor processor;
-    static XsltCompiler compiler;
+    static VOSIWriter vosiwriter;
+
+
     @BeforeAll
     public static void init() {
-
-        processor = new Processor(false);
-        compiler = processor.newXsltCompiler();
+        vosiwriter = new VOSIWriter();
 
     }
 
     @Test
-    public void writeVOSI () throws SaxonApiException, FileNotFoundException {
+    public void writeVOSIAsTAP () throws SaxonApiException {
 
-        XsltExecutable stylesheet = compiler.compile(new StreamSource(TapschemaModel.class.getResourceAsStream("/tap2VOSI.xsl")));
-        Serializer out = processor.newSerializer(new File("tablesa_VOSI.xml"));
-        out.setOutputProperty(Serializer.Property.METHOD, "xml");
-        Xslt30Transformer transformer = stylesheet.load30();
-        transformer.transform(new StreamSource(TapschemaModel.class.getResourceAsStream("/test.xml")), out);
+        InputStream resource = TapschemaModel.class.getResourceAsStream("/test.xml");
+        String vosi = vosiwriter.convertToVOSI(new StreamSource(resource), VOSIWriter.VOSIDataType.TAP);
+        System.out.println(vosi);
         org.javastro.ivoa.schema.XMLValidator validator =  new org.javastro.ivoa.schema.XMLValidator();
-        boolean res = validator.validate(new File("tablesa_VOSI.xml"));
+        boolean res = validator.validate(new StreamSource(new java.io.StringReader(vosi)));
         if(!res) {
             validator.printErrors(System.err);
         }
         assertTrue(res);
+
+    }
+
+    @Test
+    public void writeVOSIAsVOTABLE () throws SaxonApiException, FileNotFoundException {
+
+        InputStream resource = TapschemaModel.class.getResourceAsStream("/test.xml");
+        String vosi = vosiwriter.convertToVOSI(new StreamSource(resource), VOSIWriter.VOSIDataType.VOTABLE);
+        System.out.println(vosi);
+        org.javastro.ivoa.schema.XMLValidator validator =  new org.javastro.ivoa.schema.XMLValidator();
+        boolean res = validator.validate(new StreamSource(new java.io.StringReader(vosi)));
+        if(!res) {
+            validator.printErrors(System.err);
+        }
+        assertTrue(res);
+
 
     }
 
