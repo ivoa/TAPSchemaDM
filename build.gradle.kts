@@ -1,3 +1,4 @@
+import org.gradle.internal.configuration.problems.projectPathFrom
 import pl.allegro.tech.build.axion.release.domain.hooks.HookContext
 
 plugins {
@@ -11,6 +12,7 @@ plugins {
 }
 
 group = "org.javastro.ivoa.dm"
+version = scmVersion.version
 
 vodml {
     outputSiteDir.set(layout.projectDirectory.dir("doc/site/generated")) // N.B the last part of this path must be "generated"
@@ -20,20 +22,18 @@ dependencies {
     api("net.ivoa.vo-dml:ivoa-base:1.0-SNAPSHOT") // IMPL using API so that it appears in transitive compile
 
     implementation("info.picocli:picocli:4.7.6")
-    implementation("org.postgresql:postgresql:42.7.10") // add as implementation so that it is bundled in the "uber" jar TODO add other common ones
+    implementation("org.postgresql:postgresql:42.7.14") // add as implementation so that it is bundled in the "uber" jar TODO add other common ones
     implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
-    implementation("ch.qos.logback:logback-classic:1.5.13")
-
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.22.3")
+    implementation("net.sf.saxon:Saxon-HE:12.5")
 
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("net.sf.saxon:Saxon-HE:12.5")
     testImplementation("org.javastro.ivoa:ivoa-schema:0.9.10")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher") //Needed to override gradle built-in
     testRuntimeOnly("org.hibernate.orm:hibernate-testing:6.5.3.Final")
     testImplementation("com.h2database:h2:2.2.220") // try out h2
-    testImplementation("ch.qos.logback:logback-classic:1.5.13")
+    testImplementation("ch.qos.logback:logback-classic:1.6.3")
 
 }
 
@@ -160,8 +160,8 @@ scmVersion {
         pre("fileUpdate", mapOf(
             "encoding" to "utf-8",
             "file" to rootDir.resolve("README.md").toString(),
-            "pattern" to KotlinClosure2<String, HookContext,String>({ v, c -> "/${project.name}:${v}/" } ),
-            "replacement" to KotlinClosure2<String, HookContext,String>( {v, c -> "${project.name}:${v}" })
+            "pattern" to KotlinClosure2<String, HookContext,String>({ v, _ -> "/${project.name}:${v}/" } ),
+            "replacement" to KotlinClosure2<String, HookContext,String>( {v, _ -> "${project.name}:${v}" })
         ))
     }
 }
