@@ -62,10 +62,18 @@
             <xsl:choose>
                 <xsl:when test="$typeDescriptionMode = 'TAP'">
                     <xsl:attribute name="type" namespace="http://www.w3.org/2001/XMLSchema-instance">vs:TAPType</xsl:attribute>
-                    <xsl:value-of select="."/>
+
                     <xsl:if test="@arraysize">
                         <xsl:attribute name="arraysize"><xsl:value-of select="@arraysize"/></xsl:attribute>
                     </xsl:if>
+                    <xsl:choose>
+                        <!-- translate back into types that are acceptable to VOSI types
+                        TODO would be nice if VOSI types were represented properly in the registry -->
+                        <xsl:when test="text() = ('CIRCLE','POLYGON','LINE','BOX','ELLIPSE')"><xsl:text>REGION</xsl:text></xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="."/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:attribute name="type" namespace="http://www.w3.org/2001/XMLSchema-instance">vs:VOTableType</xsl:attribute>
