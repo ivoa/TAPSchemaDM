@@ -1,5 +1,6 @@
 import org.gradle.internal.configuration.problems.projectPathFrom
 import pl.allegro.tech.build.axion.release.domain.hooks.HookContext
+import pl.allegro.tech.build.axion.release.domain.scm.ScmPosition
 
 plugins {
     id("net.ivoa.vo-dml.vodmltools") version "0.7.2"
@@ -8,7 +9,7 @@ plugins {
 //    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     signing
     id("com.gradleup.shadow") version "9.4.2"
-    id("pl.allegro.tech.build.axion-release") version "1.21.3"
+    id("pl.allegro.tech.build.axion-release") version "1.21.4"
 }
 
 group = "org.javastro.ivoa.dm"
@@ -166,6 +167,7 @@ scmVersion {
             "pattern" to KotlinClosure2<String, HookContext,String>({ v, _ -> "${project.name}:${v}" } ),
             "replacement" to KotlinClosure2<String, HookContext,String>( {v, _ -> "${project.name}:${v}" })
         ))
+        pre("commit",KotlinClosure2<String,ScmPosition,String>({ v, p-> "Updating README for version ${v}" }))
     }
 }
 
