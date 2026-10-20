@@ -83,7 +83,7 @@
                     <xsl:choose>
                         <xsl:when test="text() = 'VARCHAR'">char</xsl:when>
                         <xsl:when test="text() = 'INTEGER'">int</xsl:when>
-                        <xsl:when test="text() = 'SMALLINT'">long</xsl:when>
+                        <xsl:when test="text() = 'SMALLINT'">short</xsl:when>
                         <xsl:when test="text() = 'BIGINT'">long</xsl:when>
                         <xsl:when test="text() = 'REAL'">float</xsl:when>
                         <xsl:when test="text() = 'DOUBLE'">double</xsl:when>
