@@ -29,6 +29,8 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /** tests whether the TAP schema can translate its own TAP schema description */
@@ -105,12 +107,12 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
             });
 
        // translate back in
-           TypedQuery<Schema> qin = em.createQuery("select s from Schema s where s.schema_name='TAP_SCHEMA'",Schema.class) ;
+           TypedQuery<Schema> qin = em.createQuery("select s from schemas s where s.schema_name='TAP_SCHEMA'",Schema.class) ;
            Schema sin = qin.getSingleResult();
            assertNotNull(sin);
            assertEquals(5, sin.getTables().size());
 
-           TypedQuery<ForeignKey> qkeys = em.createQuery("select k from ForeignKey k ",ForeignKey.class) ;
+           TypedQuery<ForeignKey> qkeys = em.createQuery("select k from keys k ",ForeignKey.class) ;
            for (ForeignKey key : qkeys.getResultList())
            {
                assertNotNull(key.key_id);
