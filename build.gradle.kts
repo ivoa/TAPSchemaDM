@@ -25,7 +25,7 @@ dependencies {
     implementation("info.picocli:picocli:4.7.6")
     implementation("org.postgresql:postgresql:42.7.14") // add as implementation so that it is bundled in the "uber" jar TODO add other common ones
     implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.22.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.22.4")
     implementation("net.sf.saxon:Saxon-HE:12.5")
 
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
