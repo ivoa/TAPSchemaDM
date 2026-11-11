@@ -4,8 +4,8 @@ package org.ivoa.dm.tapschema.utils;
 import jakarta.xml.bind.*;
 import org.hibernate.Session;
 import org.ivoa.dm.tapschema.Schema;
+import org.ivoa.dm.tapschema.TAPSchemaUtils;
 import org.ivoa.dm.tapschema.TapschemaModel;
-import org.ivoa.dm.tapschema.XMLNormalizer;
 import org.ivoa.vodml.ModelManagement;
 import org.ivoa.vodml.validation.AbstractBaseValidation;
 import org.ivoa.vodml.validation.XMLValidator;
@@ -34,7 +34,7 @@ public class SchemaReaderSelfTest extends AbstractBaseValidation {
         TapschemaModel model = el.getValue();
         assertNotNull(model);
 
-        new XMLNormalizer().prepareForDB(model);
+        TAPSchemaUtils.normalizeFromSerialization(model);
 
         ModelManagement<TapschemaModel> modelManagement = model.management();
         jakarta.persistence.EntityManager em = setupH2Db(TapschemaModel.pu_name(),TapschemaModel.modelDescription.allClassNames());

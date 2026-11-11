@@ -5,14 +5,21 @@ package org.ivoa.dm.tapschema;
  * Created on 16/06/2025 by Paul Harrison (paul.harrison@manchester.ac.uk).
  */
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
+
+import javax.xml.transform.Source;
 import java.util.List;
 
 /**
  * Utilities concerned with model column and table name normalization.
  * Note that this is here to allow package access to the DM.
  */
-public class XMLNormalizer {
+public class TAPSchemaUtils {
 
+   private TAPSchemaUtils(){};
    /**
     * list of reserved terms.
     */
@@ -55,36 +62,26 @@ public class XMLNormalizer {
          "WORK", "WRITE", "YEAR", "ZONE"
 
    );
-   /**
-    * If true the schema name will be appended to the table name wherever it occurs. It is false by default.
-    * It can be made true by setting TAPSCHEMADM_SCHEMA_IN_TABLE_NAME in the environment.
-    */
-   static boolean include_schema = false;
 
-   static {
-      include_schema = System.getenv().containsKey("TAPSCHEMADM_SCHEMA_IN_TABLE_NAME");
-   }
    /**
     * Normalize the model keys.
     * Make sure that the correct keys are generated for a model that as been translated from an XML instance.
     * This needs to be done to make the model ready for saving to a database.
     * @param model the model instance to be normalized.
     */
-   public void prepareForDB(TapschemaModel model) {
+   public static void normalizeFromSerialization(TapschemaModel model) {
 
       for (Schema sc: model.getContent(Schema.class)){
 
          for (Table t: sc.getTables()){
             t.schema_name = sc.schema_name;
-            if (!include_schema) {
-               t.table_name = t.table_name.substring(t.table_name.lastIndexOf('.') + 1);
-            }
+            t.table_name = t.table_name.substring(t.table_name.lastIndexOf('.') + 1);
             for (Column c: t.getColumns()){
                c.table_name=t.table_name;
                c.schema_name=sc.schema_name;
                String cn = c.getColumn_name();
                if(cn.contains(".")) {
-               c.setColumn_name(quoteColumn(cn.substring(cn.lastIndexOf('.') + 1)));
+               c.setColumn_name(cn.substring(cn.lastIndexOf('.') + 1));
                }
             }
          }
@@ -92,11 +89,36 @@ public class XMLNormalizer {
    }
 
    /**
+    * Used to prepare a schema for use in the TAP service.
+    * @param schema
+    * @return a copy of the original schema with the table names denormalised to have the schema included as required by the TAP standard.
+    *
+    */
+   public static Schema adjustforTAPStd(Schema schema) {
+      TapschemaModel model = new TapschemaModel();
+      model.createContext();
+      Schema newschema = new Schema(schema);
+      newschema.schema_name = schema.schema_name;
+      newschema.updateClonedReferences();
+      for (Table t: newschema.getTables()){
+         String tn = String.join(".",schema.schema_name,t.getTable_name());
+         t.schema_name = schema.schema_name;
+         t.table_name=tn;
+         for (Column c: t.getColumns()){
+            c.schema_name = schema.schema_name;
+            c.table_name=tn;
+            c.column_name=quoteColumn(c.column_name);
+         }
+      }
+      return newschema;
+   }
+
+   /**
     * prepare a model that has been read from a database for XML serialization. Note that
     * the serialization is not performed.
     * @param model the model to be serialized
     */
-   public void prepareForSerialization(TapschemaModel model) {
+   public static void prepareForSerialization(TapschemaModel model) {
       for (Schema sc: model.getContent(Schema.class)){
          for (Table t: sc.getTables()){
             String tn = String.join(".",sc.schema_name,t.getTable_name());
@@ -120,6 +142,40 @@ public class XMLNormalizer {
       else  {
          return columName;
       }
+   }
+
+   /**
+    * Read a tapschema model from an XML source. This is used to read the TAP schema from the standard XML representation.
+    * @param xml The xml source.
+    * @return the TAPSchemaModel.
+    * @throws JAXBException
+    */
+   public static TapschemaModel readModelFromXML(Source xml) throws JAXBException {
+      JAXBContext jaxbContext = TapschemaModel.contextFactory();
+      Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+      JAXBElement<TapschemaModel> el = unmarshaller.unmarshal(xml, TapschemaModel.class);
+      TapschemaModel model = el.getValue();
+      normalizeFromSerialization(model);
+      return model;
+   }
+
+   /**
+    * Copy a TAPSchema model.
+    * @param model The model to copy.
+    * @return The copied model.
+    * @throws JAXBException
+    */
+   public static TapschemaModel copy(TapschemaModel model) throws JAXBException {
+      TapschemaModel retval = new TapschemaModel();
+      retval.createContext();
+      for (Schema sc: model.getSchema()){
+         Schema newschema = new Schema(sc);
+         newschema.schema_name = sc.schema_name;
+         newschema.updateClonedReferences();
+         retval.addContent(newschema);
+      }
+
+      return retval;
    }
 
 }

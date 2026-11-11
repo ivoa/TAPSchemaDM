@@ -38,7 +38,7 @@ import java.util.concurrent.Callable;
 
 /**
  * Builds a TAP_SCHEMA model from JDBC metadata. Note that this fills the TAPSchema in a way that is suitable for
- * XML serialization, rather than that desirable for database storage. {@see XMLNormalizer}
+ * XML serialization, rather than that desirable for database storage. {@see TAPSchemaUtils}
  */
 public final class SchemaReader implements AutoCloseable {
 
@@ -226,7 +226,7 @@ public final class SchemaReader implements AutoCloseable {
 
   /**
    * Translate the database metadata into a TAP_SCHEMA model. By default, system schemas are excluded and only tables and views are included. See {@link Options} for more control.
-   * @return the translated metadata model.Note with schema, table and column names are qualified suitable for immediate XML serialization, rather than for database storage. See {@link XMLNormalizer} for normalizing the model for database storage.
+   * @return the translated metadata model.Note with schema, table and column names are qualified suitable for immediate XML serialization, rather than for database storage. See {@link TAPSchemaUtils} for normalizing the model for database storage.
    * @throws SQLException if there is a problem reading the database metadata.
    */
   public TapschemaModel translate() throws SQLException {
@@ -236,7 +236,7 @@ public final class SchemaReader implements AutoCloseable {
   /**
    * Translate the database metadata into a TAP_SCHEMA model. By default, system schemas are excluded and only tables and views are included. See {@link Options} for more control.
    * @param options translation options.
-   * @return the translated metadata model.Note with schema, table and column names are qualified suitable for immediate XML serialization, rather than for database storage. See {@link XMLNormalizer} for normalizing the model for database storage.
+   * @return the translated metadata model.Note with schema, table and column names are qualified suitable for immediate XML serialization, rather than for database storage. See {@link TAPSchemaUtils} for normalizing the model for database storage.
    * @throws SQLException if there is a problem reading the database metadata.
    */
   public TapschemaModel translate(Options options) throws SQLException {

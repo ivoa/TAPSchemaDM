@@ -30,7 +30,8 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.javastro.ivoa:ivoa-schema:0.9.10")
+    testImplementation("org.javastro.ivoa:ivoa-schema:0.9.14")
+    testImplementation("org.javastro.ivoa:ivoa-entities:0.9.15")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher") //Needed to override gradle built-in
     testRuntimeOnly("org.hibernate.orm:hibernate-testing:6.5.3.Final")
     testImplementation("com.h2database:h2:2.2.220") // try out h2

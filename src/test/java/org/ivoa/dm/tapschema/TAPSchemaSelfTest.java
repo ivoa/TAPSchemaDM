@@ -74,11 +74,29 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
         Schema schema_in = schema.get(0);
         assertEquals("TAP_SCHEMA",schema_in.schema_name);
         assertEquals(5,schema_in.getTables().size());
-        final XMLNormalizer xmlNormalizer = new XMLNormalizer();
-        xmlNormalizer.prepareForDB(model_in); // this should work ok = tested below
-        xmlNormalizer.prepareForSerialization(model_in);
-        roundtripXML(model_in);
-        roundTripJSON(model_in);
+        TAPSchemaUtils.normalizeFromSerialization(model_in); // this should work ok = tested below
+        TAPSchemaUtils.prepareForSerialization(model_in);
+         RoundTripResult<TapschemaModel> xres = roundtripXML(model_in);
+         assertTrue(xres.isValid);
+       RoundTripResult<TapschemaModel> jres = roundTripJSON(model_in);
+       //TODO JSON schema for TAPSchema is not correct - VODML
+    }
+
+    @Test
+    public void testReadUtil() throws JAXBException {
+       TapschemaModel model = TAPSchemaUtils.readModelFromXML(new StreamSource(TapschemaModel.TAPSchema()));
+       model.getSchema().forEach(s -> {
+           assertEquals("TAP_SCHEMA",s.schema_name);
+           assertEquals(5,s.getTables().size());
+           s.getTables().forEach(t -> {
+               assertNotNull(t.table_name);
+              assertFalse(t.getTable_name().contains("."));
+              t.getColumns().forEach(c -> {
+                  assertNotNull(c.column_name);
+                  assertFalse(c.getColumn_name().contains("."));
+              });
+           });
+       });
     }
     
     @Test
@@ -91,13 +109,16 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
         JAXBElement<TapschemaModel> el = unmarshaller.unmarshal(new StreamSource(is), TapschemaModel.class);
         TapschemaModel model_in = el.getValue();
         assertNotNull(model_in);
-        new XMLNormalizer().prepareForDB(model_in);
+
+        Schema schemaToSave = TAPSchemaUtils.adjustforTAPStd(model_in.getContent(Schema.class).get(0));
+        assertNotNull(schemaToSave);
+
         ModelManagement<TapschemaModel> modelManagement = model_in.management();
 
         jakarta.persistence.EntityManager em = setupH2Db(TapschemaModel.pu_name(),TapschemaModel.modelDescription.allClassNames());
         em.getTransaction().begin();
         modelManagement.persistRefs(em);
-        em.persist(model_in.getContent(Schema.class).get(0));
+        em.persist(schemaToSave);
         em.getTransaction().commit();
         Session sess = em.unwrap(Session.class);
             sess.doWork(conn -> {
