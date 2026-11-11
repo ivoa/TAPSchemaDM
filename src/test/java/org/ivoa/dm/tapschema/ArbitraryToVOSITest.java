@@ -5,6 +5,7 @@ package org.ivoa.dm.tapschema;
  * Created on 26/06/2025 by Paul Harrison (paul.harrison@manchester.ac.uk).
  */
 
+import jakarta.xml.bind.JAXBException;
 import net.sf.saxon.s9api.*;
 import org.ivoa.dm.tapschema.utils.VOSIWriter;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,16 +23,16 @@ public class ArbitraryToVOSITest {
 
 
     @BeforeAll
-    public static void init() {
-        vosiwriter = new VOSIWriter();
+    public static void init() throws JAXBException {
+       TapschemaModel model = TAPSchemaUtils.readModelFromXML(new StreamSource(TapschemaModel.class.getResourceAsStream("/test.xml")));
+        vosiwriter = new VOSIWriter(model);
 
     }
 
     @Test
-    public void writeVOSIAsTAP () throws SaxonApiException {
+    public void writeVOSIAsTAP () throws SaxonApiException, JAXBException {
 
-        InputStream resource = TapschemaModel.class.getResourceAsStream("/test.xml");
-        String vosi = vosiwriter.convertToVOSI(new StreamSource(resource), VOSIWriter.VOSIDataType.TAP);
+        String vosi = vosiwriter.convertToVOSI( VOSIWriter.VOSIDataType.TAP);
         System.out.println(vosi);
         org.javastro.ivoa.schema.XMLValidator validator =  new org.javastro.ivoa.schema.XMLValidator();
         boolean res = validator.validate(new StreamSource(new java.io.StringReader(vosi)));
@@ -43,10 +44,9 @@ public class ArbitraryToVOSITest {
     }
 
     @Test
-    public void writeVOSIAsVOTABLE () throws SaxonApiException, FileNotFoundException {
+    public void writeVOSIAsVOTABLE () throws SaxonApiException, FileNotFoundException, JAXBException {
 
-        InputStream resource = TapschemaModel.class.getResourceAsStream("/test.xml");
-        String vosi = vosiwriter.convertToVOSI(new StreamSource(resource), VOSIWriter.VOSIDataType.VOTABLE);
+        String vosi = vosiwriter.convertToVOSI( VOSIWriter.VOSIDataType.VOTABLE);
         System.out.println(vosi);
         org.javastro.ivoa.schema.XMLValidator validator =  new org.javastro.ivoa.schema.XMLValidator();
         boolean res = validator.validate(new StreamSource(new java.io.StringReader(vosi)));
