@@ -837,27 +837,6 @@
   
   
     <li class="md-nav__item">
-      <a href="generated/tapschema/TAPType/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TAPType
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="generated/tapschema/TableType/" class="md-nav__link">
         
   
@@ -1520,6 +1499,10 @@
 <h1 id="tapschemadm">TAPSchemaDM</h1>
 <p>This is the TAP schema defined using VO-DML and created so that a mapping from a arbitrary VO-DML model to its TAP schema can be serialized. The <a href="https://ivoa.github.io/vo-dml/">VO-DML tooling</a> will produce the TAP schema for a model as part of the output of the <code>vodmlSchema</code> command.</p>
 <p>The model follows the description of TAP schema in the <a href="https://www.ivoa.net/documents/TAP/">TAP Standard</a>. The TAP Standard does not provide a machine-readable version of the TAP Schema - this DM fills that gap. Some of model element names themselves are different from the names used in the TAP standard (and this is reflected in the XML serialization). However, naturally the RDB serialization will produce exactly the required tables as described in the TAP Standard - although there are some additional columns produced.</p>
+<p>An important aspect of using this model is to understand how the column datatype is used. In TAP/ADQL and VOSI there are effectively two type systems in use (see <a href="Mapping/">"mapping type systems"</a>), and this model uses
+a controlled vocabulary for the type name that is a mixture of these two type systems. The <a href="https://ivoa.github.io/vo-dml/">VO-DML tooling</a> emits a TAPSchemaDM instance that uses the TAP/ADQL types, 
+however, the content of TAPSchema database columns is required to use the VOTable type system -
+There are utilities to manage this described below.</p>
 <h2 id="how-to-use">How to use</h2>
 <h3 id="java">Java</h3>
 <p>The Standard <a href="https://ivoa.github.io/vo-dml/">VO-DML tooling</a> will produce a TAPSchemaDM instance in the static<code>.TAPSchema()</code> method of the generated model (See <a href="generated/javadoc/org/ivoa/dm/tapschema/TapschemaModel.html">TapSchemaModel</a> for the Model class of the TAPSchemaDM itself). The code below shows the essential steps
@@ -1529,17 +1512,17 @@ for storing the generated TAPSchema in a database. In this case it is for the TA
 <li>Normalise the tap schema instance to produce the extra key columns required by the database serialization</li>
 <li>Serialize this model instance to the database.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="n">TapschemaModel</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TapschemaModel</span><span class="p">();</span>
-<span class="n">InputStream</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TapschemaModel</span><span class="p">.</span><span class="na">TAPSchema</span><span class="p">();</span>
-<span class="n">JAXBContext</span><span class="w"> </span><span class="n">jc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="na">management</span><span class="p">().</span><span class="na">contextFactory</span><span class="p">();</span>
-<span class="n">Unmarshaller</span><span class="w"> </span><span class="n">unmarshaller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jc</span><span class="p">.</span><span class="na">createUnmarshaller</span><span class="p">();</span><span class="w"> </span>
-<span class="n">JAXBElement</span><span class="o">&lt;</span><span class="n">TapschemaModel</span><span class="o">&gt;</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unmarshaller</span><span class="p">.</span><span class="na">unmarshal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StreamSource</span><span class="p">(</span><span class="n">is</span><span class="p">),</span><span class="w"> </span><span class="n">TapschemaModel</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
-<span class="n">TapschemaModel</span><span class="w"> </span><span class="n">model_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">el</span><span class="p">.</span><span class="na">getValue</span><span class="p">();</span>
-<span class="k">new</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">ivoa</span><span class="p">.</span><span class="na">dm</span><span class="p">.</span><span class="na">tapschema</span><span class="p">.</span><span class="na">XMLNormalizer</span><span class="p">().</span><span class="na">prepareForDB</span><span class="p">(</span><span class="n">model_in</span><span class="p">);</span><span class="w"> </span><span class="c1">// note that this step is necessary before saving to the database to set up the table_name foreign keys</span>
+<div class="highlight"><pre><span></span><code><span class="cm">/* </span>
+<span class="cm">   note that this reading the TAPSchema for the TAPSchema itself - but the same static method call will work for on model produced by the VO-DML tooling</span>
+<span class="cm"> */</span>
+<span class="n">InputStream</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TapschemaModel</span><span class="p">.</span><span class="na">TAPSchema</span><span class="p">();</span><span class="w"> </span>
+<span class="n">TapschemaModel</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TAPSchemaUtils</span><span class="p">.</span><span class="na">readModelFromXML</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StreamSource</span><span class="p">(</span><span class="n">is</span><span class="p">));</span>
+
 <span class="n">EntityManager</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">emf</span><span class="p">.</span><span class="na">createEntityManager</span><span class="p">();</span><span class="w"> </span>
 <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">begin</span><span class="p">();</span>
-<span class="n">model_in</span><span class="p">.</span><span class="na">management</span><span class="p">().</span><span class="na">persistRefs</span><span class="p">(</span><span class="n">em</span><span class="p">);</span>
-<span class="n">em</span><span class="p">.</span><span class="na">persist</span><span class="p">(</span><span class="n">model_in</span><span class="p">.</span><span class="na">getContent</span><span class="p">(</span><span class="n">Schema</span><span class="p">.</span><span class="na">class</span><span class="p">).</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span><span class="w"> </span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Schema</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="na">getSchema</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">em</span><span class="p">.</span><span class="na">persist</span><span class="p">(</span><span class="n">TAPSchemaUtils</span><span class="p">.</span><span class="na">adjustforTAPStd</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+<span class="p">}</span>
 <span class="n">em</span><span class="p">.</span><span class="na">getTransaction</span><span class="p">().</span><span class="na">commit</span><span class="p">();</span>
 </code></pre></div>
 <h3 id="direct-to-ddl">Direct to DDL</h3>

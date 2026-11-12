@@ -5,30 +5,6 @@ components:
       enum:
       - "table"
       - "view"
-    TAPType:
-      description: "Allowable types for TAP columns - The various definitions for\
-        \ these can be found in the VOTable,VOSI and ADQL specifications"
-      enum:
-      - "BOOLEAN"
-      - "SMALLINT"
-      - "INTEGER"
-      - "BIGINT"
-      - "REAL"
-      - "DOUBLE"
-      - "TIMESTAMP"
-      - "CHAR"
-      - "VARCHAR"
-      - "BINARY"
-      - "VARBINARY"
-      - "CLOB"
-      - "BLOB"
-      - "POINT"
-      - "REGION"
-      - "CIRCLE"
-      - "ELLIPSE"
-      - "BOX"
-      - "POLYGON"
-      - "LINE"
     Schema:
       type: "object"
       description: "The schema"
@@ -97,8 +73,8 @@ components:
           type: "string"
           description: "name of the column"
         datatype:
-          $ref: "#/components/schemas/TAPType"
-          description: "the type of the column (VOTable semantics)"
+          type: "string"
+          description: "the type of the column (combined ADQL/VOTable semantics)"
         arraysize:
           type: "string"
           description: "the array size of the column"

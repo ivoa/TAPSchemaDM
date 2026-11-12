@@ -11,7 +11,7 @@
                 
                     ,{
                     "Enumerations": [
-                {"TAPType" : "generated/tapschema/TAPType.md"},{"TableType" : "generated/tapschema/TableType.md"}
+                {"TableType" : "generated/tapschema/TableType.md"}
                     ]
                     }
                 
