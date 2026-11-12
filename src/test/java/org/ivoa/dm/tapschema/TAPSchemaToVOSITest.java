@@ -84,10 +84,11 @@ public class TAPSchemaToVOSITest {
               .findFirst()
               .ifPresentOrElse(t -> {
                   assertEquals(17, t.getColumns().size());
+                  var cols = t.getColumns();
+                  assertTrue(cols.stream().anyMatch(c -> c.getName().equals("\"size\"")),"size column name should be quoted");
               }, () -> {
-                  fail("Expected table not found");
+                  fail("Expected columns table not found");
               });
-        ;
     }
 
 }

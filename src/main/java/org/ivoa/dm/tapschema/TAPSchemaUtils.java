@@ -9,6 +9,8 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.transform.Source;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.List;
  * Note that this is here to allow package access to the DM.
  */
 public class TAPSchemaUtils {
+
+   private static final Logger log = LoggerFactory.getLogger(TAPSchemaUtils.class);
 
    private TAPSchemaUtils(){};
    /**
@@ -239,8 +243,7 @@ public class TAPSchemaUtils {
             c.datatype = "double";
             break;
          default:
-
-            System.err.println("Unknown data type: " + c.datatype + " for column: " + c.column_name);
+            log.error("Unknown data type: " + c.datatype + " for column: " + c.column_name);
       }
    }
 }

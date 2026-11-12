@@ -129,8 +129,10 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
                assertNotNull(key.key_id);
            }
 
-
-
+       TypedQuery<Column> qcols = em.createQuery("select c from columns c ", Column.class);
+       List<Column> cols = qcols.getResultList();
+       assertEquals(  42, cols.size());
+       assertTrue(cols.stream().anyMatch(column -> column.getColumn_name().equals("\"size\"")),"size column should be quoted");
 
     }
 }

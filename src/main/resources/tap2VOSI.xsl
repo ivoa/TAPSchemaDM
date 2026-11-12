@@ -175,9 +175,61 @@
    <xsl:function name="vft:columnNameNormalisation" as="xsd:string">
 
         <xsl:param name="col" as="xsd:string"/>
-        <xsl:value-of select="tokenize($col,'[\.]')[last()]"/>
+        <xsl:value-of select="vft:columnNameQuoting(tokenize($col,'[\.]')[last()])"/>
     </xsl:function>
 
 
+
+    <xsl:variable name="reservedWords" as="xsd:string*">
+        <xsl:sequence select="(
+         'ABS', 'ACOS', 'ASIN', 'ATAN', 'ATAN2', 'CEILING', 'COS', 'DEGREES',
+         'EXP', 'FLOOR', 'LOG', 'LOG10', 'MOD', 'PI', 'POWER', 'RADIANS',
+         'RAND', 'ROUND', 'SIN', 'SQRT', 'TAN', 'TOP', 'TRUNCATE',
+         'AREA', 'BOX', 'CENTROID', 'CIRCLE', 'CONTAINS', 'COORD1', 'COORD2',
+         'COORDSYS', 'DISTANCE', 'INTERSECTS', 'POINT', 'POLYGON', 'REGION',
+         'COT', 'BIGINT', 'ILIKE', 'IN_UNIT', 'OFFSET',
+         'ABSOLUTE', 'ACTION', 'ADD', 'ALL', 'ALLOCATE', 'ALTER', 'AND', 'ANY',
+         'ARE', 'AS', 'ASC', 'ASSERTION', 'AT', 'AUTHORIZATION', 'AVG', 'BEGIN',
+         'BETWEEN', 'BIT', 'BIT_LENGTH', 'BOTH', 'BY', 'CASCADE', 'CASCADED', 'CASE',
+         'CAST', 'CATALOG', 'CHAR', 'CHARACTER', 'CHAR_LENGTH', 'CHARACTER_LENGTH',
+         'CHECK', 'CLOSE', 'COALESCE', 'COLLATE', 'COLLATION', 'COLUMN', 'COMMIT',
+         'CONNECT', 'CONNECTION', 'CONSTRAINT', 'CONSTRAINTS', 'CONTINUE', 'CONVERT',
+         'CORRESPONDING', 'COUNT', 'CREATE', 'CROSS', 'CURRENT', 'CURRENT_DATE',
+         'CURRENT_TIME', 'CURRENT_TIMESTAMP', 'CURRENT_USER', 'CURSOR', 'DATE', 'DAY',
+         'DEALLOCATE', 'DECIMAL', 'DECLARE', 'DEFAULT', 'DEFERRABLE', 'DEFERRED', 'DELETE',
+         'DESC', 'DESCRIBE', 'DESCRIPTOR', 'DIAGNOSTICS', 'DISCONNECT', 'DISTINCT', 'DOMAIN',
+         'DOUBLE', 'DROP', 'ELSE', 'END', 'END-EXEC', 'ESCAPE', 'EXCEPT', 'EXCEPTION', 'EXEC',
+         'EXECUTE', 'EXISTS', 'EXTERNAL', 'EXTRACT', 'FALSE', 'FETCH', 'FIRST', 'FLOAT', 'FOR',
+         'FOREIGN', 'FOUND', 'FROM', 'FULL', 'GET', 'GLOBAL', 'GO', 'GOTO', 'GRANT', 'GROUP',
+         'HAVING', 'HOUR', 'IDENTITY', 'IMMEDIATE', 'IN', 'INDICATOR', 'INITIALLY', 'INNER',
+         'INPUT', 'INSENSITIVE', 'INSERT', 'INT', 'INTEGER', 'INTERSECT', 'INTERVAL', 'INTO',
+         'IS', 'ISOLATION', 'JOIN', 'KEY', 'LANGUAGE', 'LAST', 'LEADING', 'LEFT', 'LEVEL',
+         'LIKE', 'LOCAL', 'LOWER', 'MATCH', 'MAX', 'MIN', 'MINUTE', 'MODULE', 'MONTH', 'NAMES',
+         'NATIONAL', 'NATURAL', 'NCHAR', 'NEXT', 'NO', 'NOT', 'NULL', 'NULLIF', 'NUMERIC',
+         'OCTET_LENGTH', 'OF', 'ON', 'ONLY', 'OPEN', 'OPTION', 'OR', 'ORDER', 'OUTER', 'OUTPUT',
+         'OVERLAPS', 'PAD', 'PARTIAL', 'POSITION', 'PRECISION', 'PREPARE', 'PRESERVE', 'PRIMARY',
+         'PRIOR', 'PRIVILEGES', 'PROCEDURE', 'PUBLIC', 'READ', 'REAL', 'REFERENCES', 'RELATIVE',
+         'RESTRICT', 'REVOKE', 'RIGHT', 'ROLLBACK', 'ROWS', 'SCHEMA', 'SCROLL', 'SECOND', 'SECTION',
+         'SELECT', 'SESSION', 'SESSION_USER', 'SET', 'SIZE', 'SMALLINT', 'SOME', 'SPACE', 'SQL', 'SQLCODE',
+         'SQLERROR', 'SQLSTATE', 'SUBSTRING', 'SUM', 'SYSTEM_USER', 'TABLE', 'TEMPORARY', 'THEN', 'TIME',
+         'TIMESTAMP', 'TIMEZONE_HOUR', 'TIMEZONE_MINUTE', 'TO', 'TRAILING', 'TRANSACTION', 'TRANSLATE',
+         'TRANSLATION', 'TRIM', 'TRUE', 'UNION', 'UNIQUE', 'UNKNOWN', 'UPDATE', 'UPPER', 'USAGE', 'USER',
+         'USING', 'VALUE', 'VALUES', 'VARCHAR', 'VARYING', 'VIEW', 'WHEN', 'WHENEVER', 'WHERE', 'WITH',
+         'WORK', 'WRITE', 'YEAR', 'ZONE')"/>
+
+
+    </xsl:variable>
+
+    <xsl:function name="vft:columnNameQuoting" as="xsd:string">
+        <xsl:param name="col" as="xsd:string"/>
+        <xsl:choose>
+            <xsl:when test="upper-case($col) = $reservedWords">
+                <xsl:value-of select="concat('&quot;',$col,'&quot;')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$col"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 </xsl:stylesheet>
