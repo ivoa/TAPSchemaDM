@@ -513,49 +513,49 @@ public final class SchemaReader implements AutoCloseable {
     return TableType.TABLE;
   }
 
-  private static TAPType mapTapType(int sqlType, String typeName) {
+  private static String mapTapType(int sqlType, String typeName) {
     return switch (sqlType) {
-      case Types.BOOLEAN, Types.BIT -> TAPType.BOOLEAN;
-      case Types.TINYINT, Types.SMALLINT -> TAPType.SMALLINT;
-      case Types.INTEGER -> TAPType.INTEGER;
-      case Types.BIGINT -> TAPType.BIGINT;
-      case Types.REAL -> TAPType.REAL;
-      case Types.FLOAT, Types.DOUBLE, Types.NUMERIC, Types.DECIMAL -> TAPType.DOUBLE;
+      case Types.BOOLEAN, Types.BIT -> "BOOLEAN";
+      case Types.TINYINT, Types.SMALLINT -> "SMALLINT";
+      case Types.INTEGER -> "INTEGER";
+      case Types.BIGINT -> "BIGINT";
+      case Types.REAL -> "REAL";
+      case Types.FLOAT, Types.DOUBLE, Types.NUMERIC, Types.DECIMAL -> "DOUBLE";
       case Types.DATE,
           Types.TIME,
           Types.TIMESTAMP,
           Types.TIMESTAMP_WITH_TIMEZONE,
-          Types.TIME_WITH_TIMEZONE -> TAPType.TIMESTAMP;
-      case Types.CHAR, Types.NCHAR -> TAPType.CHAR;
-      case Types.VARCHAR, Types.NVARCHAR, Types.SQLXML -> TAPType.VARCHAR;
-      case Types.LONGVARCHAR, Types.LONGNVARCHAR, Types.CLOB, Types.NCLOB -> TAPType.CLOB;
-      case Types.BINARY -> TAPType.BINARY;
-      case Types.VARBINARY -> TAPType.VARBINARY;
-      case Types.LONGVARBINARY, Types.BLOB -> TAPType.BLOB;
+          Types.TIME_WITH_TIMEZONE -> "TIMESTAMP";
+      case Types.CHAR, Types.NCHAR -> "CHAR";
+      case Types.VARCHAR, Types.NVARCHAR, Types.SQLXML -> "VARCHAR";
+      case Types.LONGVARCHAR, Types.LONGNVARCHAR, Types.CLOB, Types.NCLOB -> "CLOB";
+      case Types.BINARY -> "BINARY";
+      case Types.VARBINARY -> "VARBINARY";
+      case Types.LONGVARBINARY, Types.BLOB -> "BLOB";
       default -> mapNonStandard(typeName);
     };
   }
 
-  private static TAPType mapNonStandard(String typeName) {
+  private static String mapNonStandard(String typeName) {
      if (typeName.contains("POINT")) {
-      return TAPType.POINT;
+      return "POINT";
     }
     if (typeName.contains("REGION")) {
-      return TAPType.REGION;
+      return "REGION";
     }
     if (typeName.contains("BLOB") || typeName.contains("BYTEA")) {
-      return TAPType.BLOB;
+      return "BLOB";
     }
     if (typeName.contains("BINARY")) {
-      return TAPType.VARBINARY;
+      return "VARBINARY";
     }
     if (typeName.contains("CLOB") || typeName.contains("TEXT") || typeName.contains("JSON")) {
-      return TAPType.CLOB;
+      return "CLOB";
     }
     if (typeName.contains("CHAR") || typeName.contains("STRING")) {
-      return TAPType.VARCHAR;
+      return "VARCHAR";
     }
-    return TAPType.VARCHAR;
+    return "VARCHAR";
   }
 
   private static String computeArraySize(int sqlType, int columnSize) {

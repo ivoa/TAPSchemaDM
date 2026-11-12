@@ -24,11 +24,9 @@ import java.util.Collections;
 public class VOSIWriter {
    private static final Logger log = org.slf4j.LoggerFactory.getLogger(VOSIWriter.class);
    private final Processor processor = new Processor(false);
-   private final XsltCompiler compiler = processor.newXsltCompiler();
    private final XsltExecutable stylesheet;
    private final TapschemaModel model;
-   private final Document doc;
-   private DocumentBuilderFactory dbf;
+   private final DocumentBuilderFactory dbf;
 
 
    /**
@@ -40,15 +38,13 @@ public class VOSIWriter {
       try {
          this.model = TAPSchemaUtils.copy(model); // make a copy to avoid modifying the original model
          TAPSchemaUtils.prepareForSerialization(this.model);
+         XsltCompiler compiler = processor.newXsltCompiler();
          stylesheet = compiler.compile(new StreamSource(TapschemaModel.class.getResourceAsStream("/tap2VOSI.xsl")));
          dbf = DocumentBuilderFactory.newInstance();
-         doc = dbf.newDocumentBuilder().newDocument();
+
       } catch (SaxonApiException e) {
          log.error("Failed to compile XSLT stylesheet for TAP to VOSI conversion", e);
          throw new RuntimeException(e); // should not happen
-      } catch (ParserConfigurationException e) {
-         log.error("Failed to create DocumentBuilder", e);
-         throw new RuntimeException(e);
       } catch (JAXBException e) {
          log.error("Failed to copy TAP schema model", e);
          throw new RuntimeException("Failed to copy TAP schema model",e);
@@ -71,9 +67,11 @@ public class VOSIWriter {
     * @return The XML representation of the VOSI tableset.
     * @throws SaxonApiException if there is a problem with the XSLT transformation.
     * @throws JAXBException if there is a problem with the JAXB context.
+    * @throws ParserConfigurationException if there is a problem with the DocumentBuilderFactory.
     */
 
-   public String convertToVOSI( VOSIDataType dataType) throws SaxonApiException, JAXBException {
+   public String convertToVOSI( VOSIDataType dataType) throws SaxonApiException, JAXBException, ParserConfigurationException {
+      Document doc = dbf.newDocumentBuilder().newDocument();
       Xslt30Transformer transformer = stylesheet.load30();
       JAXBContext jc = model.management().contextFactory();
       Marshaller m = jc.createMarshaller();

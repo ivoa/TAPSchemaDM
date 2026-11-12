@@ -17,10 +17,6 @@ public class TAPSchemaTest extends AutoRoundTripTest<TapschemaModel> {
 
     final static String desc = "description".repeat(372);
 
-
-
-
-
    @Override
     public TapschemaModel createModel() {
         tapschemaModel = new TapschemaModel();
@@ -31,7 +27,7 @@ public class TAPSchemaTest extends AutoRoundTripTest<TapschemaModel> {
            t.columns = List.of(
                  Column.createColumn(c -> {
                     c.column_name ="col1";
-                    c.datatype=TAPType.VARCHAR;
+                    c.datatype="VARCHAR";
                     c.indexed = 1;
                     c.principal = 0;
                     c.std = 0;
@@ -39,7 +35,7 @@ public class TAPSchemaTest extends AutoRoundTripTest<TapschemaModel> {
                  }),
                  Column.createColumn(c -> {
                     c.column_name ="col2";
-                    c.datatype=TAPType.INTEGER;
+                    c.datatype="INTEGER";
                     c.indexed = 0;
                     c.principal = 0;
                     c.std = 0;
@@ -57,7 +53,7 @@ public class TAPSchemaTest extends AutoRoundTripTest<TapschemaModel> {
                   t.columns = List.of(
                         Column.createColumn(c -> {
                            c.column_name ="cola";
-                           c.datatype=TAPType.VARCHAR;
+                           c.datatype="VARCHAR";
                            c.indexed = 1;
                            c.principal = 0;
                            c.std = 0;
@@ -66,7 +62,7 @@ public class TAPSchemaTest extends AutoRoundTripTest<TapschemaModel> {
                         }),
                         Column.createColumn(c -> {
                            c.column_name ="colb";
-                           c.datatype=TAPType.INTEGER;
+                           c.datatype="INTEGER";
                            c.indexed = 0;
                            c.principal = 0;
                            c.std = 0;

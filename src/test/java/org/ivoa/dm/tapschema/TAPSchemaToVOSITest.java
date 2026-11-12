@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class TAPSchemaToVOSITest {
     }
 
     @Test
-    public void testVosiWriter() throws JAXBException, SaxonApiException, IOException, SAXException {
+    public void testVosiWriter() throws JAXBException, SaxonApiException, IOException, SAXException, ParserConfigurationException {
 
         TapschemaModel model = TAPSchemaUtils.readModelFromXML(new StreamSource(TapschemaModel.TAPSchema()));
         VOSIWriter vosiWriter = new VOSIWriter(model);

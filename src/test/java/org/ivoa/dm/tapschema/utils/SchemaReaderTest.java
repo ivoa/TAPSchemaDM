@@ -3,7 +3,6 @@ package org.ivoa.dm.tapschema.utils;
 import org.ivoa.dm.tapschema.Column;
 import org.ivoa.dm.tapschema.ForeignKey;
 import org.ivoa.dm.tapschema.Schema;
-import org.ivoa.dm.tapschema.TAPType;
 import org.ivoa.dm.tapschema.Table;
 import org.ivoa.dm.tapschema.TapschemaModel;
 import org.junit.jupiter.api.Test;
@@ -71,8 +70,8 @@ class SchemaReaderTest {
         obs.getColumns().stream()
             .collect(Collectors.toMap(c -> c.getColumn_name().toUpperCase(), c -> c));
 
-    assertEquals(TAPType.BIGINT, obsColumns.get("ASTRO.OBS.ID").getDatatype());
-    assertEquals(TAPType.INTEGER, obsColumns.get("ASTRO.OBS.CATALOG_ID").getDatatype());
+    assertEquals("BIGINT", obsColumns.get("ASTRO.OBS.ID").getDatatype());
+    assertEquals("INTEGER", obsColumns.get("ASTRO.OBS.CATALOG_ID").getDatatype());
     assertTrue(obsColumns.get("ASTRO.OBS.BAND").getIndexed() == 1);
     assertFalse(obsColumns.get("ASTRO.OBS.CATALOG_ID").getNullable() == 1);
 

@@ -11,6 +11,7 @@ import org.ivoa.dm.tapschema.utils.VOSIWriter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -30,7 +31,7 @@ public class ArbitraryToVOSITest {
     }
 
     @Test
-    public void writeVOSIAsTAP () throws SaxonApiException, JAXBException {
+    public void writeVOSIAsTAP () throws SaxonApiException, JAXBException, ParserConfigurationException {
 
         String vosi = vosiwriter.convertToVOSI( VOSIWriter.VOSIDataType.TAP);
         System.out.println(vosi);
@@ -44,7 +45,7 @@ public class ArbitraryToVOSITest {
     }
 
     @Test
-    public void writeVOSIAsVOTABLE () throws SaxonApiException, FileNotFoundException, JAXBException {
+    public void writeVOSIAsVOTABLE () throws SaxonApiException, JAXBException, ParserConfigurationException {
 
         String vosi = vosiwriter.convertToVOSI( VOSIWriter.VOSIDataType.VOTABLE);
         System.out.println(vosi);

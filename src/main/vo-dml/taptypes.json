@@ -1,0 +1,238 @@
+{
+  "uri": "urn:tapschema!vocab:taptypes",
+  "flavour": "RDF Class",
+  "terms": {
+    "BOOLEAN": {
+      "label": "BOOLEAN",
+      "description": "Boolean type",
+      "preliminary": "",
+      "wider": [],
+      "narrower": [
+      ]
+    },
+    "SMALLINT": {
+      "label": "SMALLINT",
+      "description": "typically a 16 bit integer",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "INTEGER": {
+      "label": "INTEGER",
+      "description": "typically a 32 bit integer",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "BIGINT": {
+      "label": "BIGINT",
+      "description": "typically a 64 bit integer",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "REAL": {
+      "label": "REAL",
+      "description": "single precision floating point number",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "DOUBLE": {
+      "label": "DOUBLE",
+      "description": "double precision floating point number",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "TIMESTAMP": {
+      "label": "TIMESTAMP",
+      "description": "a point in time",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+     "VARCHAR": {
+      "label": "VARCHAR",
+      "description": "variable length character string",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+      "BINARY": {
+      "label": "BINARY",
+      "description": "fixed length binary data",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "VARBINARY": {
+      "label": "VARBINARY",
+      "description": "variable length binary data",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "CLOB": {
+      "label": "CLOB",
+      "description": "character large object",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "BLOB": {
+      "label": "BLOB",
+      "description": "binary large object",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "POINT": {
+      "label": "POINT",
+      "description": "a point in space. Geometry values are two-dimensional; they are usually longitude and latitude values in spherical coordinates",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "REGION": {
+      "label": "REGION",
+      "description": "a region in space. Geometry values are two-dimensional; they are usually longitude and latitude values in spherical coordinates",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "CIRCLE": {
+      "label": "CIRCLE",
+      "description": "a circular region",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": ["REGION"]
+    },
+    "ELLIPSE": {
+      "label": "ELLIPSE",
+      "description": "an elliptical region",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": ["REGION"]
+    },
+    "BOX": {
+      "label": "BOX",
+      "description": "a rectangular region",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": ["REGION"]
+    },
+    "POLYGON": {
+      "label": "POLYGON",
+      "description": "a polygonal region",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": ["REGION"]
+    },
+    "LINE": {
+      "label": "LINE",
+      "description": "a line in space",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": ["REGION"]
+    },
+    "char": {
+      "label": "VOTable char",
+      "description": "a character value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "boolean": {
+      "label": "VOTable boolean",
+      "description": "a boolean value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "unsignedByte": {
+      "label": "VOTable unsignedByte",
+      "description": "a byte value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "short": {
+      "label": "VOTable short",
+      "description": "a short integer value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "int": {
+      "label": "VOTable int",
+      "description": "an integer value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "long": {
+      "label": "VOTable long",
+      "description": "a long integer value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "float": {
+      "label": "VOTable float",
+      "description": "a floating-point value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "double": {
+      "label": "VOTable double",
+      "description": "double precision floating point number, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "floatComplex": {
+      "label": "VOTable floatComplex",
+      "description": "a complex floating-point value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    },
+    "doubleComplex": {
+      "label": "VOTable doubleComplex",
+      "description": "a complex double-precision floating-point value, as defined in VOTable",
+      "preliminary": "",
+      "wider": [
+      ],
+      "narrower": []
+    }
+  }
+}
