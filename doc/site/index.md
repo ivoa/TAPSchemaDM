@@ -5,6 +5,11 @@ This is the TAP schema defined using VO-DML and created so that a mapping from a
 
 The model follows the description of TAP schema in the [TAP Standard](https://www.ivoa.net/documents/TAP/). The TAP Standard does not provide a machine-readable version of the TAP Schema - this DM fills that gap. Some of model element names themselves are different from the names used in the TAP standard (and this is reflected in the XML serialization). However, naturally the RDB serialization will produce exactly the required tables as described in the TAP Standard - although there are some additional columns produced.
 
+An important aspect of using this model is to understand how the column datatype is used. In TAP/ADQL and VOSI there are effectively two type systems in use (see ["mapping type systems"](Mapping.md)), and this model uses
+a controlled vocabulary for the type name that is a mixture of these two type systems. The [VO-DML tooling](https://ivoa.github.io/vo-dml/) emits a TAPSchemaDM instance that uses the TAP/ADQL types, 
+however, the content of TAPSchema database columns is required to use the VOTable type system -
+There are utilities to manage this described below.
+
 ## How to use
 
 ### Java
@@ -17,18 +22,17 @@ for storing the generated TAPSchema in a database. In this case it is for the TA
 * Serialize this model instance to the database.
 
 ```java
+/* 
+   note that this reading the TAPSchema for the TAPSchema itself - but the same static method call will work for on model produced by the VO-DML tooling
+ */
+InputStream is = TapschemaModel.TAPSchema(); 
+TapschemaModel model = TAPSchemaUtils.readModelFromXML(new StreamSource(is));
 
-TapschemaModel model = new TapschemaModel();
-InputStream is = TapschemaModel.TAPSchema();
-JAXBContext jc = model.management().contextFactory();
-Unmarshaller unmarshaller = jc.createUnmarshaller(); 
-JAXBElement<TapschemaModel> el = unmarshaller.unmarshal(new StreamSource(is), TapschemaModel.class);
-TapschemaModel model_in = el.getValue();
-TAPSchemaUtils.prepareForDB(model_in); // note that this step is necessary before saving to the database to set up the table_name foreign keys
 EntityManager em = emf.createEntityManager(); 
 em.getTransaction().begin();
-model_in.management().persistRefs(em);
-em.persist(model_in.getContent(Schema.class).get(0)); 
+for (Schema s : model.getSchema()) {
+      em.persist(TAPSchemaUtils.adjustforTAPStd(s));
+}
 em.getTransaction().commit();
 
 ```

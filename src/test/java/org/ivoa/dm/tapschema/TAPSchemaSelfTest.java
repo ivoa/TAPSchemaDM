@@ -101,25 +101,15 @@ public class TAPSchemaSelfTest extends AbstractBaseValidation {
     
     @Test
     public void selfDBTest() throws JAXBException {
-         TapschemaModel model = new TapschemaModel();
-        InputStream is = TapschemaModel.TAPSchema();
-        assertNotNull(is);
-        JAXBContext jc = model.management().contextFactory();
-        Unmarshaller unmarshaller = jc.createUnmarshaller();
-        JAXBElement<TapschemaModel> el = unmarshaller.unmarshal(new StreamSource(is), TapschemaModel.class);
-        TapschemaModel model_in = el.getValue();
-        assertNotNull(model_in);
-
-        Schema schemaToSave = TAPSchemaUtils.adjustforTAPStd(model_in.getContent(Schema.class).get(0));
-        assertNotNull(schemaToSave);
-
-        ModelManagement<TapschemaModel> modelManagement = model_in.management();
-
         jakarta.persistence.EntityManager em = setupH2Db(TapschemaModel.pu_name(),TapschemaModel.modelDescription.allClassNames());
+        InputStream is = TapschemaModel.TAPSchema();
+        TapschemaModel model = TAPSchemaUtils.readModelFromXML(new StreamSource(is));
         em.getTransaction().begin();
-        modelManagement.persistRefs(em);
-        em.persist(schemaToSave);
+        for (Schema s : model.getSchema()) {
+            em.persist(TAPSchemaUtils.adjustforTAPStd(s));
+        }
         em.getTransaction().commit();
+
         Session sess = em.unwrap(Session.class);
             sess.doWork(conn -> {
                 PreparedStatement ps = conn.prepareStatement("SCRIPT TO ?"); // this is H2db specific

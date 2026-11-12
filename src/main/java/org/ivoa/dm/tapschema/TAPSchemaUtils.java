@@ -108,6 +108,7 @@ public class TAPSchemaUtils {
             c.schema_name = schema.schema_name;
             c.table_name=tn;
             c.column_name=quoteColumn(c.column_name);
+            updateToVOTableDataType(c);
          }
       }
       return newschema;
@@ -178,4 +179,68 @@ public class TAPSchemaUtils {
       return retval;
    }
 
+   private static void updateToVOTableDataType(Column c) {
+
+      switch (c.datatype) {
+         case "VARCHAR":
+         case "CHAR":
+         case "CLOB":
+            c.datatype = "char";
+            c.arraysize = "*";
+            break;
+         case "INTEGER":
+            c.datatype = "int";
+            break;
+         case "SMALLINT":
+            c.datatype = "short";
+            break;
+         case "BIGINT":
+            c.datatype = "long";
+            break;
+         case "REAL":
+            c.datatype = "float";
+            break;
+         case "DOUBLE":
+            c.datatype = "double";
+            break;
+         case "BOOLEAN":
+            c.datatype = "boolean";
+            break;
+         case "TIMESTAMP":
+            c.arraysize = "*";
+            c.xtype = "timestamp";
+            c.datatype = "char";
+            break;
+         case "POINT":
+            c.arraysize = "2"; //FIXME is there semantic difference between size and arraysize
+            c.xtype = "point";
+            c.datatype = "double";
+            break;
+         case "CIRCLE":
+            c.arraysize = "3";
+            c.size = 3;
+            c.xtype = "circle";
+            c.datatype = "double";
+            break;
+         case "ELLIPSE":
+            c.arraysize = "5";
+            c.xtype = "ellipse";
+            c.datatype = "double";
+            break;
+         case "POLYGON":
+         case "REGION":
+            c.arraysize = "*";
+            c.xtype = "polygon";
+            c.datatype = "double";
+            break;
+         case "LINE":
+            c.arraysize = "2";
+            c.xtype = "line";
+            c.datatype = "double";
+            break;
+         default:
+
+            System.err.println("Unknown data type: " + c.datatype + " for column: " + c.column_name);
+      }
+   }
 }

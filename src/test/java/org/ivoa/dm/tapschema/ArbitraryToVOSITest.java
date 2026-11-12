@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.stream.StreamSource;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
